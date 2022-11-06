@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "bcc39949-16c5-410c-9fe0-b4f287c9ace9": {
+      "ProjectGuid": "bcc39949-16c5-410c-9fe0-b4f287c9ace9",
+      "DisplayName": "NetCore-MiddleWare-Demo",
+      "ColorIndex": 0
+    },
+    "cd3bf113-31a4-4710-833f-a6c8f9717d49": {
+      "ProjectGuid": "cd3bf113-31a4-4710-833f-a6c8f9717d49",
+      "DisplayName": "Solution Items",
+      "ColorIndex": 1
+    },
+    "4a2feac2-0512-4af5-9a7b-993c0cb87efa": {
+      "ProjectGuid": "4a2feac2-0512-4af5-9a7b-993c0cb87efa",
+      "DisplayName": "NetCore-MiddleWare-Demo",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}
