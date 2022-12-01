@@ -1,0 +1,58 @@
+﻿@page "/fetchdata"
+@using AntDesign
+<PageTitle>Weather forecast</PageTitle>
+
+@using Ant_Table_Demo.Data
+@inject WeatherForecastService ForecastService
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@*https://antblazor.com/en-US/components/table#ant-blazor-17f32a65-0dcd-4f47-b85c-0ccdc275408d*@
+<Table TItem="WeatherForecast"DataSource="@forecasts">
+  <PropertyColumn Property="c=>c.Date" Format="yyyy-MM-dd" Sortable />
+  <PropertyColumn Property="c=>c.TemperatureC" Sortable />
+  <PropertyColumn Title="Temp. (F)" Property="c=>c.TemperatureF" />
+  <PropertyColumn Property="c=>c.Summary" Sortable />
+</Table>
+
+
+
+@*@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}*@
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}

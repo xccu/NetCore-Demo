@@ -1,0 +1,44 @@
+﻿@page "/sqlite-table"
+
+@using Ant_Table_Demo.DataContext
+@using AntDesign.TableModels
+@using AntDesign
+@using Ant_Table_Demo.DataContext.Entities;
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<Table DataSource="Properties" TItem="Property">
+    <PropertyColumn Property="x => x.Id"
+            Sortable
+            Filterable
+            ShowSorterTooltip="false">
+    </PropertyColumn>
+
+    <PropertyColumn Property="x => x.Address"
+            Sortable
+            Filterable
+            ShowSorterTooltip="false">
+    </PropertyColumn>
+
+    <PropertyColumn Property="x => x.Suburb"
+            Sortable
+            Filterable
+            ShowSorterTooltip="false" SorterMultiple="5"/>
+
+    <PropertyColumn Property="x => x.Postcode"
+            Sortable
+            Filterable
+            ShowSorterTooltip="false" SorterMultiple="3">
+    </PropertyColumn>
+
+    <PropertyColumn Property="x => x.State"
+            Sortable
+            Filterable
+            ShowSorterTooltip="false" SorterMultiple="4"/>
+</Table>
