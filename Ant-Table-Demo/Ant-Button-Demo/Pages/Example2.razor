@@ -1,0 +1,31 @@
+﻿@page "/example2"
+
+@using System.ComponentModel
+@using AntDesign.TableModels
+@using AntDesign
+
+<h3>Icon</h3>
+<li><code>Button</code> components can contain an <code>Icon</code>. This is done by setting the <code>icon</code> property or placing an <code>Icon</code> component within the <code>Button</code>.</li>
+<li>If you want specific control over the positioning and placement of the <code>Icon</code>, then that should be done by placing the <code>Icon</code> component within the <code>Button</code> rather than using the <code>icon</code> property.</li>
+<div>
+    <Tooltip Title="@IconType.Outline.Search">
+        <Button Type="@ButtonType.Primary" Shape="@ButtonShape.Circle" Icon="@IconType.Outline.Search" />
+    </Tooltip>
+    <Button Type="@ButtonType.Primary" Shape="@ButtonShape.Circle">A</Button>
+    <Button Type="@ButtonType.Primary" Icon="@IconType.Outline.Search">Search</Button>
+    <Tooltip Title="@IconType.Outline.Search">
+        <Button Shape="@ButtonShape.Circle" Icon="@IconType.Outline.Search" />
+    </Tooltip>
+    <Button Icon="@IconType.Outline.Search">Search</Button>
+    
+    <br />
+    
+    <Tooltip Title="@IconType.Outline.Search">
+        <Button Shape="@ButtonShape.Circle" Icon="@IconType.Outline.Search" />
+    </Tooltip>
+    <Button Icon="@IconType.Outline.Search">Search</Button>
+    <Tooltip Title="@IconType.Outline.Search">
+        <Button Type="@ButtonType.Dashed" Shape="@ButtonShape.Circle" Icon="@IconType.Outline.Search" />
+    </Tooltip>
+    <Button Type="@ButtonType.Dashed" Icon="@IconType.Outline.Search">Search</Button>
+</div>
