@@ -19,5 +19,3 @@ dotnet ef migrations add Initial --project Blazor-Query-Demo
 dotnet ef database update --project Blazor-Query-Demo
 
 
-httpclient
-https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-6.0
