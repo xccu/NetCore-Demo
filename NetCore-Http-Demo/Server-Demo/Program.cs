@@ -10,11 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//配置json驼峰显示
+//配置json
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
-    options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
-    options.JsonSerializerOptions.WriteIndented = true; //启用json 格式化
+    options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase; //驼峰显示
+    options.JsonSerializerOptions.WriteIndented = true;                             //启用 json 格式化
 });
 
 
