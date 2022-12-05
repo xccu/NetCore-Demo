@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ant-Table-Demo", "Ant-Table-Demo\Ant-Table-Demo.csproj", "{8FA60F9E-5AA5-4A8D-A33C-04CFBE448D0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ant-Button-Demo", "Ant-Button-Demo\Ant-Button-Demo.csproj", "{82E5A64B-EDD9-4364-9AAF-CC71FE57474C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ant-Button-Demo", "Ant-Button-Demo\Ant-Button-Demo.csproj", "{82E5A64B-EDD9-4364-9AAF-CC71FE57474C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
