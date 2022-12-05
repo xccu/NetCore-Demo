@@ -1,7 +1,7 @@
-﻿using Microsoft.Net.Http.Headers;
+﻿using System.Net.Http;
 using System.Text.Json;
 
-namespace Client_Demo.Services
+namespace IHttpClientFactory_Demo.Services
 {
     public class WeatherForecastService
     {
@@ -12,7 +12,7 @@ namespace Client_Demo.Services
 
         public async Task<IEnumerable<WeatherForecast>?> GetWeatherForecastAsync()
         {
-           var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get,"https://localhost:7168/WeatherForecast")
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get,"https://localhost:7168/WeatherForecast")
             {
                 Headers =
                 {
@@ -21,13 +21,12 @@ namespace Client_Demo.Services
                 }
             };
 
-
             var httpClient = _httpClientFactory.CreateClient();
             var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
 
             httpResponseMessage.EnsureSuccessStatusCode();
 
-            using var contentStream =await httpResponseMessage.Content.ReadAsStreamAsync();
+            using var contentStream = await httpResponseMessage.Content.ReadAsStreamAsync();
 
             return await JsonSerializer.DeserializeAsync<IEnumerable<WeatherForecast>>(contentStream);
         }
