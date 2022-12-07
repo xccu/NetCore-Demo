@@ -1,0 +1,29 @@
+﻿@page "/example1"
+
+@using System.ComponentModel
+@using AntDesign.TableModels
+@using AntDesign
+
+<h3>Basic Grid</h3>
+<li>You can create a basic grid system by using a single set of <code>GridRow</code> and <code>GridCol</code> grid assembly, all of the columns (GridCol) must be placed in GridRow.</li>
+
+<div>
+    <GridRow>
+        <GridCol Span="24">col-24</GridCol>   
+    </GridRow>
+    <GridRow>
+        <GridCol Span="12">col-12</GridCol>
+        <GridCol Span="12">col-12</GridCol>
+    </GridRow>
+    <GridRow>
+        <GridCol Span="8">col-8</GridCol>
+        <GridCol Span="8">col-8</GridCol>
+        <GridCol Span="8">col-8</GridCol>
+    </GridRow>
+    <GridRow>
+        <GridCol Span="6">col-6</GridCol>
+        <GridCol Span="6">col-6</GridCol>
+        <GridCol Span="6">col-6</GridCol>
+        <GridCol Span="6">col-6</GridCol>
+    </GridRow>
+</div>
