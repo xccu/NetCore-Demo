@@ -1,9 +1,5 @@
 ﻿@page "/example3"
 
-@using System.ComponentModel
-@using AntDesign.TableModels
-@using AntDesign
-
 <h3>Set props on per row</h3>
 <Table TItem="Data" DataSource="@data" OnRow="OnRow" OnHeaderRow="OnHeaderRow">
   <PropertyColumn Property="c=>c.Name" OnCell="OnCell" OnHeaderCell="OnHeaderCell">
