@@ -9,11 +9,12 @@ namespace Refit_Server.Controllers
     {
 
         private readonly ILogger<AccountController> _logger;
-        private static List<AccountDto> dtos;
+        private static List<AccountDto> _dtos;
 
         public AccountController(ILogger<AccountController> logger)
         {
-            _logger = logger;            
+            _logger = logger;   
+            InitialData();
         }
 
         [HttpPost("Login")]
@@ -28,6 +29,22 @@ namespace Refit_Server.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("All")]
+        public IEnumerable<AccountDto> GetAll()
+        {
+            return _dtos;          
+        }
+
+        private void InitialData()
+        {
+            if (_dtos != null)
+                return;
+            _dtos = new List<AccountDto>();
+            _dtos.Add(new AccountDto() { UserName = "Admin", Password = "123" });
+            _dtos.Add(new AccountDto() { UserName = "User1", Password = "456" });
+            _dtos.Add(new AccountDto() { UserName = "User2", Password = "456" });
         }
     }
 }

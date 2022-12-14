@@ -6,6 +6,7 @@ using Refit;
 using Refit_Client.Interfaces;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Security.Principal;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -37,8 +38,24 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Map("/login", async (IAccount api) =>
-       await api.Login(new AccountDto())
+
+
+app.Map("/post", async (IAccount api) =>
+{
+    try
+    {
+        var dto = new AccountDto() { UserName = "admin", Password = "123" };
+        var result = await api.LoginAsync(dto);
+        return Task.CompletedTask;
+    }
+    catch (Exception ex)
+    {
+        return null;
+    }
+});
+
+app.Map("/get", async (IAccount api) => 
+    await api.GetAllAsync()
 );
 
 app.Run();
@@ -62,10 +79,10 @@ static void configRefit(WebApplicationBuilder builder)
     };
 
 
-    builder.Services.AddRefitClient<IAccount>()
+    builder.Services.AddRefitClient<IAccount>(refitSettings)
         .ConfigureHttpClient(c =>
         {
             c.BaseAddress = new Uri("https://localhost:7001/");
-            c.Timeout = TimeSpan.FromSeconds(5);
+            //c.Timeout = TimeSpan.FromSeconds(5);
         });
 }
