@@ -1,0 +1,99 @@
+﻿@page "/login"
+@inherits FeedbackComponent<string>
+@using System.ComponentModel.DataAnnotations
+
+<div>
+    <Form Model="_model"
+          Loading="FormLoading"
+          OnFinish="OnLogin"
+          Layout="FormLayout.Vertical"
+          LabelColOffset="4"
+          LabelColSpan="20"
+          WrapperColOffset="4"
+          WrapperColSpan="15">
+
+        <FormItem LabelColSpan="3" LabelColOffset="0">
+            <LabelTemplate>
+                <h2>Login</h2>
+            </LabelTemplate>
+        </FormItem>
+
+        <FormItem LabelAlign="AntLabelAlignType.Left">
+            <LabelTemplate>
+                <Icon Style="font-size:18px" Type="user" Theme="outline" />
+            </LabelTemplate>
+            <ChildContent>
+                <Input Placeholder="User name" Style="border-radius:16px" @bind-Value='context.UserName' />
+            </ChildContent>
+        </FormItem>
+
+        <FormItem LabelAlign="AntLabelAlignType.Left">
+            <LabelTemplate>
+                <Icon Style="font-size:18px" Type="edit" Theme="outline" />
+            </LabelTemplate>
+            <ChildContent>
+                <InputPassword Placeholder="Password" @bind-Value='context.Password' />
+            </ChildContent>
+        </FormItem>
+
+        <FormItem WrapperColOffset="8">
+            <button class="loginBtn" type="submit">Login</button>
+        </FormItem>
+
+        <FormItem WrapperColOffset="8">
+            <p>
+                Pre-account :
+                <a @onclick='FillAccount("Admin")' @onclick:preventDefault>Admin</a>
+            </p>
+        </FormItem>
+    </Form>
+
+</div>
+
+@code {
+
+    IFeedbackRef? _modalRef;
+    bool _formLoading;
+    bool FormLoading
+    {
+        get => _formLoading;
+
+        set
+        {
+            _formLoading = value;
+            StateHasChanged();
+        }
+    }
+
+    public class LoginViewModel
+    {
+        [Required]
+        public string UserName { get; set; } = default!;
+
+        [Required]
+        public string Password { get; set; } = default!;
+    }
+
+
+    LoginViewModel _model = new();
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _modalRef = FeedbackRef;
+    }
+
+    Action FillAccount(string userName) => () =>
+    {
+        _model.UserName = userName;
+        _model.Password = "Pass@word0";
+    };
+
+    async Task OnLogin(EditContext context)
+    {
+        Console.WriteLine(string.Format("UserName:{0};Password:{1}", _model.UserName, _model.Password));
+        Console.WriteLine("onLogin");
+    }
+}

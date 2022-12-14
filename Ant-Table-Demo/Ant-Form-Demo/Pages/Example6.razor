@@ -1,0 +1,92 @@
+﻿@page "/example6"
+
+@using System.ComponentModel.DataAnnotations;
+@using System.Text.Json;
+
+<h3>Complex form control</h3>
+<li>This demonstrates the use of multiple elements within a <code>FormItem</code>.</li>
+<li>
+    <p><code>Username</code>: there is a description text or other component behind the input box, within <code>FormItem</code> only the component that uses &#64;bind-Value will be bound to the FormItem, other components can be added at will.</p>
+</li>
+<li>
+    <p><code>Address</code>: there are two controls, use two <code>&lt;FormItem NoStyle /&gt;</code> within the <code>FormItem</code> to bind the corresponding controls separately (only one control with &#64;bind-Value can appear under a FormItem), use NoStyle for the FormItem, then The Grid layout of the FormItem will be ignored, even if LabelCol or WrapperCol is actively used.</p>
+    <p>This scenario also demonstrates the validation of a complex type of form, Address is a class structure containing two properties and by attaching ValidateComplexType the form can be validated against all its properties. Details can be found in the Blazor documentation: <a href="https://docs.microsoft.com/zh-cn/aspnet/core/blazor/forms-validation?WT.mc_id=DT-MVP-5003987">Nested Models, Collection Types and Complex Types</a></p>
+</li>
+<li>
+    <p><code>BirthDate</code>: there are two inline controls with error messages displayed under each control, using two <code>&lt;FormItem /&gt;</code>s to bind the corresponding controls separately, and modifying the <code>style</code> to make the layout inline.</p>
+</li>
+
+<Form Model="@model"
+      OnFinish="OnFinish"
+      OnFinishFailed="OnFinishFailed"
+      LabelColSpan="8"
+      WrapperColSpan="16">
+    <FormItem Label="Username">
+        <Input @bind-Value="context.Username" Style="width: 160px" Placeholder="Please input" />
+        <Tooltip Title="Useful information">
+            <a href="#API" Style="margin: 0 8px" }>
+                Need Help?
+            </a>
+        </Tooltip>
+    </FormItem>
+    <FormItem label="Address">
+        <InputGroup Compact>
+            <FormItem NoStyle>
+                <Input @bind-Value="context.Address.Province" Placeholder="Select is not yet" />
+            </FormItem>
+
+            <FormItem NoStyle>
+                <Input @bind-Value="context.Address.Street" Style="width: 50%" Placeholder="Input street" />
+            </FormItem>
+        </InputGroup>
+    </FormItem>
+    <FormItem Label="BirthDate" style="margin-bottom: 0">
+        <FormItem Style="display: inline-block; width: calc(50% - 10px)">
+            <Input @bind-Value="context.Year" Placeholder="Input birth year" />
+        </FormItem>
+        <FormItem Style="display: inline-block; width: calc(50% - 10px); margin: 0 8px">
+            <Input @bind-Value="context.Month" Placeholder="Input birth month" />
+        </FormItem>
+    </FormItem>
+    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+        <Button HtmlType="submit">
+            Submit
+        </Button>
+    </FormItem>
+</Form>
+
+@code
+{
+    public class Address
+    {
+        [Required]
+        public string Province { get; set; }
+        [Required]
+        public string Street { get; set; }
+    }
+
+    public class Model
+    {
+        [Required]
+        public string Username { get; set; }
+        [ValidateComplexType]
+        public Address Address { get; set; } = new Address();
+        [Required]
+        public string Year { get; set; }
+        [Required]
+        public string Month { get; set; }
+    }
+
+    private Model model = new Model();
+
+    private void OnFinish(EditContext editContext)
+    {
+        Console.WriteLine($"Success:{JsonSerializer.Serialize(model)}");
+    }
+
+    private void OnFinishFailed(EditContext editContext)
+    {
+        Console.WriteLine($"Failed:{JsonSerializer.Serialize(model)}");
+    }
+
+}

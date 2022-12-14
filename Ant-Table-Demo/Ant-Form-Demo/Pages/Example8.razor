@@ -1,0 +1,30 @@
+﻿@page "/example8"
+@using System.ComponentModel.DataAnnotations;
+
+<h3>Customized Label</h3>
+<li>Label can be customized by using LabelTemplate.</li>
+
+<Form Model="@model"
+      LabelColSpan="8"
+      WrapperColSpan="16">
+    <FormItem>
+        <LabelTemplate>
+            <label class="ant-form-item-required" for="username">
+                <Tooltip Title="Enter your username">Username</Tooltip>
+            </label>
+        </LabelTemplate>
+        <ChildContent>
+            <Input Id="username" @bind-Value="@context.Username" />
+        </ChildContent>
+    </FormItem>
+</Form>
+
+@code {
+    public class Model
+    {
+        [Required]
+        public string Username { get; set; }
+    }
+
+    private Model model = new Model();
+}
