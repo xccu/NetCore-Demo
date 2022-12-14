@@ -9,11 +9,12 @@ namespace Client_Demo.Services
     public class UserService
     {
         private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public UserService(HttpClient httpClient)
+        public UserService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
-
+            _httpClientFactory = httpClientFactory;
+            _httpClient = httpClientFactory.CreateClient();
             _httpClient.BaseAddress = new Uri("https://localhost:7168/");
 
             // using Microsoft.Net.Http.Headers;
@@ -22,7 +23,23 @@ namespace Client_Demo.Services
                 HeaderNames.Accept, "application/vnd.github.v3+json");
             _httpClient.DefaultRequestHeaders.Add(
                 HeaderNames.UserAgent, "HttpRequestsSample");
+
+            
         }
+
+        //public UserService(HttpClient httpClient)
+        //{
+        //    _httpClient = httpClient;
+
+        //    _httpClient.BaseAddress = new Uri("https://localhost:7168/");
+
+        //    // using Microsoft.Net.Http.Headers;
+        //    // The GitHub API requires two headers.
+        //    _httpClient.DefaultRequestHeaders.Add(
+        //        HeaderNames.Accept, "application/vnd.github.v3+json");
+        //    _httpClient.DefaultRequestHeaders.Add(
+        //        HeaderNames.UserAgent, "HttpRequestsSample");
+        //}
 
         public async Task<IEnumerable<User>?> GetUsersAsync() =>
             await _httpClient.GetFromJsonAsync<IEnumerable<User>>("api/User/GetAll");

@@ -14,8 +14,9 @@ using System.Text.Json;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
-//添加BaseService
+//添加Service
 builder.Services.AddTransient<BaseService>();
+builder.Services.AddTransient<UserService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -53,42 +54,32 @@ app.Run();
 #region 请求示例
 void addMap(WebApplication app)
 {
-    app.Map("/get", async () =>
-    {
-        UserService service = new UserService(new HttpClient());
-        var result = await service.GetUsersJsonAsync();
-        return result;
-    });
+    app.Map("/get", async (UserService service) =>       
+        await service.GetUsersJsonAsync()
+    );
 
-    app.Map("/post", async () =>
+    app.Map("/post", async (UserService service) =>
     {
-        UserService service = new UserService(new HttpClient());
         var user = new User() { name = "Test", age = 10, gender = "male", race = "Unkonwn" };
         var result = await service.CreateUserAsync(user);
         return result;
     });
 
-    app.Map("/put", async () =>
+    app.Map("/put", async (UserService service) =>
     {
-        UserService service = new UserService(new HttpClient());
         var user = new User() { name = "Test", age = 10, gender = "male", race = "Unkonwn" };
         var result = await service.UpdateUserAsync(user);
         return result;
     });
 
-    app.Map("/delete", async () =>
-    {
-        UserService service = new UserService(new HttpClient());
-        var result = await service.DeleteUserAsync("Test");
-        return result;
-    });
+    app.Map("/delete", async (UserService service) =>  
+         await service.DeleteUserAsync("Test")
+    );
 
 
-    app.Map("/send", async () =>
+    app.Map("/send", async (UserService service) =>
     {
-        UserService service = new UserService(new HttpClient());
         await service.OnSend();
-        ;
     });
 
     app.Map("/client", async (BaseService service) =>
