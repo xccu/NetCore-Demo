@@ -1,0 +1,51 @@
+﻿@*@typeparam TItem*@
+
+<DropdownButton Icon="down" Block>
+    <Overlay>
+        <Menu>
+            <MenuItem OnClick='e => {Value = "All";Console.WriteLine("Value: All"); }'>All</MenuItem>
+            @foreach (var item in Data)
+            {
+                <MenuItem OnClick='e => {Value = item;Console.WriteLine("Value:"+Value); }'>@item</MenuItem>
+            }
+        </Menu>
+    </Overlay>
+    <Unbound>@Value</Unbound>
+</DropdownButton>
+
+
+
+@*@ChildContent(item)*@
+@*<Dropdown>
+    <Overlay>
+        <Menu>
+            @foreach (var item in Data)
+            {
+                <MenuItem OnClick='e => {Value = item;Console.WriteLine("Value:"+Value); }'>@item</MenuItem>
+
+               
+            }
+        </Menu>
+    </Overlay>
+    <Unbound>
+        <Button RefBack=@context Block>Button <Icon Type="down" /></Button>
+    </Unbound>
+</Dropdown>*@
+
+
+@code {
+    [Parameter]
+    public IEnumerable<String> Data { get; set; }
+
+    [Parameter]
+    public RenderFragment<String> ChildContent { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string Value { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }       
+}

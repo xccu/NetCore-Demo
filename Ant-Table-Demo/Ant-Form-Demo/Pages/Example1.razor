@@ -29,6 +29,9 @@
     </Form>
 @code
 {
+    [CascadingParameter]
+    protected string test { get; set; }
+
     public class Model
     {
         [Required, DisplayName("User Name")]
@@ -42,6 +45,7 @@
 
     private void OnFinish(EditContext editContext)
     {
+        Console.WriteLine(test);
         Console.WriteLine($"Success:{JsonSerializer.Serialize(model)}");
     }
 

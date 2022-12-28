@@ -1,0 +1,157 @@
+﻿@page "/test"
+
+<h3>dynamic-rule</h3>
+<li>Perform different check rules according to different situations.</li>
+
+@using System.ComponentModel.DataAnnotations;
+@using System.Text.Json;
+@using System.Globalization
+
+<Switch @bind-Value="@validateOnChange" CheckedChildren="ValidateOnChange" UnCheckedChildren="ValidateOnSubmit" />
+<p />
+
+@*<Test2 Data=""   OnClick="(codeitem)_codeTable.Update(codeitem)" Context="codeItem">
+    <ChildContent>
+        <FormItem>Categor</FormItem>
+        <Input @bind-Value="codeItem."></Input>
+    </ChildContent>
+
+    <ChildContent2>
+
+    </ChildContent2>
+    
+</Test2>*@
+
+<Form Model="@modelRules"
+      ValidateMode="@FormValidateMode.Rules"
+      ValidateOnChange="@validateOnChange"
+      LabelColSpan="10"
+      WrapperColSpan="14"
+      OnFinish="OnFinish"
+      OnFinishFailed="OnFinishFailed"
+      Size="@AntSizeLDSType.Small">
+    <FormItem Label="Rules-UserName" Rules=@(userNameRules)>
+        <Input @bind-Value="@context.Username" />
+    </FormItem>
+    <FormItem Label="Rules-Number" Rules=@(numberRules)>
+        <AntDesign.InputNumber @bind-Value="@context.Number1" />
+    </FormItem>
+        <FormItem Label="Rules-Number2" Rules=@(numberRules)>
+        <AntDesign.InputNumber @bind-Value="@context.Number2" />
+    </FormItem>
+    
+    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+        <Button Type="@ButtonType.Primary" HtmlType="submit">
+            Submit
+        </Button>
+    </FormItem>
+</Form>
+
+@code
+{
+    public class Person
+    {
+        [Required]
+        public string Name { get; set; }
+        public int Age { get; set; } = 2;
+    }
+
+    public class Model
+    {
+        public string Username { get; set; }
+        public decimal Number1 { get; set; } = 1;
+
+        public decimal Number2 { get; set; } = 3;
+
+    }
+
+    private Model modelRules = new Model();
+    private bool validateOnChange = false;
+
+    private FormValidationRule[] userNameRules = new FormValidationRule[] {
+        new FormValidationRule { Pattern = "\\d" }
+    };
+
+    private FormValidationRule[] numberRules = new FormValidationRule[]{
+        new FormValidationRule{ Type=FormFieldType.Number, Len=100, Message = "number != 100" }
+    };
+
+    private FormValidationRule[] numberRules1 = new FormValidationRule[]{
+        new FormValidationRule{ Type=FormFieldType.Number, Min =3, Message = "number != 100" }
+    };
+
+    private FormValidationRule[] personNameRules = new FormValidationRule[]{
+        new FormValidationRule{ OneOf = new string[]{ "Blazor", "AntDesign" } } ,
+        new FormValidationRule{ Max=8 }
+    };
+
+    private FormValidationRule[] personAgeRules = new FormValidationRule[]{
+        new FormValidationRule { Type=FormFieldType.Integer, Min = 1, Max=5 }
+    };
+
+    private FormValidationRule[] emailRules = new FormValidationRule[]{
+        new FormValidationRule { Type = FormFieldType.Email, Required = true },
+    };
+
+    private FormValidationRule[] validatorRules = new FormValidationRule[]{
+        new FormValidationRule { Validator = (validationContext) => {
+                var validationAttribute = new CustomValidationAttribute("hello validator");
+
+                if (validationAttribute.IsValid(validationContext.Value) == false)
+                {
+                    string errorMessage = validationAttribute.FormatErrorMessage(validationContext.DisplayName);
+
+                    var result = new ValidationResult(errorMessage, new string[] { validationContext.FieldName });
+
+                    return result;
+                }
+
+                return null;
+            }
+        },
+    };
+
+    private FormValidationRule[] transformRules = new FormValidationRule[]{
+        new FormValidationRule { Type = FormFieldType.Number, Max=10, Transform = value => (decimal)value + 1},
+    };
+
+    private void OnFinish(EditContext editContext)
+    {
+        Console.WriteLine($"Success:{JsonSerializer.Serialize(modelRules)}");
+    }
+
+    private void OnFinishFailed(EditContext editContext)
+    {
+        Console.WriteLine($"Failed:{JsonSerializer.Serialize(modelRules)}");
+    }
+
+    class CustomValidationAttribute : ValidationAttribute
+    {
+        public string Value { get; set; }
+        public CustomValidationAttribute(string value) : base("The field {0} should be '{1}'.")
+        {
+            Value = value;
+        }
+
+        public override string FormatErrorMessage(string name)
+        {
+            return string.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, Value);
+        }
+
+        public override bool IsValid(object value)
+        {
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!(value is string valueAsString))
+            {
+                return false;
+            }
+
+            return valueAsString == Value;
+        }
+    }
+
+}

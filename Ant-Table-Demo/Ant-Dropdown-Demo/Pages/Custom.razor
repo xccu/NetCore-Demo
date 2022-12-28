@@ -1,0 +1,75 @@
+﻿@page "/custom"
+
+<h3>Button with dropdown menu</h3>
+<li>A button is on the left, and a related functional menu is on the right. You can set the icon property to modify the icon of right.</li>
+
+<Divider Orientation="left">Div</Divider>
+<Space Direction="@DirectionVHType.Vertical" Style="width: 100%">
+
+                <Dropdown Trigger="@(new Trigger[] { Trigger.Click })" OnClick='e => { Console.WriteLine("Dropdown button clicked."); }'>
+                    <Overlay>
+                        @_overlayMenu
+                    </Overlay>
+                    <ChildContent>
+                        <Button> Button <Icon Type="down" /></Button>
+                    </ChildContent>
+                </Dropdown>
+           
+</Space>
+
+<Divider Orientation="left">Unbound</Divider>
+<Space Direction="@DirectionVHType.Vertical" Style="width: 100%">
+    <SpaceItem>
+        <Dropdown Trigger="@(new Trigger[] { Trigger.Click })" OnClick='e => { Console.WriteLine("Dropdown button clicked."); }'>
+            <Overlay>
+                <Menu>
+                @foreach (var item in _data)
+                {
+                     <MenuItem>@item</MenuItem>
+                }      
+                </Menu>              
+            </Overlay>
+            <Unbound>
+                <Button RefBack=@context>Button <Icon Type="down" /></Button>
+            </Unbound>
+        </Dropdown>
+    </SpaceItem>
+</Space>
+
+
+
+<Divider Orientation="left">Custom</Divider>
+
+<Button OnClick='e => {  Console.WriteLine("Str:"+_dropdown.Value); }'>Test</Button>
+
+<CustomDropDown Data=@_data Value="@teststr" @ref="_dropdown">
+    @context
+</CustomDropDown>
+
+
+@code
+{
+    CustomDropDown _dropdown;
+    private string teststr;
+    List<String> _data = new List<string> { "aaa", "bbb", "ccc" };
+    private RenderFragment _overlayMenu =
+    @<Menu>
+        <MenuItem>            
+                1st menu item
+        </MenuItem>
+        <MenuItem>
+                2nd menu item
+        </MenuItem>
+        <MenuItem>
+                3rd menu item
+        </MenuItem>
+        </Menu>
+    ;
+
+    protected override void OnInitialized()
+    {
+        teststr = "teststr";
+        base.OnInitialized();
+    }
+
+}
