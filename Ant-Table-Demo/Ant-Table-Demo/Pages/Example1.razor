@@ -59,8 +59,8 @@
 
   protected override async Task OnInitializedAsync()
   {
-    forecasts = await GetForecastAsync(1, 50);
-    _total = 50;
+    forecasts = await GetForecastAsync(1, 10);
+    _total = 10;
   }
 
   public class WeatherForecast

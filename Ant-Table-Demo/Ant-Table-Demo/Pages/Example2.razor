@@ -5,11 +5,11 @@
 @using AntDesign*@
 
 <h3>Basic Usage</h3>
-<Table TItem="Data" DataSource="@data" OnRowClick="OnRowClick">
+<Table TItem="Data" DataSource="@data" OnRowClick="OnRowClick" OnChange="OnChange">
   <PropertyColumn Property="c=>c.Name">
     <a>@context.Name</a>
   </PropertyColumn>
-  <PropertyColumn Property="c=>c.Age"></PropertyColumn>
+  <PropertyColumn Property="c=>c.Age" Sortable></PropertyColumn>
   <PropertyColumn Property="c=>c.Address">
     <TitleTemplate>
       <span> <Icon Type="environment" /> Address </span>
@@ -84,6 +84,11 @@
     [DisplayName("Tags")]
     public string[] Tags { get; set; }
   }
+
+    public async Task OnChange(QueryModel<Data> queryModel)
+    {
+        Console.WriteLine("Onchange");
+    }
 
   void OnRowClick(RowData<Data> row)
   {

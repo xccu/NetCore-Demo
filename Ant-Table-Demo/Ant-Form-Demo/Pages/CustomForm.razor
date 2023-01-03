@@ -1,0 +1,68 @@
+﻿@typeparam TItem
+
+<GridRow OnBreakpoint="OnBreakpoint">
+    <GridCol Span="24">
+        <Form Model="@Data"
+              ValidateMode="@FormValidateMode.Rules"
+              ValidateOnChange=ValidateOnChange
+              LabelCol="GetFormLabelCol()"
+              WrapperCol="GetFormWrapperCol()"
+              OnFinish="async ()=> await OnClick.InvokeAsync(Data)">
+            @BaseForm(Data)
+
+            <FormItem WrapperCol="GetButtonItemLayout()">
+                <Button Type="@ButtonType.Primary" HtmlType="submit">
+                    @BaseButton
+                </Button>
+            </FormItem>
+        </Form>       
+    </GridCol>
+</GridRow>
+
+
+@code {
+
+    [Parameter]
+    public TItem Data { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> BaseForm { get; set; } //default:ChildContent
+
+    [Parameter]
+    //[EditorRequired]
+    public RenderFragment BaseButton { get; set; }
+
+    [Parameter]
+    public bool ShowButton { get; set; }
+
+    [Parameter]
+    public bool ValidateOnChange { get; set; }
+
+    [Parameter]
+    public EventCallback<TItem> OnClick { get; set; }
+
+
+    BreakpointType _breakpoint = BreakpointType.Xxl;
+
+    #region layout
+    private ColLayoutParam GetFormLabelCol()
+    {
+        return _breakpoint.IsIn(BreakpointType.Xxl, BreakpointType.Xl, BreakpointType.Lg) ? new ColLayoutParam { Span = "6" } : null;
+    }
+
+    private ColLayoutParam GetFormWrapperCol()
+    {
+        return _breakpoint.IsIn(BreakpointType.Xxl, BreakpointType.Xl, BreakpointType.Lg) ? new ColLayoutParam { Span = "12" } : null;
+    }
+
+    private ColLayoutParam GetButtonItemLayout()
+    {
+        return _breakpoint.IsIn(BreakpointType.Xxl, BreakpointType.Xl, BreakpointType.Lg) ? new ColLayoutParam { Span = "12", Offset = "6" } : null;
+    }
+
+    void OnBreakpoint(BreakpointType breakpoint)
+    {
+        _breakpoint = breakpoint;
+    }
+    #endregion
+}

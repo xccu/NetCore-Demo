@@ -1,0 +1,36 @@
+﻿@page "/test"
+
+@{
+    string style = "background: #0092ff; padding: 8px 0; color:#FFFFFF;text-align:center;";
+    string style2 = "background: rgba(0, 146, 255, 0.75); padding: 8px 0; color:#FFFFFF;text-align:center;";
+}
+
+<h3>Basic Grid</h3>
+<li>Perform different check rules according to different situations.</li>
+
+<div>
+    <GridRow>
+        <GridCol Span="24"><div style="@style">col-24</div></GridCol>
+    </GridRow>
+    <GridRow>
+        <GridCol Span="12">
+            <GridRow>
+                <GridCol Span="12"><div style="@style">inner-col-12</div></GridCol>
+                <GridCol Span="12"><div style="@style2">inner-col-12</div></GridCol>
+            </GridRow>
+        </GridCol>
+        <GridCol Span="12"><div style="@style">col-12</div></GridCol>
+    </GridRow>
+    <GridRow>
+        <GridCol Span="8">col-8</GridCol>
+        <GridCol Span="8">col-8</GridCol>
+        <GridCol Span="8">col-8</GridCol>
+    </GridRow>
+    <GridRow>
+        <GridCol Span="6">col-6</GridCol>
+        <GridCol Span="6">col-6</GridCol>
+        <GridCol Span="6">col-6</GridCol>
+        <GridCol Span="6">col-6</GridCol>
+    </GridRow>
+</div>
+
