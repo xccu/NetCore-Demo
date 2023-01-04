@@ -1,0 +1,24 @@
+﻿@page "/fetchdata"
+
+    <Card> 
+        <Body>
+           <GridRow Gutter="(20,5)">
+                <GridCol Span="6"><Input Placeholder="Name" @bind-Value="@value" /></GridCol>
+                <GridCol Span="6"><Input Placeholder="Value" @bind-Value="@value" /></GridCol>
+            </GridRow>
+        </Body>
+    </Card>
+
+
+<GridRow Gutter="(20,5)">
+    <Card>
+        <Body>            
+            <GridCol Span="6"><Input Placeholder="Name" @bind-Value="@value" /></GridCol>
+            <GridCol Span="6"><Input Placeholder="Value" @bind-Value="@value" /></GridCol>           
+        </Body>
+    </Card>
+</GridRow>
+
+@code{
+    String value = "123";
+}
