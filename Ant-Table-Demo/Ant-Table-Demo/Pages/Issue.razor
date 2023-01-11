@@ -34,23 +34,13 @@
 <br />
 <p>PageIndex: @_pageIndex | PageSize: @_pageSize | Total: @_total</p>
 
-<br />
-<h5>selections:</h5>
-@if (selectedRows != null && selectedRows.Any())
-{
-        <Button Danger Size="small" OnClick="@(e => { selectedRows = null; })">Clear</Button>
 
-    @foreach (var selected in selectedRows)
-    {
-                <Tag @key="selected.Id" Closable OnClose="e=>RemoveSelection(selected.Id)">@selected.Id - @selected.Summary</Tag>
-    }
-}
 
 <Button OnClick="()=> { _pageIndex--; }">Previous page</Button>
 <Button OnClick="()=> { _pageIndex++; }">Next Page</Button>
 
 
-<Pagination PageSize="10" Total="23"></Pagination>
+@*<Pagination PageSize="10" Total="23"></Pagination>*@
 
 @using System.Text.Json;
 @code {
@@ -66,8 +56,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await GetForecastAsync(1, 50);
-        _total = 10;
+        forecasts = await GetForecastAsync(1, 10);
+        _total = forecasts.Count();
         Console.WriteLine("OnInitializedAsync");
     }
 

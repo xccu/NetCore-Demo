@@ -1,0 +1,17 @@
+﻿
+
+@code {
+    public int currentCount = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //base.OnInitializedAsync();
+
+        currentCount = 10;
+    }
+
+    public void IncrementCount()
+    {
+        currentCount++;
+    }
+}

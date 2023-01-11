@@ -1,5 +1,4 @@
 ﻿@page "/counter"
-@inherits CounterBase
 
 <PageTitle>Counter</PageTitle>
 
@@ -10,8 +9,10 @@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-    protected override async Task OnInitializedAsync()
+    private int currentCount = 0;
+
+    private void IncrementCount()
     {
-        base.OnInitializedAsync();      
+        currentCount++;
     }
 }

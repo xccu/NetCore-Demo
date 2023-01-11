@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ant-Menu-Demo", "Ant-Menu-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ant-Statistic-Demo", "Ant-Statistic-Demo\Ant-Statistic-Demo.csproj", "{D627FD6B-DB0B-4A9D-BEA6-EEB4639C96DA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ant-Modal-Demo", "Ant-Modal-Demo\Ant-Modal-Demo.csproj", "{F843E16F-9BEB-4271-8283-4C816C54FA85}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ant-Transfer-Demo", "Ant-Transfer-Demo\Ant-Transfer-Demo.csproj", "{00C65838-9F11-4E3A-B6B2-4CA852DB4C98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{D627FD6B-DB0B-4A9D-BEA6-EEB4639C96DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D627FD6B-DB0B-4A9D-BEA6-EEB4639C96DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D627FD6B-DB0B-4A9D-BEA6-EEB4639C96DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F843E16F-9BEB-4271-8283-4C816C54FA85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F843E16F-9BEB-4271-8283-4C816C54FA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F843E16F-9BEB-4271-8283-4C816C54FA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F843E16F-9BEB-4271-8283-4C816C54FA85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00C65838-9F11-4E3A-B6B2-4CA852DB4C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00C65838-9F11-4E3A-B6B2-4CA852DB4C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00C65838-9F11-4E3A-B6B2-4CA852DB4C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00C65838-9F11-4E3A-B6B2-4CA852DB4C98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

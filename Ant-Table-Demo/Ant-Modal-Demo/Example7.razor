@@ -1,0 +1,50 @@
+﻿@page "/example7"
+@inject ModalService _modalService
+
+<h3>Internationalization</h3>
+<p>To customize the text of the buttons, you need to set okText and cancelText props.</p>
+
+<div>
+    <Button Type="primary" OnClick="@ShowModal">
+        Modal
+    </Button>
+    <Modal Title="@("Modal")"
+           Visible="@_visible"
+           OnOk="@HideModal"
+           OnCancel="@HideModal"
+           OkText="@("确认")"
+           CancelText="@("取消")">
+        <p>Bla bla ...</p>
+        <p>Bla bla ...</p>
+        <p>Bla bla ...</p>
+    </Modal>
+
+    <Button OnClick="@HandleConfirm">Confirm</Button>
+
+</div>
+
+
+@code {
+    private bool _visible = false;
+    private void ShowModal()
+    {
+        _visible = true;
+    }
+
+    private void HideModal()
+    {
+        _visible = false;
+    }
+
+    private void HandleConfirm()
+    {
+        _modalService.Confirm(new ConfirmOptions()
+            {
+                Title = "Confirm",
+                Icon =@<Icon Type="exclamation-circle" Theme="Outline"></Icon>,
+            Content = "Bla bla ...",
+            OkText = "确认",
+            CancelText = "取消"
+        });
+    }
+}

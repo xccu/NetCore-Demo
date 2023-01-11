@@ -1,0 +1,111 @@
+﻿@page "/test"
+
+<h3>Basic</h3>
+<p>The most basic usage of <code>Transfer</code> involves providing the source data and target keys arrays, plus the rendering and some callback functions.</p>
+
+<div>
+    <Transfer DataSource="_dataSource"
+              Disabled="_disabled"
+              TargetKeys="_targetKeys.ToArray()"
+              SelectedKeys="_selectedKeys"
+              Titles="_titles"
+              OnChange="OnChange"
+              OnScroll="OnScroll"
+              OnSelectChange="OnSelectChange">
+    </Transfer>
+
+</div>
+
+@code {
+    private List<TransferItem> _dataSource = new List<TransferItem>();
+    private List<string> _targetKeys = new List<string>();
+    private string[] _selectedKeys = Array.Empty<string>();
+    private string[] _titles = { "Source", "Target" };
+    private bool _disabled = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        List<String> list = await getDataAsync();
+        //List<String> list = getData();
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            _dataSource.Add(new TransferItem
+                {
+                    Title = $"Content{i + 1}",
+                    Description = $"description of content{i + 1}",
+                    Key = list[i],
+                    Disabled = false
+                });
+
+            if (i > 10)
+                _targetKeys.Add(i.ToString());
+        }
+
+        //for (int i = 0; i < 20; i++)
+        //{
+        //    _dataSource.Add(new TransferItem
+        //        {
+        //            Title = $"Content{i + 1}",
+        //            Description = $"description of content{i + 1}",
+        //            Key = i.ToString(),
+        //            Disabled = false
+        //        });
+
+        //    //if (i > 10)
+        //    //    _targetKeys.Add(i.ToString());
+        //}
+
+        //for (int i = 10; i < 20; i++)
+        //    _targetKeys.Add(i.ToString());
+
+        await base.OnInitializedAsync();
+    }
+
+    private List<String> getData()
+    {
+        var result = new List<String>();
+        for (int i = 0; i < 20; i++)
+        {
+            result.Add(i.ToString());
+            //if(i > 10)
+            //    _targetKeys.Add(i.ToString());
+        }
+        return result;
+    }
+
+    private Task<List<String>> getDataAsync()
+    {
+        var t = new Task<List<String>>(getData);
+        t.Start();
+        return t;
+    }
+
+    private void OnSwitchChange(bool check)
+    {
+        _disabled = check;
+    }
+
+    private OneOf.OneOf<string, RenderFragment> Render(TransferItem item)
+    {
+        return $"{item.Title} - {item.Description}";
+    }
+
+    private void OnChange(TransferChangeArgs e)
+    {
+        Console.WriteLine(e.Direction);
+        Console.WriteLine($"MoveKeys:{string.Join(',', e.MoveKeys)}");
+        Console.WriteLine($"TargetKeys:{string.Join(',', e.TargetKeys)}");
+    }
+
+    private void OnScroll(TransferScrollArgs e)
+    {
+        Console.WriteLine(e.Direction);
+    }
+
+    private void OnSelectChange(TransferSelectChangeArgs e)
+    {
+        Console.WriteLine($"SourceSelectedKeys:{string.Join(',', e.SourceSelectedKeys)}");
+        Console.WriteLine($"TargetSelectedKeys:{string.Join(',', e.TargetSelectedKeys)}");
+    }
+}

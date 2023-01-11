@@ -1,0 +1,33 @@
+﻿
+<p role="status">Current count: @CurrentCount</p>
+
+
+@code {
+
+    [Parameter]
+    public int CurrentCount { get; set; }
+
+
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        Console.WriteLine("\tExs:SetParametersAsync - Begin");
+        await base.SetParametersAsync(parameters);
+        Console.WriteLine("\tExs:SetParametersAsync - End");
+    }
+
+    protected override void OnInitialized() => Console.WriteLine("\tExs:OnInitialized");
+
+    protected override async Task OnInitializedAsync() => Console.WriteLine("\tExs:OnInitializedAsync");
+
+    protected override void OnParametersSet() => Console.WriteLine("\tExs:OnParametersSet");
+
+    protected override async Task OnParametersSetAsync() => Console.WriteLine("\tExs:OnParametersSetAsync");
+
+    protected override void OnAfterRender(bool firstRender) => Console.WriteLine($"\tExs:OnAfterRender(First render: {firstRender})");
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) => Console.WriteLine($"\tExs:OnAfterRenderAsync(First render: {firstRender})");
+
+
+
+}
