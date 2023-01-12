@@ -1,0 +1,27 @@
+﻿@page "/culture"
+
+@using System.Globalization
+
+<PageTitle>Culture</PageTitle>
+<h1>CultureInfo Test</h1>
+
+@foreach(var item in c)
+{
+    <li>@item</li>
+}
+
+
+@code {
+
+    private CultureInfo _culture = new CultureInfo("en-US");
+    List<String> c = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        while (!_culture.Equals(CultureInfo.InvariantCulture))
+        {
+            c.Add(_culture.Name);
+            _culture= _culture.Parent;
+        }
+    }
+}
