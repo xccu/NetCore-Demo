@@ -11,43 +11,55 @@
         <div class="top-row px-4">
             @*<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>*@
             <Menu Mode=MenuMode.Horizontal>
-    <SubMenu TitleTemplate=@sub1Title>
-        <MenuItem Key="setting:1">
-            <MenuLink Href="example1">1-Line</MenuLink>
-        </MenuItem>
-        <MenuItem Key="setting:2"> 
-            <MenuLink Href="example2">2-Bar</MenuLink>
-        </MenuItem>
-        <MenuItem Key="setting:3">
-            <MenuLink Href="example3">3-Multiple Line</MenuLink>
-        </MenuItem>
-    </SubMenu>
-    <SubMenu TitleTemplate=@sub2Title>
-        <MenuItem Key="setting:1">
-            <MenuLink Href="Line_Chart">Line Chart</MenuLink>
-        </MenuItem>
-        <MenuItem Key="setting:2">
-            <MenuLink Href="Marker_Point">Marker Point</MenuLink>
-        </MenuItem>
-        <MenuItem Key="setting:3">
-            <MenuLink Href="Multiple_Line_Chart">Multiple Line Chart</MenuLink>
-        </MenuItem>
-    </SubMenu>
-    <SubMenu TitleTemplate=@sub3Title>
-        <MenuItem Key="setting:1">
-            <MenuLink Href="Column_Chart">Column Chart</MenuLink>
-        </MenuItem>
-        <MenuItem Key="setting:2">
-            <MenuLink Href="Grouped_Column_Chart">Grouped Column Chart</MenuLink>
-        </MenuItem>
-        <MenuItem Key="setting:3">
-            <MenuLink Href="Histogram_Chart">Histogram Chart</MenuLink>
-        </MenuItem>
-        <MenuItem Key="setting:3">
-            <MenuLink Href="Percent_Stacked_Column_Chart">Percent Stacked Column Chart</MenuLink>
-        </MenuItem>
-    </SubMenu>
-</Menu>
+                <SubMenu TitleTemplate=@sub1Title>
+                    <MenuItem Key="setting:1">
+                        <MenuLink Href="example1">1-Line</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:2">
+                        <MenuLink Href="example2">2-Bar</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:3">
+                        <MenuLink Href="example3">3-Multiple Line</MenuLink>
+                    </MenuItem>
+                </SubMenu>
+                <SubMenu TitleTemplate=@sub2Title>
+                    <MenuItem Key="setting:1">
+                        <MenuLink Href="Line_Chart">Line Chart</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:2">
+                        <MenuLink Href="Marker_Point">Marker Point</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:3">
+                        <MenuLink Href="Multiple_Line_Chart">Multiple Line Chart</MenuLink>
+                    </MenuItem>
+                </SubMenu>
+                <SubMenu TitleTemplate=@sub3Title>
+                    <MenuItem Key="setting:1">
+                        <MenuLink Href="Column_Chart">Column Chart</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:2">
+                        <MenuLink Href="Grouped_Column_Chart">Grouped Column Chart</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:3">
+                        <MenuLink Href="Histogram_Chart">Histogram Chart</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:4">
+                        <MenuLink Href="Percent_Stacked_Column_Chart">Percent Stacked Column Chart</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:5">
+                        <MenuLink Href="Ranged_Column_Chart">Ranged Column Chart</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:6">
+                        <MenuLink Href="Stacked_Column_Chart">Stacked Column Chart</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:7">
+                        <MenuLink Href="Stock_Chart">Stock Chart</MenuLink>
+                    </MenuItem>
+                    <MenuItem Key="setting:8">
+                        <MenuLink Href="Waterfall_Chart">Waterfall Chart</MenuLink>
+                    </MenuItem>
+                </SubMenu>
+            </Menu>
         </div>
 
         <article class="content px-4">
@@ -61,20 +73,16 @@
 {
     RenderFragment sub1Title =
     @<Template>
-        <Icon Type="setting" Theme="outline"></Icon>
-        Base
-        </Template>;
+        <Icon Type="setting" Theme="outline"></Icon>Base
+    </Template>;
 
     RenderFragment sub2Title =
     @<Template>
-        <Icon Type="line-chart" Theme="outline"></Icon>
-        Line
+        <Icon Type="line-chart" Theme="outline"></Icon>Line
     </Template>;
-
 
     RenderFragment sub3Title =
     @<Template>
-        <Icon Type="bar-chart" Theme="outline"></Icon>
-        Column
+        <Icon Type="bar-chart" Theme="outline"></Icon>Column
     </Template>;
 }

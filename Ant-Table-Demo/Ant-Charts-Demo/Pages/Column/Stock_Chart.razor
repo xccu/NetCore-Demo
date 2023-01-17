@@ -4,46 +4,20 @@
 @using System.Text.Json
 @using System.Text.Json.Serialization
 
+<Divider>示例1</Divider>
+@*<Stock Data=data1 Config="config1" />*@
+<Stock OnFirstRender="onChart_FirstRender" Config="config1" />
+<Divider>示例2</Divider>
+<Stock OnFirstRender="onChart_FirstRender" Config="config2" />
+<Divider>示例3</Divider>
+<Stock OnFirstRender="onChart_FirstRender" Config="config3" />
+<Divider>示例4</Divider>
+<Stock OnFirstRender="onChart_FirstRender" Config="config4" />
+<Divider>示例5</Divider>
+<Stock OnFirstRender="onChart_FirstRender" Config="config5" />
+<Divider>示例6</Divider>
+<Stock OnFirstRender="onChart_FirstRender" Config="config6" />        
 
-
-<Tabs>
-    <TabPane Key="1">
-        <Divider>示例1</Divider>
-        
-            <Stock Data=data1 Config="config1" />
-        
-    </TabPane>
-    <TabPane Key="2">
-        <Divider>示例2</Divider>
-        
-            <Stock Data=data2 Config="config2" />
-        
-    </TabPane>
-    <TabPane Key="3">
-        <Divider>示例3</Divider>
-        
-            <Stock Data=data3 Config="config3" />
-        
-    </TabPane>
-    <TabPane Key="4">
-        <Divider>示例4</Divider>
-        
-            <Stock Data=data4 Config="config4" />
-        
-    </TabPane>
-    <TabPane Key="5">
-        <Divider>示例5</Divider>
-        
-            <Stock Data=data5 Config="config5" />
-        
-    </TabPane>
-    <TabPane Key="6">
-        <Divider>示例6</Divider>
-        
-            <Stock Data=data6 Config="config6" />
-        
-    </TabPane>
-</Tabs>
 
 @*<Divider>动手实验</Divider>
 <DynamicExample @ref="@example">
@@ -58,6 +32,12 @@
     {
         base.OnAfterRender(firstRender);
         //example.Chart = chart;
+    }
+
+    private async Task onChart_FirstRender(IChartComponent chart)
+    {
+        var data = await DemoData.StockDataAsync(NavigationManager, HttpClient);
+        await chart.ChangeData(data);
     }
 
     #region 示例1

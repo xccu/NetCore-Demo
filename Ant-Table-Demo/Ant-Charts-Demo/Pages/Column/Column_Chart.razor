@@ -15,10 +15,12 @@
 <AntDesign.Charts.Column Data=data1 Config="config4" />
 
 <Divider>示例5</Divider>
-<AntDesign.Charts.Column Data=data5 Config="config5" />
+@*<AntDesign.Charts.Column Data=data5 Config="config5" />*@
+<AntDesign.Charts.Column OnFirstRender="onChart5_FirstRender" Config="config5" />
 
 <Divider>示例6</Divider>
-<AntDesign.Charts.Column Data=data5 Config="config6" />
+@*<AntDesign.Charts.Column Data=data5 Config="config6" />*@
+<AntDesign.Charts.Column OnFirstRender="onChart5_FirstRender" Config="config6" />
 
 <Divider>示例7</Divider>
 <AntDesign.Charts.Column Data=data7 Config="config7" />
@@ -256,6 +258,12 @@
                 },
                 },
         };
+
+    private async Task onChart5_FirstRender(IChartComponent chart)
+    {
+        data5 = await DemoData.SalesAsync(NavigationManager, HttpClient);
+        await chart.ChangeData(data5);
+    }
     #endregion
 
     #region 示例6
@@ -298,6 +306,7 @@
                 },
                     },
         };
+
     #endregion
 
 
