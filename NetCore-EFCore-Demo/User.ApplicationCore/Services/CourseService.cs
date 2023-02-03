@@ -1,11 +1,12 @@
-﻿using User.ApplicationCore.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using User.ApplicationCore.Dtos;
+using User.ApplicationCore.Interfaces.Repositories;
+using User.ApplicationCore.Interfaces.Services;
 
 namespace User.ApplicationCore.Service;
 
-public class CourseService
+public class CourseService: ICourseService
 {
     private ICourseRepository _courseRepository;
     private IUserRepository _userRepository;
@@ -49,7 +50,5 @@ public class CourseService
 
         return dto;
     }
-
-
 
 }

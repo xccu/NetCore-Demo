@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using User.ApplicationCore.Interfaces;
+using System.Xml.Linq;
+using User.ApplicationCore.Interfaces.Repositories;
+using User.ApplicationCore.Interfaces.Services;
 using User.Infrastructure.Data;
 
 namespace WebAPI.Controllers
@@ -15,10 +17,13 @@ namespace WebAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly IUserRepository _repository;
-        private readonly UserContext _context;
+        private readonly IUserService _service;
+
+
 
         //方式1：注入MySqlContext
+        //private readonly UserContext _context;
+
         //public UserController(ILogger<UserController> logger,MySqlContext context)
         //{
         //    _logger = logger;
@@ -27,16 +32,25 @@ namespace WebAPI.Controllers
         //}
 
         //方式2：注入IUserRepository
-        public UserController(ILogger<UserController> logger, IUserRepository repository)
+
+        //private readonly IUserRepository _repository;
+        //public UserController(ILogger<UserController> logger, IUserRepository repository)
+        //{
+        //    _logger = logger;
+        //    _repository = repository;
+        //}
+
+
+        public UserController(ILogger<UserController> logger, IUserService service)
         {
             _logger = logger;
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet]
         public IEnumerable<User.ApplicationCore.Entities.User> GetUsers()
         {
-            var users = _repository.GetAll();
+            var users = _service.GetUsers();
             return users.ToList();
         }
 
@@ -44,7 +58,7 @@ namespace WebAPI.Controllers
         [Route("{id}")]
         public User.ApplicationCore.Entities.User GetUser(int id)
         {
-            var user = _repository.GetById(id);
+            var user = _service.GetUser(id);
             return user;
         }
 
@@ -52,7 +66,9 @@ namespace WebAPI.Controllers
         [Route("query")]
         public IEnumerable<User.ApplicationCore.Entities.User> GetByQuery()
         {
-            var user = _context.User.FromSqlRaw($"select * from user where id in(1,2)");
+            //var user = _context.User.FromSqlRaw($"select * from user where id in(1,2)");
+            Expression<Func<User.ApplicationCore.Entities.User, bool>> express = a => a.gender == "male";
+            var user = _service.SearchCondition(express);
             return user.ToList();
         }
 
@@ -61,7 +77,7 @@ namespace WebAPI.Controllers
         public User.ApplicationCore.Entities.User GetUserByName(String name)
         {
             Expression<Func<User.ApplicationCore.Entities.User, bool>> express = a => a.name == name;
-            var user = _repository.GetByCondition(express);
+            var user = _service.SearchCondition(express);
             return user.FirstOrDefault();
         }
 
@@ -69,9 +85,9 @@ namespace WebAPI.Controllers
         [Route("update")]
         public bool UpdateUser()
         {
-            var user = _repository.GetById(3);
+            var user = _service.GetUser(3);
             user.name = "懒羊羊";
-            return _repository.Update(user);
+            return _service.Update(user);
         }
 
         [HttpGet]
@@ -80,18 +96,18 @@ namespace WebAPI.Controllers
         {
             var user = new User.ApplicationCore.Entities.User();
             user.name = "test";
-            user.sex = "male";
+            user.gender = "male";
             user.password = "123";
             user.age = 100;
-            return _repository.Insert(user);
+            return _service.Insert(user);
         }
 
         [HttpGet]
         [Route("delete")]
         public bool DeleteUser()
         {
-            var user = _repository.GetById(9);
-            return _repository.Delete(user);
+            var user = _service.GetUser(9);
+            return _service.Delete(user);
         }
 
     }

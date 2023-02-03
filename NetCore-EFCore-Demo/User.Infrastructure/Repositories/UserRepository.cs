@@ -1,5 +1,5 @@
 ﻿using Base.Infrastructure.Repositories;
-using User.ApplicationCore.Interfaces;
+using User.ApplicationCore.Interfaces.Repositories;
 
 namespace User.Infrastructure.Data;
 

@@ -17,8 +17,8 @@ public class User
     public String password { get; set; }
     [Column("AGE")]
     public int age { get; set; }
-    [Column("SEX")]
-    public String sex { get; set; }
+    [Column("GENDER")]
+    public String gender { get; set; }
     [Column("RACE")]
     public String race { get; set; }
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using User.ApplicationCore.Dtos;
+using User.ApplicationCore.Interfaces.Services;
 using User.ApplicationCore.Service;
 
 namespace WebAPI.Controllers
@@ -12,9 +13,9 @@ namespace WebAPI.Controllers
     public class CourseController : ControllerBase
     {
         private readonly ILogger<CourseController> _logger;
-        private readonly CourseService _service;
+        private readonly ICourseService _service;
 
-        public CourseController(ILogger<CourseController> logger, CourseService service)
+        public CourseController(ILogger<CourseController> logger, ICourseService service)
         {
             _logger = logger;
             _service = service;
@@ -24,7 +25,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IEnumerable<object> GetCourse()
         {
-            return _service.GetCourses() ;
+            return _service.GetCourses();
         }
 
         //https://localhost:5001/course/user/1

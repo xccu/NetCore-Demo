@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using User.ApplicationCore.Entities;
-using User.ApplicationCore.Interfaces;
+using User.ApplicationCore.Interfaces.Repositories;
 
 namespace User.Infrastructure.Data;
 

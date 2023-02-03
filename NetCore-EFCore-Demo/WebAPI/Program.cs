@@ -1,14 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
-using User.ApplicationCore.Interfaces;
+using User.ApplicationCore.Interfaces.Repositories;
+using User.ApplicationCore.Interfaces.Services;
 using User.ApplicationCore.Service;
 using User.Infrastructure.Data;
 using User.Infrastructure.Repositories;
+using WebAPI.DBGenerator;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
-var connectionString = configuration.GetConnectionString("MySqlContext");
+var connectionString = configuration.GetConnectionString("SqlServer");
 
 // Add services to the container.
 
@@ -17,16 +19,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<UserContext>(options =>options.UseMySQL(connectionString));
+builder.Services.AddDbContext<UserContext>(options =>options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserCourseRepository, UserCourseRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 
-builder.Services.AddScoped<CourseService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
+EFCoreDbGenerator.SeedData(app.Services);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

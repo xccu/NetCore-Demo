@@ -15,6 +15,7 @@ public interface IRepository<T>
     bool Insert(T t);
     bool Update(T t);
     bool Delete(T t);
+    bool Delete(object id);
     IQueryable<T> GetAll();
     IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression);
     IQueryable<T> GetBySql(String sql);

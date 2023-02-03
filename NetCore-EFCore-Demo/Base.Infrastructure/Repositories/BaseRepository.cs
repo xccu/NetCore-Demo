@@ -87,6 +87,12 @@ namespace Base.Infrastructure.Repositories
             return  dbContext.SaveChanges() > 0;
         }
 
+        public bool Delete(object id)
+        {
+            var entity = GetById(id);
+            return Delete(entity);
+        }
+
         public IQueryable<T> GetAll()
         {
             return dbContext.Set<T>();
@@ -106,7 +112,6 @@ namespace Base.Infrastructure.Repositories
             var result = dbContext.Set<T>().Find(id);
             return result;
         }
-
 
         public bool IsExist(object id)
         {
