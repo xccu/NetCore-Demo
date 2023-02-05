@@ -18,7 +18,7 @@ namespace Base.Infrastructure.Repositories
     {
         private readonly DbContext dbContext;
         public BaseRepository(DbContext dbContext) => this.dbContext = dbContext;
-        public  bool Insert(T entity)
+        public bool Insert(T entity)
         {
             bool bRet = false;
 
@@ -35,6 +35,17 @@ namespace Base.Infrastructure.Repositories
 
             dbContext.Set<T>().Add(entity);
             return dbContext.SaveChanges() > 0;
+        }
+
+        public async Task<bool> InsertAsync(T entity)
+        {
+            if (entity == null)
+            {
+                return false;
+            }
+
+            dbContext.Set<T>().Add(entity);
+            return await dbContext.SaveChangesAsync() > 0;
         }
 
         public bool Update(T entity)
@@ -62,6 +73,31 @@ namespace Base.Infrastructure.Repositories
             return  dbContext.SaveChanges() > 0;
         }
 
+        public async Task<bool> UpdateAsync(T entity)
+        {
+            bool bRet = false;
+
+            if (entity == null)
+            {
+                return bRet;
+            }
+
+            bRet = IsEntityTracked(entity);
+            if (!bRet)
+            {
+                return bRet;
+            }
+
+            bRet = IsEntityValid(entity);
+            if (!bRet)
+            {
+                return bRet;
+            }
+
+            dbContext.Set<T>().Update(entity);
+            return await dbContext.SaveChangesAsync() > 0;
+        }
+
         public bool Delete(T entity)
         {
             bool bRet = false;
@@ -87,10 +123,41 @@ namespace Base.Infrastructure.Repositories
             return  dbContext.SaveChanges() > 0;
         }
 
+        public async Task<bool> DeleteAsync(T entity)
+        {
+            bool bRet = false;
+
+            if (entity == null)
+            {
+                return bRet;
+            }
+
+            bRet = IsEntityTracked(entity);
+            if (!bRet)
+            {
+                return bRet;
+            }
+
+            bRet = IsEntityValid(entity);
+            if (!bRet)
+            {
+                return bRet;
+            }
+
+            dbContext.Set<T>().Remove(entity);
+            return await dbContext.SaveChangesAsync() > 0;
+        }
+
         public bool Delete(object id)
         {
             var entity = GetById(id);
             return Delete(entity);
+        }
+
+        public async Task<bool> DeleteAsync(object id)
+        {
+            var entity = GetById(id);
+            return await DeleteAsync(entity);
         }
 
         public IQueryable<T> GetAll()
@@ -98,12 +165,22 @@ namespace Base.Infrastructure.Repositories
             return dbContext.Set<T>();
         }
 
-        public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression)
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
+            return await dbContext.Set<T>().ToListAsync();
+        }
+
+        public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression)
+        {            
             return dbContext.Set<T>().Where(expression);
         }
 
-        public  T GetById(object id)
+        public async Task<IEnumerable<T>> GetByConditionAsync(Expression<Func<T, bool>> expression)
+        {
+            return await dbContext.Set<T>().Where(expression).ToListAsync() ;
+        }
+
+        public T GetById(object id)
         {
             if (id == null)
             {
@@ -112,6 +189,27 @@ namespace Base.Infrastructure.Repositories
             var result = dbContext.Set<T>().Find(id);
             return result;
         }
+
+        public async Task<T> GetByIdAsync(object id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+            var result = dbContext.Set<T>().FindAsync(id);
+            return await result;
+        }
+
+        public IQueryable<T> GetBySql(string sql)
+        {
+            var list = dbContext.Set<T>(sql);
+            return list;
+        }
+
+        public async Task<IEnumerable<T>> GetBySqlAsync(string sql)
+        {
+            return await dbContext.Set<T>(sql).ToListAsync();
+        }    
 
         public bool IsExist(object id)
         {
@@ -123,9 +221,24 @@ namespace Base.Infrastructure.Repositories
             return  dbContext.Set<T>().Find(id) != null;
         }
 
+        public async Task<bool> IsExistAsync(object id)
+        {
+            if (id == null)
+            {
+                return false;
+            }
+
+            return await dbContext.Set<T>().FindAsync(id) != null;
+        }
+
         public int GetCount(T entity)
         {
             return  dbContext.Set<T>().Count();
+        }
+
+        public async Task<int> GetCountAsync(T entity)
+        {
+            return await dbContext.Set<T>().CountAsync();
         }
 
         private bool IsEntityValid(T entity)
@@ -178,12 +291,6 @@ namespace Base.Infrastructure.Repositories
             {
                 return true;
             }
-        }
-
-        public IQueryable<T> GetBySql(string sql)
-        {
-            var list = dbContext.Set<T>(sql);
-            return list;
         }
     }     
 

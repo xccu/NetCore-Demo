@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace User.ApplicationCore.Service;
 
-public class UserService: IUserService
+public class UserService : IUserService
 {
     private IUserRepository _userRepository;
 

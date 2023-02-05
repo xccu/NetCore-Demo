@@ -22,4 +22,15 @@ public interface IRepository<T>
     T GetById(object id);
     bool IsExist(object id);
     int GetCount(T t);
+
+    Task<bool> InsertAsync(T t);
+    Task<bool> UpdateAsync(T t);
+    Task<bool> DeleteAsync(T t);
+    Task<bool> DeleteAsync(object id);
+    Task<IEnumerable<T>> GetAllAsync();
+    Task<IEnumerable<T>> GetByConditionAsync(Expression<Func<T, bool>> expression);
+    Task<IEnumerable<T>> GetBySqlAsync(String sql);
+    Task<T> GetByIdAsync(object id);
+    Task<bool> IsExistAsync(object id);
+    Task<int> GetCountAsync(T t);
 }

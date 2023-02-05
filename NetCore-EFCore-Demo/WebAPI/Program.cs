@@ -1,3 +1,8 @@
+using Device.ApplicationCore.Interfaces.Repositories;
+using Device.ApplicationCore.Interfaces.Services;
+using Device.ApplicationCore.Services;
+using Device.Infrastructure.Data;
+using Device.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using User.ApplicationCore.Interfaces.Repositories;
@@ -20,13 +25,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<UserContext>(options =>options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DeviceContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserCourseRepository, UserCourseRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDeviceService, DeviceService>();
 
 var app = builder.Build();
 

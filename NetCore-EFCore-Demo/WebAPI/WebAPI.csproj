@@ -21,12 +21,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\User.ApplicationCore\User.ApplicationCore.csproj" />
-    <ProjectReference Include="..\User.Infrastructure\User.Infrastructure.csproj" />
+    <Folder Include="ExcelData\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ExcelData\" />
+    <ProjectReference Include="..\Services\Device.ApplicationCore\Device.ApplicationCore.csproj" />
+    <ProjectReference Include="..\Services\Device.Infrastructure\Device.Infrastructure.csproj" />
+    <ProjectReference Include="..\Services\User.ApplicationCore\User.ApplicationCore.csproj" />
+    <ProjectReference Include="..\Services\User.Infrastructure\User.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

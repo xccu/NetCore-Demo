@@ -1,4 +1,5 @@
 ﻿
+using Device.Infrastructure.Data;
 using System.ComponentModel;
 using User.Infrastructure.Data;
 
@@ -8,6 +9,7 @@ public static class DbContextStore
 {
     public static IEnumerable<Func<Type>> Contexts = new Func<Type>[]
     {
-        [Description("User Database")]()=> typeof(UserContext)
+        [Description("User Database")]()=> typeof(UserContext),
+        [Description("Device Database")]()=> typeof(DeviceContext)
     };
 }
