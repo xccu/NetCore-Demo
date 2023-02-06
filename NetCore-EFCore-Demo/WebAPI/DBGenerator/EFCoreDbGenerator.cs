@@ -19,28 +19,37 @@ static class EFCoreDbGenerator
             .Select(x => ValueTuple.Create(x.Key, x.Value))
             .ToArray();
 
-
         //(databaseName, connString)
         //create Database from dbConfigs
         foreach (var config in dbConfigs)
         {
-            //Generate Db succeed then import Data from .xlsx
-            if (config.GenerateDb(serviceProvider))
+            try
             {
-                DataStore.ImportData(dataPath, serviceProvider);
+                //Generate Db succeed then import Data from .xlsx
+                if (config.GenerateDb(serviceProvider))
+                {
+                    DataStore.ImportData(dataPath, serviceProvider);
+                }
+            }
+            catch (Exception ex)
+            {
+                //drop Database when exception
+                Console.WriteLine(ex.ToString());
+                config.DatabaseDeleted();
             }
         }
     }
 
     public static bool GenerateDb(this (string, string) dbConfig, IServiceProvider provider)
     {
-        Console.WriteLine($"Generating database:{dbConfig.Item1}");
+        var (dbName, connString) = dbConfig;
+        Console.WriteLine($"Generating database:{dbName}");
         if (DatabaseStore.TryGetConfig(dbConfig.Item1, out var configure))
         {
             //if DataBase exist then not create table
-            if (!DatabaseCreated(configure!(dbConfig.Item2)))
+            if (!DatabaseCreated(configure!(connString)))
             {
-                Console.WriteLine($"Database:{dbConfig.Item1} already exist");
+                Console.WriteLine($"Database:{dbName} already exist");
                 return false;
             }
 
@@ -49,7 +58,7 @@ static class EFCoreDbGenerator
             {
                 var method = typeof(EFCoreDbGenerator).GetMethod(nameof(Generate), new[] { typeof(Action<DbContextOptionsBuilder>) });
                 method = method!.MakeGenericMethod(factory());
-                method.Invoke(null, new object[] { configure!(dbConfig.Item2) });
+                method.Invoke(null, new object[] { configure!(connString) });
             }           
         }
         else
@@ -74,6 +83,30 @@ static class EFCoreDbGenerator
         });
         var dbContext = services.BuildServiceProvider().GetRequiredService<DbContext>();
         return dbContext.Database.EnsureCreated();
+    }
+
+    /// <summary>
+    /// Check database exist, if exist then delete
+    /// </summary>
+    /// <param name="dbConfig"></param>
+    /// <returns></returns>
+    public static bool DatabaseDeleted(this (string, string) dbConfig)
+    {
+        var (dbName, connString) = dbConfig;
+        if (DatabaseStore.TryGetConfig(dbName, out var configure))
+        {
+            Console.WriteLine($"Deleting database:{dbName}");
+            var configureAction = configure!(connString);
+            ServiceCollection services = new();
+            services.AddDbContext<DbContext>(option =>
+            {
+                configureAction?.Invoke(option);
+            });
+
+            var dbContext = services.BuildServiceProvider().GetRequiredService<DbContext>();
+            return dbContext.Database.EnsureDeleted();
+        }
+        return false;
     }
 
     /// <summary>
