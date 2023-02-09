@@ -9,11 +9,15 @@ namespace WebAPI.DBGenerator
 {
     public static class DataStore
     {
+        //D:\WorkSpace\sampleonweb\src\Service\Admin.WebAPI
+        static string _path = Directory.GetCurrentDirectory();
+
         public static void ImportData(string filePath, IServiceProvider provider)
         {
             using var scope = provider.CreateScope();
             provider = scope.ServiceProvider;
 
+            filePath = $"{_path}\\{filePath}";
             FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
             IExcelDataReader excelReader;
 
