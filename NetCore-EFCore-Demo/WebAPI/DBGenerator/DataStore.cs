@@ -9,7 +9,6 @@ namespace WebAPI.DBGenerator
 {
     public static class DataStore
     {
-        //D:\WorkSpace\sampleonweb\src\Service\Admin.WebAPI
         static string _path = Directory.GetCurrentDirectory();
 
         public static void ImportData(string filePath, IServiceProvider provider)
