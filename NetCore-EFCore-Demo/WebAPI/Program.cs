@@ -37,9 +37,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDeviceService, DeviceService>();
 
 var app = builder.Build();
-//D:\WorkSpace\sampleonweb\src\Service\Admin.WebAPI
-var path = Directory.GetCurrentDirectory();
-Console.WriteLine($"{path}");
 EFCoreDbGenerator.SeedData(app.Services);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
