@@ -1,9 +1,12 @@
+using Base.Infrastructure.Enum;
 using Device.ApplicationCore.Interfaces.Repositories;
 using Device.ApplicationCore.Interfaces.Services;
 using Device.ApplicationCore.Services;
 using Device.Infrastructure.Data;
 using Device.Infrastructure.Repositories;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Configuration;
 using User.ApplicationCore.Interfaces.Repositories;
 using User.ApplicationCore.Interfaces.Services;
@@ -24,16 +27,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddUser(
+    builder => builder.UseDataBase(DataBase.SqlServer,connectionString),
+    option=>{
+        option.EnableCache = true;
+        option.CacheOptions.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
+    }
+);
+
 builder.Services.AddDbContext<UserContext>(options =>options.UseSqlServer(connectionString));
+//builder.Services.AddScoped<ICourseService, CourseService>();
+//builder.Services.AddScoped<IUserService, UserService>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<IUserCourseRepository, UserCourseRepository>();
+//builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
 builder.Services.AddDbContext<DeviceContext>(options => options.UseSqlServer(connectionString));
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserCourseRepository, UserCourseRepository>();
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
-
-builder.Services.AddScoped<ICourseService, CourseService>();
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDeviceService, DeviceService>();
 
 var app = builder.Build();
