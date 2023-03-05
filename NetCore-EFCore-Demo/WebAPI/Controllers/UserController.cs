@@ -10,7 +10,7 @@ using Entities = User.ApplicationCore.Entities;
 namespace WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
@@ -39,11 +39,11 @@ namespace WebAPI.Controllers
             if (!_options.EnableCache)
                 return _service.GetUsers().ToList();
 
-            var data = _cache.GetCache("User-GetUsers");
+            var data = _cache.GetCache(Constants.ApiUser);
             if (data == null)
             {
                 data = _service.GetUsers().ToList();
-                _cache.SetCache("User-GetUsers", data, _options.CacheOptions);
+                _cache.SetCache(Constants.ApiUser, data, _options.CacheOptions);
             }
             return (IEnumerable<Entities.User>)data;
         }
