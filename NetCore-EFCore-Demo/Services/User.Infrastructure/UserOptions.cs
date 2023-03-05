@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace User.Infrastructure
 {
-    public class UserOption
+    public class UserOptions
     {
         public bool EnableCache { get; set; } = false;
         public CacheOptions CacheOptions { get; set; } = new CacheOptions();

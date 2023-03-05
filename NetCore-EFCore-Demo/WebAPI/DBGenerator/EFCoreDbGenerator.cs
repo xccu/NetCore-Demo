@@ -1,11 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Quartz.Impl.AdoJobStore.Common;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebAPI.DBGenerator;
 
 static class EFCoreDbGenerator
 {
+
+
     public static void SeedData(IServiceProvider serviceProvider)
     {
         var configuration = new ConfigurationBuilder()
@@ -34,7 +38,7 @@ static class EFCoreDbGenerator
             catch (Exception ex)
             {
                 //drop Database when exception
-                Console.WriteLine(ex.ToString());
+                GetLog(serviceProvider).LogError(ex.Message);
                 config.DatabaseDeleted();
             }
         }
@@ -43,13 +47,13 @@ static class EFCoreDbGenerator
     public static bool GenerateDb(this (string, string) dbConfig, IServiceProvider provider)
     {
         var (dbName, connString) = dbConfig;
-        Console.WriteLine($"Generating database:{dbName}");
+        GetLog(provider).LogInformation($"Generating database:{dbName}");
         if (DatabaseStore.TryGetConfig(dbConfig.Item1, out var configure))
         {
             //if DataBase exist then not create table
             if (!DatabaseCreated(configure!(connString)))
             {
-                Console.WriteLine($"Database:{dbName} already exist");
+                GetLog(provider).LogInformation($"Database:{dbName} already exist");
                 return false;
             }
 
@@ -95,7 +99,6 @@ static class EFCoreDbGenerator
         var (dbName, connString) = dbConfig;
         if (DatabaseStore.TryGetConfig(dbName, out var configure))
         {
-            Console.WriteLine($"Deleting database:{dbName}");
             var configureAction = configure!(connString);
             ServiceCollection services = new();
             services.AddDbContext<DbContext>(option =>
@@ -129,5 +132,12 @@ static class EFCoreDbGenerator
         Console.WriteLine(databaseCreator.GenerateCreateScript());
         
         databaseCreator.CreateTables();
+    }
+
+
+    public static ILogger GetLog(IServiceProvider provider)
+    {
+        var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+        return loggerFactory.CreateLogger("Default");
     }
 }

@@ -7,6 +7,6 @@ namespace User.ApplicationCore.Interfaces
     {
         IServiceCollection Services { get; }
 
-        public void UseDataBase(DataBase dataBase,string connectionString);
+        public void SetDataBase(DataBase dataBase,string connectionString);
     }
 }

@@ -27,15 +27,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCacheFactory();
 builder.Services.AddUser(
-    builder => builder.UseDataBase(DataBase.SqlServer,connectionString),
+    builder => builder.SetDataBase(DataBase.SqlServer,connectionString),
     option=>{
         option.EnableCache = true;
         option.CacheOptions.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
     }
 );
 
-builder.Services.AddDbContext<UserContext>(options =>options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<UserContext>(options =>options.UseSqlServer(connectionString));
 //builder.Services.AddScoped<ICourseService, CourseService>();
 //builder.Services.AddScoped<IUserService, UserService>();
 //builder.Services.AddScoped<IUserRepository, UserRepository>();

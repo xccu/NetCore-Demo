@@ -17,7 +17,7 @@ public class UserBuilder : IUserBuilder
 
     public UserBuilder(IServiceCollection services) => Services = services;
 
-    public void UseDataBase(DataBase dataBase,string connectionString)
+    public void SetDataBase(DataBase dataBase,string connectionString)
     {
         switch (dataBase)
         {

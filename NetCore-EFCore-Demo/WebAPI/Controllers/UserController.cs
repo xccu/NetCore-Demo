@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Base.ApplicationCore.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using System.Linq.Expressions;
-using System.Xml.Linq;
-using User.ApplicationCore.Interfaces.Repositories;
 using User.ApplicationCore.Interfaces.Services;
-using User.Infrastructure.Data;
+using WebAPI.Extensions;
+using Entities = User.ApplicationCore.Entities;
 
 namespace WebAPI.Controllers
 {
@@ -18,45 +15,42 @@ namespace WebAPI.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _service;
+        private ICacheFactory _cacheFactory;
+        private readonly User.Infrastructure.UserOptions _options;
+        private IMemoryCache _cache;
 
-
-
-        //方式1：注入MySqlContext
-        //private readonly UserContext _context;
-
-        //public UserController(ILogger<UserController> logger,MySqlContext context)
-        //{
-        //    _logger = logger;
-        //    _context = context;
-        //    _repository = new UserRepository(_context);
-        //}
-
-        //方式2：注入IUserRepository
-
-        //private readonly IUserRepository _repository;
-        //public UserController(ILogger<UserController> logger, IUserRepository repository)
-        //{
-        //    _logger = logger;
-        //    _repository = repository;
-        //}
-
-
-        public UserController(ILogger<UserController> logger, IUserService service)
+        public UserController(ILogger<UserController> logger, IUserService service, ICacheFactory cacheFactory, IOptions<User.Infrastructure.UserOptions> optionsAccessor)
         {
             _logger = logger;
             _service = service;
+            _cacheFactory = cacheFactory;
+            _options = optionsAccessor?.Value ?? new User.Infrastructure.UserOptions();
+
+            if (_options.EnableCache)
+            {
+                _cache = cacheFactory.GetOrCreateCache(Constants.UserCacheKey);
+                _cacheFactory = cacheFactory;
+            }
         }
 
         [HttpGet]
-        public IEnumerable<User.ApplicationCore.Entities.User> GetUsers()
+        public IEnumerable<Entities.User> GetUsers()
         {
-            var users = _service.GetUsers();
-            return users.ToList();
+            if (!_options.EnableCache)
+                return _service.GetUsers().ToList();
+
+            var data = _cache.GetCache("User-GetUsers");
+            if (data == null)
+            {
+                data = _service.GetUsers().ToList();
+                _cache.SetCache("User-GetUsers", data, _options.CacheOptions);
+            }
+            return (IEnumerable<Entities.User>)data;
         }
 
         [HttpGet]
         [Route("{id}")]
-        public User.ApplicationCore.Entities.User GetUser(int id)
+        public Entities.User GetUser(int id)
         {
             var user = _service.GetUser(id);
             return user;
@@ -64,19 +58,19 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("query")]
-        public IEnumerable<User.ApplicationCore.Entities.User> GetByQuery()
+        public IEnumerable<Entities.User> GetByQuery()
         {
             //var user = _context.User.FromSqlRaw($"select * from user where id in(1,2)");
-            Expression<Func<User.ApplicationCore.Entities.User, bool>> express = a => a.gender == "male";
+            Expression<Func<Entities.User, bool>> express = a => a.gender == "male";
             var user = _service.SearchCondition(express);
             return user.ToList();
         }
 
         [HttpGet]
         [Route("name/{name}")]
-        public User.ApplicationCore.Entities.User GetUserByName(String name)
+        public Entities.User GetUserByName(String name)
         {
-            Expression<Func<User.ApplicationCore.Entities.User, bool>> express = a => a.name == name;
+            Expression<Func<Entities.User, bool>> express = a => a.name == name;
             var user = _service.SearchCondition(express);
             return user.FirstOrDefault();
         }
@@ -94,7 +88,7 @@ namespace WebAPI.Controllers
         [Route("insert")]
         public bool InsertUser()
         {
-            var user = new User.ApplicationCore.Entities.User();
+            var user = new Entities.User();
             user.name = "test";
             user.gender = "male";
             user.password = "123";
@@ -109,6 +103,8 @@ namespace WebAPI.Controllers
             var user = _service.GetUser(9);
             return _service.Delete(user);
         }
+
+
 
     }
 }
