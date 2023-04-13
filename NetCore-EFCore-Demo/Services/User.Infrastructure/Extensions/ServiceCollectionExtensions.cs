@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Base.ApplicationCore.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using User.ApplicationCore.Entities;
 using User.ApplicationCore.Interfaces;
 using User.ApplicationCore.Interfaces.Repositories;
 using User.ApplicationCore.Interfaces.Services;
@@ -32,7 +34,17 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICourseService, CourseService>();
         services.AddScoped<IUserService, UserService>();
 
-        IUserBuilder userbuilder =   new UserBuilder(services);
+        services.AddScoped<IUserService>(sp =>
+        {
+            var cacheFactory = sp.GetService<ICacheFactory>();
+            var repository = sp.GetService<IUserRepository>();
+            var options = sp.GetService<IOptions<UserOptions>>();
+
+            return new UserService(repository, cacheFactory, options);
+        });
+
+
+        IUserBuilder userbuilder = new UserBuilder(services);
         buildAction?.Invoke(userbuilder);       
 
         return new UserBuilder(services);

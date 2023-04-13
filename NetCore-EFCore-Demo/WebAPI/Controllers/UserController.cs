@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using System.Linq.Expressions;
+using User.ApplicationCore.Entities;
 using User.ApplicationCore.Interfaces.Services;
 using WebAPI.Extensions;
 using Entities = User.ApplicationCore.Entities;
@@ -15,37 +16,18 @@ namespace WebAPI.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _service;
-        private ICacheFactory _cacheFactory;
-        private readonly User.Infrastructure.UserOptions _options;
-        private IMemoryCache _cache;
 
-        public UserController(ILogger<UserController> logger, IUserService service, ICacheFactory cacheFactory, IOptions<User.Infrastructure.UserOptions> optionsAccessor)
+        public UserController(ILogger<UserController> logger, IUserService service)
         {
             _logger = logger;
             _service = service;
-            _cacheFactory = cacheFactory;
-            _options = optionsAccessor?.Value ?? new User.Infrastructure.UserOptions();
 
-            if (_options.EnableCache)
-            {
-                _cache = cacheFactory.GetOrCreateCache(Constants.UserCacheKey);
-                _cacheFactory = cacheFactory;
-            }
         }
 
         [HttpGet]
         public IEnumerable<Entities.User> GetUsers()
         {
-            if (!_options.EnableCache)
-                return _service.GetUsers().ToList();
-
-            var data = _cache.GetCache(Constants.ApiUser);
-            if (data == null)
-            {
-                data = _service.GetUsers().ToList();
-                _cache.SetCache(Constants.ApiUser, data, _options.CacheOptions);
-            }
-            return (IEnumerable<Entities.User>)data;
+            return _service.GetUsers().ToList();
         }
 
         [HttpGet]
@@ -103,8 +85,6 @@ namespace WebAPI.Controllers
             var user = _service.GetUser(9);
             return _service.Delete(user);
         }
-
-
 
     }
 }

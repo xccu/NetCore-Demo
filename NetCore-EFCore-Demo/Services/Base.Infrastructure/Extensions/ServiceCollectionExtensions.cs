@@ -1,6 +1,4 @@
-﻿
-
-using Base.ApplicationCore.Interfaces;
+﻿using Base.ApplicationCore.Interfaces;
 using Base.Infrastructure;
 
 namespace Microsoft.Extensions.DependencyInjection;

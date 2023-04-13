@@ -1,11 +1,11 @@
-﻿using Base.Infrastructure;
+﻿using Base.ApplicationCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace User.Infrastructure
+namespace User.ApplicationCore.Entities
 {
     public class UserOptions
     {

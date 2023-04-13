@@ -1,7 +1,7 @@
 ﻿using Base.ApplicationCore.Entities;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace WebAPI.Extensions;
+namespace Base.Infrastructure;
 
 public static class CacheExtensions
 {
@@ -9,11 +9,14 @@ public static class CacheExtensions
     {
         cache.Set(key, value, new MemoryCacheEntryOptions
         {
-            SlidingExpiration = option.AbsoluteExpirationRelativeToNow
+            AbsoluteExpiration = option.AbsoluteExpiration,
+            AbsoluteExpirationRelativeToNow = option.AbsoluteExpirationRelativeToNow,
+            Priority = (Microsoft.Extensions.Caching.Memory.CacheItemPriority)(int)option.Priority,
+            SlidingExpiration = option.SlidingExpiration
         });
     }
 
-    public static object GetCache(this IMemoryCache cache, object key)
+    public static object GetCache(this IMemoryCache cache, string key)
     {
         object val = null;
         if (key != null && cache.TryGetValue(key, out val))
@@ -22,7 +25,7 @@ public static class CacheExtensions
         }
         else
         {
-            return default(object);
+            return default;
         }
     }
 }

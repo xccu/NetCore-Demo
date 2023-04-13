@@ -24,10 +24,8 @@
     <Folder Include="ExcelData\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Services\Device.ApplicationCore\Device.ApplicationCore.csproj" />
-    <ProjectReference Include="..\Services\Device.Infrastructure\Device.Infrastructure.csproj" />
-    <ProjectReference Include="..\Services\User.ApplicationCore\User.ApplicationCore.csproj" />
+  <ItemGroup>   
+    <ProjectReference Include="..\Services\Device.Infrastructure\Device.Infrastructure.csproj" />    
     <ProjectReference Include="..\Services\User.Infrastructure\User.Infrastructure.csproj" />
   </ItemGroup>
 

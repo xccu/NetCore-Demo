@@ -1,4 +1,4 @@
-﻿namespace WebAPI;
+﻿namespace User.ApplicationCore;
 
 public static class Constants
 {

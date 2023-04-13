@@ -1,18 +1,10 @@
-using Base.Infrastructure.Enum;
+using Base.Infrastructure.Interceptors;
 using Device.ApplicationCore.Interfaces.Repositories;
 using Device.ApplicationCore.Interfaces.Services;
 using Device.ApplicationCore.Services;
 using Device.Infrastructure.Data;
 using Device.Infrastructure.Repositories;
-using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System.Configuration;
-using User.ApplicationCore.Interfaces.Repositories;
-using User.ApplicationCore.Interfaces.Services;
-using User.ApplicationCore.Service;
-using User.Infrastructure.Data;
-using User.Infrastructure.Repositories;
 using WebAPI.DBGenerator;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,14 +21,24 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCacheFactory();
 builder.Services.AddUser(
-    builder => builder.SetDataBase(DataBase.SqlServer,connectionString),
-    option=>{
+    builder => builder.UseDataBase(options =>
+    {
+        options.UseSqlServer(connectionString);
+        options.AddInterceptors(new DbSaveChangesInterceptor());
+    }),
+    option =>
+    {
         option.EnableCache = true;
         option.CacheOptions.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
     }
 );
 
-//builder.Services.AddDbContext<UserContext>(options =>options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<UserContext>(options => 
+//{
+//    options.UseSqlServer(connectionString);
+//    options.AddInterceptors(new DbSaveChangesInterceptor());
+//});
+
 //builder.Services.AddScoped<ICourseService, CourseService>();
 //builder.Services.AddScoped<IUserService, UserService>();
 //builder.Services.AddScoped<IUserRepository, UserRepository>();

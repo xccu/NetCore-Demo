@@ -1,4 +1,5 @@
 ﻿using Base.Infrastructure.Enum;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace User.ApplicationCore.Interfaces
@@ -7,6 +8,7 @@ namespace User.ApplicationCore.Interfaces
     {
         IServiceCollection Services { get; }
 
-        public void SetDataBase(DataBase dataBase,string connectionString);
+        //public void SetDataBase(DataBase dataBase,string connectionString);
+        public void UseDataBase(Action<DbContextOptionsBuilder> buildAction);
     }
 }
