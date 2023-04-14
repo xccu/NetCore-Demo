@@ -11,17 +11,20 @@ namespace Server_Demo.Controllers
 
         private readonly ILogger<UserController> _logger;
         private static List<User> _users;
+        private UserDbContext _context;
 
-        public UserController(ILogger<UserController> logger)
+        public UserController(ILogger<UserController> logger,UserDbContext context)
         {
             _logger = logger;
+            _context = context;
             InitialUsers();
         }
 
         [HttpGet("GetAll")]
         public IEnumerable<User> GetAll()
         {
-            return _users;
+            return _context.User.ToList();
+            //return _users;
         }
 
         [HttpPost("Add")]
@@ -29,7 +32,8 @@ namespace Server_Demo.Controllers
         {
             try
             {
-                _users.Add(user);
+                _context.User.Add(user);
+                _context.SaveChanges();
                 return Ok();
             }
             catch (Exception ex)

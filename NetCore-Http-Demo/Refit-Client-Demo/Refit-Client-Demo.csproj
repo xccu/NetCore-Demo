@@ -4,17 +4,15 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Server_Demo</RootNamespace>
+    <RootNamespace>Refit_Client_Demo</RootNamespace>
   </PropertyGroup>
-
+	
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.1" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="6.1.15" />
   </ItemGroup>
-
+	
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
-
+	
 </Project>

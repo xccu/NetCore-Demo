@@ -1,0 +1,67 @@
+﻿@page "/"
+@using Blazor.WebAssembly.Client.Services;
+@using Models;
+@inject UserService Service
+<PageTitle>Index</PageTitle>
+
+<button class="btn btn-primary" @onclick="GetAll">Click me</button>
+
+@*<table style="font-size: 14px">
+    <tr>
+        <td><b>Name</b></td>
+        <td><b>Gender</b></td>
+        <td><b>Age</b></td>
+        <td><b>Race</b></td>
+    </tr>
+    @foreach (var item in _users)
+    {
+        <tr>
+            <td>@item.name</td>
+            <td>@item.gender</td>
+            <td>@item.age</td>
+            <td>@item.race</td>
+        </tr>
+    }
+</table>*@
+
+
+  <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Race</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in _users)
+            {
+                <tr>
+                    <td>@item.name</td>
+                    <td>@item.gender</td>
+                    <td>@item.age</td>
+                    <td>@item.race</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+<div>count:@_count</div>
+
+@code {
+    private List<User> _users = new List<User>();
+    private int _count = 0;
+
+    protected override async Task OnInitializedAsync()
+    {       
+        base.OnInitializedAsync();
+    }
+
+    private async Task GetAll()
+    {
+        _users = (await Service.GetUsersAsync()).ToList();
+        _count = _users.Count();
+    }
+
+}
