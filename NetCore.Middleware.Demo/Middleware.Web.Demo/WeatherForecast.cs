@@ -1,4 +1,4 @@
-namespace NetCore_MiddleWare_Demo
+namespace Middleware.Web.Demo
 {
     public class WeatherForecast
     {
