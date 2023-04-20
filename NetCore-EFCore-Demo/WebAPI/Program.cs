@@ -5,6 +5,8 @@ using Device.ApplicationCore.Services;
 using Device.Infrastructure.Data;
 using Device.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using User.Infrastructure;
 using WebAPI.DBGenerator;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +27,7 @@ builder.Services.AddUser(
     {
         options.UseSqlServer(connectionString);
         options.AddInterceptors(new DbSaveChangesInterceptor());
+        //options.ReplaceService<IModelCustomizer, UserModelCustomizer>();
     }),
     option =>
     {
@@ -32,6 +35,7 @@ builder.Services.AddUser(
         option.CacheOptions.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
     }
 );
+
 
 //builder.Services.AddDbContext<UserContext>(options => 
 //{

@@ -13,9 +13,9 @@ public partial class UserContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ApplicationCore.Entities.User>();
-        modelBuilder.Entity<Course>();
-        modelBuilder.Entity<UserCourse>().HasKey(t => new { t.userId, t.courseId });
+        //modelBuilder.Entity<ApplicationCore.Entities.User>();
+        //modelBuilder.Entity<Course>();
+        //modelBuilder.Entity<UserCourse>().HasKey(t => new { t.userId, t.courseId });
     }
 
     public virtual DbSet<ApplicationCore.Entities.User> User { get; set; }
