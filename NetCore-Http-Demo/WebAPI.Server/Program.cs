@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Newtonsoft.Json.Serialization;
-using Server_Demo;
+using WebAPI.Server;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
         builder => builder.AllowAnyOrigin()
           .AllowAnyMethod()
           .AllowAnyHeader()
-          .WithExposedHeaders("X-ICONNECT-FLAGS")
+          .WithExposedHeaders("Access-Control-Allow-Origin' ")
     .Build());
 });
 

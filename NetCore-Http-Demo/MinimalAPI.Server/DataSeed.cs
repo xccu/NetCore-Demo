@@ -1,7 +1,7 @@
 ﻿using Models;
 using System.Security;
 
-namespace Server_Demo;
+namespace MinimalAPI.Server;
 
 public class DataSeed
 {

@@ -1,8 +1,7 @@
+using Blazor.WebAssembly.Client;
 using Blazor.WebAssembly.Client.Services;
-using Blazor_WebAssembly_Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.VisualBasic;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

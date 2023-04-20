@@ -1,4 +1,4 @@
-namespace Server_Demo
+namespace WebAPI.Server
 {
     public class WeatherForecast
     {

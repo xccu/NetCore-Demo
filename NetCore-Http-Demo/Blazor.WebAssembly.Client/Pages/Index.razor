@@ -25,27 +25,27 @@
 </table>*@
 
 
-  <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Age</th>
-                <th>Race</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Race</th>
+        </tr>
+    </thead>
+    <tbody>
         @foreach (var item in _users)
-            {
-                <tr>
-                    <td>@item.name</td>
-                    <td>@item.gender</td>
-                    <td>@item.age</td>
-                    <td>@item.race</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        {
+            <tr>
+                <td>@item.name</td>
+                <td>@item.gender</td>
+                <td>@item.age</td>
+                <td>@item.race</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 <div>count:@_count</div>
 
@@ -54,7 +54,7 @@
     private int _count = 0;
 
     protected override async Task OnInitializedAsync()
-    {       
+    {
         base.OnInitializedAsync();
     }
 
