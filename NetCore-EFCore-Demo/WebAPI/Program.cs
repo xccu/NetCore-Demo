@@ -27,7 +27,7 @@ builder.Services.AddUser(
     {
         options.UseSqlServer(connectionString);
         options.AddInterceptors(new DbSaveChangesInterceptor());
-        //options.ReplaceService<IModelCustomizer, UserModelCustomizer>();
+        options.ReplaceService<IModelCustomizer, UserModelCustomizer>();
     }),
     option =>
     {
@@ -37,7 +37,7 @@ builder.Services.AddUser(
 );
 
 
-//builder.Services.AddDbContext<UserContext>(options => 
+//builder.Services.AddDbContext<UserContext>(options =>
 //{
 //    options.UseSqlServer(connectionString);
 //    options.AddInterceptors(new DbSaveChangesInterceptor());
