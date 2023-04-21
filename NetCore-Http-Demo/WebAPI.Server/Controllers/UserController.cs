@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Models;
-using Server_Demo.Attributes;
-using WebAPI.Server.Attributes;
+using DataAccess;
+using Common.Attributes;
 
 namespace WebAPI.Server.Controllers
 {
     [Route("api/[controller]")]    
-    [ApiController]
-    //[Validation]
-    [ExceptionRecover]
+    [ApiController]       
     public class UserController : ControllerBase
     {
 
@@ -51,13 +48,14 @@ namespace WebAPI.Server.Controllers
         }
 
         [HttpPut("Update")]
+        [Validation]
         public IActionResult update(User user)
         {
             try
             {
                 var item = _context.User.FirstOrDefault(t => t.name == user.name);
                 if (item == null)
-                    throw(new Exception());
+                    throw (new Exception());
                 item.name = user.name;
                 item.age = user.age;
                 item.gender = user.gender;
@@ -87,6 +85,7 @@ namespace WebAPI.Server.Controllers
         }
 
         [HttpGet("getException")]
+        [ExceptionRecover]
         public IActionResult GetException()
         {
             throw new Exception("This is a test");

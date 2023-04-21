@@ -1,7 +1,8 @@
-﻿using Models;
+﻿using DataAccess;
+using Microsoft.Extensions.DependencyInjection;
 using System.Security;
 
-namespace MinimalAPI.Server;
+namespace DataAccess;
 
 public class DataSeed
 {

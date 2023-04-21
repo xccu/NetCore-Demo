@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace WebAPI.Server.Attributes;
+namespace Common.Attributes;
 
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class ValidationAttribute : Attribute, IActionFilter, IOrderedFilter
 {
     //Need to run before 'ModelStateInvalidFilter (Order = -2000)' for API Controller.

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models
+namespace DataAccess
 {
     public class User 
     {
@@ -10,6 +10,7 @@ namespace Models
         [Required]
         public string name { get; set; }
         public string gender { get; set; }
+        [Range(0,200)]
         public int age { get; set; }
         public string race { get; set; }
 

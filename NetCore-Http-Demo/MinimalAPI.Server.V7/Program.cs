@@ -1,11 +1,6 @@
-//https://www.cnblogs.com/DarkRoger/p/15950244.html
-//https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-7.0&tabs=visual-studio
-//https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio
-
-using Microsoft.EntityFrameworkCore;
 using DataAccess;
-using MinimalAPI.Server;
-using MinimalAPI.Server.API;
+using Microsoft.EntityFrameworkCore;
+using MinimalAPI.Server.V7.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +29,4 @@ app.UseHttpsRedirection();
 //MinimalUserAPI
 app.UseMinimalUserAPI();
 
-//app.UseEndpoints(e => { });
-
 app.Run();
-
