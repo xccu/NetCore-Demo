@@ -1,5 +1,5 @@
 ﻿
-using Common.Interfaces;
+using Common.Custom.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Text.Json;

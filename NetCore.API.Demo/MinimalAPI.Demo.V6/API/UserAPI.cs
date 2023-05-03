@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
-using Common.Attributes;
+using Common.Custom.Attributes;
+using Common.Model;
 
 namespace MinimalAPI.Server.API;
 
@@ -28,6 +29,7 @@ public class UserAPI
     }
 
     [Permission("User.Add")]
+    [Validation]
     public IResult Add(User user)
     {
         try
@@ -85,5 +87,17 @@ public class UserAPI
     public IResult Ok()
     {
         return Results.Ok();
+    }
+
+    public IResult Binder([ModelBinder(Name = "id")] UserModel user)
+    {
+        try
+        {
+            return Results.Ok();
+        }
+        catch (Exception ex)
+        {
+            return Results.BadRequest(ex.Message);
+        }
     }
 }

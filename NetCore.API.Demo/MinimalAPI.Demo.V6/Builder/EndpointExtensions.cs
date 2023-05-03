@@ -1,8 +1,8 @@
-﻿using Common.Options;
+﻿using Common.Custom.Options;
 using Common;
-using Common.Middlewares;
+using Common.Custom.Middlewares;
 using Microsoft.Extensions.Options;
-using Common.Interfaces;
+using Common.Custom.Interfaces;
 
 namespace Microsoft.AspNetCore.Builder;
 

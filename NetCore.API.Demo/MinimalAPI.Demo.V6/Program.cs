@@ -6,11 +6,11 @@
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using MinimalAPI.Server.API;
-using Common;
+using Common.Custom;
 using Microsoft.AspNetCore.Builder;
-using Common.Middlewares;
+using Common.Custom.Middlewares;
 using Microsoft.Extensions.Options;
-using Common.Interfaces;
+using Common.Custom.Interfaces;
 using MinimalAPI.Demo.V6.Filters.EndPointFilter;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,8 +41,9 @@ app.UseHttpsRedirection();
 //app.UseMiddleware<TestMiddleware>();
 //MinimalUserAPI
 app.UseMinimalUserAPI();
-//app.UseMinimalTestAPI();
+app.UseMinimalTestAPI();
 //app.UseMinimalBindingAPI();
+
 app.UseRouting();
 
 //app.UseEndpoints(endpoints => {

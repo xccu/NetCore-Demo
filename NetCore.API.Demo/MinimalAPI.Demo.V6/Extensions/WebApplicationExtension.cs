@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Builder;
 using System.Reflection;
 using MinimalAPI.Demo.V6.Bindings;
 using MinimalAPI.Demo.V6.Filters;
-using Common.Attributes;
+using Common.Custom.Attributes;
 using Common;
 using Microsoft.Extensions.Options;
 using MinimalAPI.Demo.V6.Filters.EndPointFilter;
+using System.Xml.Linq;
+using Common.Model;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -92,6 +94,7 @@ public static class WebApplicationExtension
         app.MapDelete("/api/User/Delete", API.Delete);
         app.MapGet("/api/User/GetException", API.GetException);
         app.MapGet("/api/User/Ok", API.Ok);
+        app.MapPost("/api/User/Binder", API.Binder);
 
         return app;
     }
