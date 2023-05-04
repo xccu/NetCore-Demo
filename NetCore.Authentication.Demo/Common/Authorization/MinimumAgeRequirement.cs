@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Demo.Authorization;
+namespace Common.Authorization;
 
 public class MinimumAgeRequirement : IAuthorizationRequirement
 {

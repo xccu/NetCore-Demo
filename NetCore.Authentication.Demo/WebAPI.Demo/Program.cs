@@ -2,9 +2,12 @@
 //https://learn.microsoft.com/zh-cn/aspnet/core/security/authentication/?view=aspnetcore-7.0
 //https://learn.microsoft.com/zh-cn/aspnet/core/security/authorization/policies?view=aspnetcore-7.0
 
-using Demo.Authorization;
+using Common.Authentication;
+using Common.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,8 +30,20 @@ builder.Services.AddAuthorization(options =>
 // 注入权限处理器
 builder.Services.AddTransient<IAuthorizationHandler, MinimumAgeHandler>();
 
-//认证
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+//Default认证方案(不手动Login)
+//builder.Services.AddAuthentication("default")
+//                .AddScheme<DefaultSchemeOptions, DefaultHandler>("default", null, null);
+
+//Cookie认证方案
+//https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-7.0
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/Failed"; //授权失败则跳转
+    });
+
 #endregion
 
 var app = builder.Build();
@@ -44,8 +59,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapControllers();
 

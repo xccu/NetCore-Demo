@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +19,6 @@ public class UserController : ControllerBase
         try 
         {
             #region 传统的登录  
-            //只判断是否登录  通过[Authorize] 小项目中只有一个管理员 只要账号和密码对就行
-            //        var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            //identity.AddClaim(new Claim(ClaimTypes.Name, user));
-
-            //        var principal = new ClaimsPrincipal(claimIdentity);
-            //        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
-
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user),
@@ -37,7 +31,7 @@ public class UserController : ControllerBase
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
             #endregion
 
-            return Ok();
+            return Ok("Login Succeed");
         }
         catch(Exception ex) 
         {
@@ -64,7 +58,7 @@ public class UserController : ControllerBase
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
             #endregion
 
-            return Ok();
+            return Ok("Login Succeed");
         }
         catch (Exception ex)
         {
@@ -81,11 +75,17 @@ public class UserController : ControllerBase
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             #endregion
 
-            return Ok();
+            return Ok("Logout Succeed");
         }
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
         }
+    }
+
+    [HttpGet("/Failed")]
+    public async Task<IActionResult> Failed()
+    {
+        return Ok("Authorize failed. Access denied");
     }
 }

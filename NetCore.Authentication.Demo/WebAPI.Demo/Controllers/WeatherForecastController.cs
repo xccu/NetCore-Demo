@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebAPI.Demo.Controllers;
 
 [ApiController]
-[Authorize(Policy = "AtLeast18")]
+//[Authorize(Policy = "AtLeast18")]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
@@ -23,6 +23,8 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
+        if (!User.Identity.IsAuthenticated)
+            return null;
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),
