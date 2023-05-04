@@ -15,7 +15,7 @@ public class MinimumAgeHandler : AuthorizationHandler<MinimumAgeRequirement>
 {
     protected override async Task<Task> HandleRequirementAsync(AuthorizationHandlerContext context, MinimumAgeRequirement requirement)
     {
-        #region Authenticate
+        #region Authenticate(Not use)
         //HttpContext httpContext = context.Resource as HttpContext;
         //AuthenticateResult result = await httpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         //var principal= result.Principal;

@@ -5,10 +5,8 @@
 using Common.Authentication;
 using Common.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,8 +57,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//UseAuthentication must before UseAuthorization
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllers();
