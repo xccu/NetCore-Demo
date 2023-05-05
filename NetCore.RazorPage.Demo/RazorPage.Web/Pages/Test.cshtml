@@ -1,0 +1,22 @@
+﻿@page
+@model RazorPage.Web.Pages.TestModel
+@{
+    ViewData["Title"] = "Test";
+}
+
+
+<h3>@Model.Message</h3>
+
+<a asp-page-handler="" >Get</a>
+
+<form method="post" ><button>Post</button></form>
+
+@*<a href="/test" class="btn btn-default">Click to Get</a>*@
+
+
+<a asp-page-handler="Param" asp-route-id="12">Get Param</a>
+
+<form asp-page-handler="Param" method="post">
+    <input type="hidden" name="id" value="23" />
+    <button>Post Param</button>
+</form>
