@@ -14,74 +14,9 @@ using Common.Model;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-public static class WebApplicationExtension
+public static class UserAPIExtension
 {
-    public static WebApplication UseMinimalUserAPI_old(this WebApplication app)
-    {
-        var scope = app.Services.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<UserDbContext>();
-
-        app.MapGet("/api/User/GetAll", [Permission("User.View")] () =>
-        {
-            return context.User.ToList();
-        }).WithName("GetAll");
-
-        app.MapPost("/api/User/Add", (User user) =>
-        {
-            try
-            {
-                context.User.Add(user);
-                context.SaveChanges();
-                return Results.Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return Results.BadRequest(ex);
-            }
-        }).WithName("Add");
-
-        app.MapPut("/api/User/Update", (User user) =>
-        {
-            try
-            {
-                var item = context.User.FirstOrDefault(t => t.name == user.name);
-                if (item == null)
-                    throw (new Exception());
-                item.name = user.name;
-                item.age = user.age;
-                item.gender = user.gender;
-                item.race = user.race;
-                return Results.Ok();
-            }
-            catch (Exception ex)
-            {
-                return Results.BadRequest(ex);
-            }
-        }).WithName("Update");
-
-        app.MapGet("/api/User/Exception", () =>
-        {
-            throw new Exception("this is a test");
-        }).WithName("Exception");
-
-        app.MapGet("/api/User/BadRequest", () =>
-        {
-            var validationProblemDetails = new ValidationProblemDetails()
-            {
-                Type = "https://datatracker.ietf.org/doc/html/rfc7807",
-                Instance = "about:blank",
-                Status = StatusCodes.Status400BadRequest,
-                Title = "Test",
-                Detail = string.Format("Error Count:{0}", 1)
-            };
-
-            return Results.BadRequest(validationProblemDetails);
-        }).WithName("BadRequest");
-
-
-        return app;
-    }
-
+    
     public static WebApplication UseMinimalUserAPI(this WebApplication app)
     {
         var scope = app.Services.CreateScope();
@@ -149,24 +84,71 @@ public static class WebApplicationExtension
         return app;
     }
 
-    public static WebApplication UseMinimalBindingAPI(this WebApplication app)
+    #region old
+    public static WebApplication UseMinimalUserAPI_old(this WebApplication app)
     {
         var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<UserDbContext>();
 
-
-        app.MapGet("/myendpoint", [Permission("User.myendpoint")] () =>
+        app.MapGet("/api/User/GetAll", [Permission("User.View")] () =>
         {
-            return "myendpoint";
-        });
+            return context.User.ToList();
+        }).WithName("GetAll");
 
-        // GET /map?Point=12.3,10.1
-        app.MapGet("/map", (Point point) => $"Point: {point.X}, {point.Y}");
+        app.MapPost("/api/User/Add", (User user) =>
+        {
+            try
+            {
+                context.User.Add(user);
+                context.SaveChanges();
+                return Results.Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(ex);
+            }
+        }).WithName("Add");
 
-        // GET /products?SortBy=xyz&SortDir=Desc&Page=99
-        app.MapGet("/products", (PagingData pageData) => $"SortBy:{pageData.SortBy}, " +
-               $"SortDirection:{pageData.SortDirection}, CurrentPage:{pageData.CurrentPage}");
+        app.MapPut("/api/User/Update", (User user) =>
+        {
+            try
+            {
+                var item = context.User.FirstOrDefault(t => t.name == user.name);
+                if (item == null)
+                    throw (new Exception());
+                item.name = user.name;
+                item.age = user.age;
+                item.gender = user.gender;
+                item.race = user.race;
+                return Results.Ok();
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(ex);
+            }
+        }).WithName("Update");
+
+        app.MapGet("/api/User/Exception", () =>
+        {
+            throw new Exception("this is a test");
+        }).WithName("Exception");
+
+        app.MapGet("/api/User/BadRequest", () =>
+        {
+            var validationProblemDetails = new ValidationProblemDetails()
+            {
+                Type = "https://datatracker.ietf.org/doc/html/rfc7807",
+                Instance = "about:blank",
+                Status = StatusCodes.Status400BadRequest,
+                Title = "Test",
+                Detail = string.Format("Error Count:{0}", 1)
+            };
+
+            return Results.BadRequest(validationProblemDetails);
+        }).WithName("BadRequest");
+
 
         return app;
     }
-
+    #endregion
 }

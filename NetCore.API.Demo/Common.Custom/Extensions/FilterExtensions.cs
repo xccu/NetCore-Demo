@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.Custom.Options;
+using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

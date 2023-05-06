@@ -29,7 +29,6 @@ public class UserAPI
     }
 
     [Permission("User.Add")]
-    [Validation]
     public IResult Add(User user)
     {
         try

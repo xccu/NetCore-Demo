@@ -1,13 +1,10 @@
 ﻿using Common.Model;
-using DataAccess;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 
 namespace Common.ModelBinder;
 
-//see:
-//https://learn.microsoft.com/en-us/aspnet/core/mvc/advanced/custom-model-binding?view=aspnetcore-6.0
-public class AuthorEntityBinder : IModelBinder
+public class LocationBinder : IModelBinder
 {
 
     public Task BindModelAsync(ModelBindingContext bindingContext)
@@ -30,24 +27,23 @@ public class AuthorEntityBinder : IModelBinder
         bindingContext.ModelState.SetModelValue(modelName, valueProviderResult);
 
         var value = valueProviderResult.FirstValue;
+        var values = value.Split(',');
 
-        // Check if the argument value is null or empty
-        if (string.IsNullOrEmpty(value))
+        if (values.Length == 2 &&
+                        double.TryParse(values[0], out var latitude) &&
+                        double.TryParse(values[1], out var longitude))
         {
+            var location = new Location
+            {
+                Latitude = latitude,
+                Longitude = longitude
+            };
+            bindingContext.Result = ModelBindingResult.Success(location);
             return Task.CompletedTask;
         }
 
-        int id;
-        if (!int.TryParse(value, out id))
-        {
-            // Non-integer arguments result in model state errors
-            bindingContext.ModelState.TryAddModelError(
-                modelName, "Author Id must be an integer.");
-
-            return Task.CompletedTask;
-        }
-
-        bindingContext.Result = ModelBindingResult.Success(new UserModel(id.ToString(),"default user"));
+        bindingContext.ModelState.TryAddModelError(modelName, "values error");
         return Task.CompletedTask;
     }
+          
 }

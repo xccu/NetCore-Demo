@@ -9,7 +9,7 @@ using Common.Model;
 
 namespace Common.ModelBinder;
 
-public class AuthorEntityBinderProvider : IModelBinderProvider
+public class UserModelBinderProvider : IModelBinderProvider
 {
     public IModelBinder GetBinder(ModelBinderProviderContext context)
     {
@@ -20,7 +20,7 @@ public class AuthorEntityBinderProvider : IModelBinderProvider
 
         if (context.Metadata.ModelType == typeof(UserModel))
         {
-            return new BinderTypeModelBinder(typeof(AuthorEntityBinder));
+            return new BinderTypeModelBinder(typeof(UserModelBinder));
         }
 
         return null;

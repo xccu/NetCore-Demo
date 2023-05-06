@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Common.Model;
 
-[ModelBinder(BinderType = typeof(AuthorEntityBinder))]
+[ModelBinder(BinderType = typeof(UserModelBinder))]
 public class UserModel
 {
     public string Id { get; set; }

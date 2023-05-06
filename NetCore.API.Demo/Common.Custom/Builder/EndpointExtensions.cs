@@ -3,6 +3,7 @@ using Common;
 using Common.Custom.Middlewares;
 using Microsoft.Extensions.Options;
 using Common.Custom.Interfaces;
+using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Builder;
 
@@ -35,6 +36,7 @@ public static class EndpointExtensions
             foreach (var item in dataSource.Endpoints)
             {
                 var endpoint = (RouteEndpoint)item;
+                //options.Handlers.Add(endpoint.DisplayName, endpoint.RequestDelegate);
                 options.Handlers.Add(endpoint.RoutePattern.RawText, endpoint.RequestDelegate);
             }
         }

@@ -101,29 +101,4 @@ public class UserController : ControllerBase
         throw new Exception("This is a test");
     }
 
-    [HttpGet("Binder/{user}")]
-    public IActionResult BinderAdd(UserModel user)
-    {
-        try
-        {
-            return Ok(user.Id+"-"+user.Name);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
-
-    [HttpGet("BinderAttribute/{id}")]
-    public IActionResult GetById([ModelBinder(Name = "id")] UserModel user)
-    {
-        try
-        {
-            return Ok(user.Id + "-" + user.Name);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
 }

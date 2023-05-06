@@ -12,8 +12,13 @@ using Common.Custom.Middlewares;
 using Microsoft.Extensions.Options;
 using Common.Custom.Interfaces;
 using MinimalAPI.Demo.V6.Filters.EndPointFilter;
+using MinimalAPI.Demo.V6.Extensions;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//register the validator in the service provider(for FluentValidation)
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -39,10 +44,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 //app.UseMiddleware<TestMiddleware>();
-//MinimalUserAPI
+
+#region MinimalUserAPI
 app.UseMinimalUserAPI();
-app.UseMinimalTestAPI();
+//app.UseMinimalTestAPI();
 //app.UseMinimalBindingAPI();
+app.UseParameterBindingAPI();
+app.UseValidationAPI();
+#endregion
 
 app.UseRouting();
 
@@ -50,6 +59,8 @@ app.UseRouting();
 //    endpoints.MapGet("/hello", () => { return "Hello"; });
 //});
 
-app.UseEndpointMiddleware();
+//Test UseEndpointMiddleware
+//app.UseEndpointMiddleware();
+
 app.Run();
 
