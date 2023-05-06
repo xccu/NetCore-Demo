@@ -1,0 +1,13 @@
+﻿
+@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Test Index";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Test Index Page</p>
+
+<a asp-page="./AnchorTag">AnchorTag</a> | 
+<a asp-page="./Concurrency" asp-route-id="1">Concurrency</a>|
+<a asp-page="./Filter">Filter</a>

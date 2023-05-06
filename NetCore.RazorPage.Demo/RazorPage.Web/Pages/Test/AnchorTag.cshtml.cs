@@ -1,3 +1,4 @@
+using Common.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -5,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace RazorPage.Web.Pages;
 
 
-
+[AddHeader("PAGE_FLAG", "Anchor")]
 public class TestModel : PageModel
 {
     public string Message { get; set; }

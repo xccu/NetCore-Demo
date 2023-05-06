@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
-
 
 namespace RazorPage.Web.Pages.Movies;
 
@@ -30,7 +24,7 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        var movie =  await _context.Movie.FirstOrDefaultAsync(m => m.ID == id);
+        var movie = await _context.Movie.FirstOrDefaultAsync(m => m.ID == id);
         if (movie == null)
         {
             return NotFound();
@@ -45,6 +39,7 @@ public class EditModel : PageModel
     //see:
     //https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/concurrency?view=aspnetcore-6.0&tabs=visual-studio
     //to know how to Handle concurrency conflicts
+
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)

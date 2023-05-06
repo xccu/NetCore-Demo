@@ -7,23 +7,45 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using RazorPage.Web.Data;
 using Microsoft.Extensions.DependencyInjection;
+using static System.Formats.Asn1.AsnWriter;
+using Common.Filter;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = builder.Configuration;
+var connectionString = configuration.GetConnectionString("Default");
+
 // Add services to the container.
-builder.Services.AddRazorPages()
-    .AddViewOptions(options => //disable client validation
-    {
-        options.HtmlHelperOptions.ClientValidationEnabled = false;
-    });
+
+builder.Services.AddRazorPages(options =>{
+    options.Conventions.AddFolderApplicationModelConvention( //add filter for special folder path
+        "/Movies",
+        model => model.Filters.Add(new HttpAsyncPageFilter()));
+})
+.AddMvcOptions(options => // add global filter 
+{
+    options.Filters.Add(new ValidationAsyncPageFilter());
+})
+.AddViewOptions(options => //disable client validation
+{
+    options.HtmlHelperOptions.ClientValidationEnabled = false;
+});
+
 
 builder.Services.AddDbContext<UserDbContext>(options => options.UseInMemoryDatabase("MemoryDemoDb"));
 builder.Services.AddDbContext<MovieDbContext>(options => options.UseInMemoryDatabase("MemoryDemoDb"));
+builder.Services.AddDbContext<DepartmentDbContext>(options => options.UseInMemoryDatabase("MemoryDemoDb"));
 
+//Concurrency Test must use SqlServer 
+//builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<DepartmentDbContext>(options => options.UseSqlServer(connectionString));
 var app = builder.Build();
 
+await DataSeed.SeedAsync(app.Services);
 
-DataSeed.SeedAsync(app.Services);
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
