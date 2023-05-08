@@ -5,7 +5,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
-using MinimalAPI.Server.API;
 using Common.Custom;
 using Microsoft.AspNetCore.Builder;
 using Common.Custom.Middlewares;
@@ -14,6 +13,7 @@ using Common.Custom.Interfaces;
 using MinimalAPI.Demo.V6.Filters.EndPointFilter;
 using MinimalAPI.Demo.V6.Extensions;
 using FluentValidation;
+using Common.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,8 +49,8 @@ app.UseHttpsRedirection();
 app.UseMinimalUserAPI();
 //app.UseMinimalTestAPI();
 //app.UseMinimalBindingAPI();
-app.UseParameterBindingAPI();
-app.UseValidationAPI();
+//app.UseParameterBindingAPI();
+//app.UseValidationAPI();
 #endregion
 
 app.UseRouting();
@@ -59,8 +59,11 @@ app.UseRouting();
 //    endpoints.MapGet("/hello", () => { return "Hello"; });
 //});
 
+
+app.ViewEndpoints();
+
 //Test UseEndpointMiddleware
-//app.UseEndpointMiddleware();
+app.UseEndpointMiddleware();
 
 app.Run();
 

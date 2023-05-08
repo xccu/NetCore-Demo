@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalAPI.Demo.V6", "Minim
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Custom", "Common.Custom\Common.Custom.csproj", "{6296756A-A9A1-4D1B-8976-0EEB037C38E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{CBB07969-2498-4FA2-A6B9-2957978EA6AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{CBB07969-2498-4FA2-A6B9-2957978EA6AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalAPI.Demo.V7", "MinimalAPI.Demo.V7\MinimalAPI.Demo.V7.csproj", "{131CAADF-97CA-43A2-B289-61DE80B15F3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CBB07969-2498-4FA2-A6B9-2957978EA6AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBB07969-2498-4FA2-A6B9-2957978EA6AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBB07969-2498-4FA2-A6B9-2957978EA6AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{131CAADF-97CA-43A2-B289-61DE80B15F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{131CAADF-97CA-43A2-B289-61DE80B15F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{131CAADF-97CA-43A2-B289-61DE80B15F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{131CAADF-97CA-43A2-B289-61DE80B15F3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

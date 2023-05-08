@@ -3,8 +3,9 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Common.Custom.Attributes;
 using Common.Model;
+using Microsoft.AspNetCore.Http;
 
-namespace MinimalAPI.Server.API;
+namespace Common.API;
 
 public class UserAPI
 {

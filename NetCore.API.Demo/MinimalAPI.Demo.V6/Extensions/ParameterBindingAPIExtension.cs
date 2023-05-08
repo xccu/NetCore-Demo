@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MinimalAPI.Demo.V6.Bindings;
 using MinimalAPI.Demo.V6.Filters.EndPointFilter;
-using MinimalAPI.Server.API;
 using System;
 using System.Security.Claims;
 using System.Xml.Linq;

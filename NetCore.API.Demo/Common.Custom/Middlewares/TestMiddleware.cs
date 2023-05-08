@@ -1,5 +1,7 @@
 ﻿
+using DataAccess;
 using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 
 namespace Common;
 
@@ -14,10 +16,8 @@ public class TestMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        //context.Response.WriteAsync("Start\r\n");
         context.Response.Headers.Append("TEST_MIDDLEFLAG", "Test");
         //await _next(context);
         await _next(context);
-        //context.Response.WriteAsync("End\r\n");
     }
 }

@@ -1,6 +1,5 @@
 ﻿using DataAccess;
 using Microsoft.AspNetCore.Mvc;
-using MinimalAPI.Server.API;
 using Microsoft.AspNetCore.Builder;
 using System.Reflection;
 using MinimalAPI.Demo.V6.Bindings;
@@ -11,6 +10,7 @@ using Microsoft.Extensions.Options;
 using MinimalAPI.Demo.V6.Filters.EndPointFilter;
 using System.Xml.Linq;
 using Common.Model;
+using Common.API;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

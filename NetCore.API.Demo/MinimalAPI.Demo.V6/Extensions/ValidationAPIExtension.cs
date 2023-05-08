@@ -2,7 +2,6 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using MinimalAPI.Demo.V6.Bindings;
-using MinimalAPI.Server.API;
 using MiniValidation;
 using System.ComponentModel.DataAnnotations;
 using System;
