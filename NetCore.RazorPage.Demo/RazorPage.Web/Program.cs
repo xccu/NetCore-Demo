@@ -10,6 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using static System.Formats.Asn1.AsnWriter;
 using Common.Filter;
 using System.Configuration;
+using Common.Convention;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,10 +22,24 @@ var connectionString = configuration.GetConnectionString("Default");
 
 // Add services to the container.
 
-builder.Services.AddRazorPages(options =>{
+
+builder.Services.AddRazorPages(options =>
+{
+    #region Filters
     options.Conventions.AddFolderApplicationModelConvention( //add filter for special folder path
         "/Movies",
         model => model.Filters.Add(new HttpAsyncPageFilter()));
+    options.Conventions.ConfigureFilter(new AddHeaderWithFactory());
+    #endregion
+
+    #region Route and ModelConvention
+    options.Conventions.Add(new GlobalTemplatePageRouteModelConvention());
+    options.Conventions.AddPageRouteModelConvention("/About", ModelConventions.About);
+    options.Conventions.AddFolderRouteModelConvention("/OtherPages", ModelConventions.OtherPages);
+    options.Conventions.AddPageRoute("/Test/Contact", "TheContactPage/{text?}");
+    options.Conventions.AddPageRoute("/Index", "home/Index");
+    #endregion
+
 })
 .AddMvcOptions(options => // add global filter 
 {
@@ -33,17 +51,31 @@ builder.Services.AddRazorPages(options =>{
 });
 
 
-builder.Services.AddDbContext<UserDbContext>(options => options.UseInMemoryDatabase("MemoryDemoDb"));
-builder.Services.AddDbContext<MovieDbContext>(options => options.UseInMemoryDatabase("MemoryDemoDb"));
-builder.Services.AddDbContext<DepartmentDbContext>(options => options.UseInMemoryDatabase("MemoryDemoDb"));
 
+#region test RootDirectory
+//builder.Services.AddRazorPages(options =>
+//{
+//    options.RootDirectory = "/MyPages";
+//    options.Conventions.AddPageRoute("/Admin", "");
+//});
+#endregion
+
+#region UseInMemoryDatabase
+//builder.Services.AddDbContext<UserDbContext>(options => options.UseInMemoryDatabase("MemoryDemoDb"));
+//builder.Services.AddDbContext<MovieDbContext>(options => options.UseInMemoryDatabase("MemoryDemoDb"));
+//builder.Services.AddDbContext<DepartmentDbContext>(options => options.UseInMemoryDatabase("MemoryDemoDb"));
+#endregion
+
+#region UseSqlServer
 //Concurrency Test must use SqlServer 
-//builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(connectionString));
-//builder.Services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(connectionString));
-//builder.Services.AddDbContext<DepartmentDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DepartmentDbContext>(options => options.UseSqlServer(connectionString));
+#endregion
+
 var app = builder.Build();
 
-await DataSeed.SeedAsync(app.Services);
+await DataSeed.SqlServerSeedAsync(app.Services);
 
 
 // Configure the HTTP request pipeline.

@@ -36,26 +36,6 @@ public class ConcurrencyModel : PageModel
         return Page();
     }
 
-    //public async Task<IActionResult> OnPostAsync(int id)
-    //{
-    //    var studentToUpdate = await _context.Department.FindAsync(id);
-
-    //    if (studentToUpdate == null)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    if (await TryUpdateModelAsync<Department>(
-    //        studentToUpdate,
-    //        "Department",
-    //        s => s.Name, s => s.Budget, s => s.StartDate))
-    //    {
-    //        await _context.SaveChangesAsync();
-    //        return RedirectToPage("./Index");
-    //    }
-
-    //    return Page();
-    //}
 
     public async Task<IActionResult> OnPostAsync(int id)
     {
@@ -76,6 +56,7 @@ public class ConcurrencyModel : PageModel
         // Set ConcurrencyToken to value read in OnGetAsync
         _context.Entry(departmentToUpdate).Property(
              d => d.ConcurrencyToken).OriginalValue = Department.ConcurrencyToken;
+
 
         if (await TryUpdateModelAsync<Department>(
             departmentToUpdate,
@@ -106,12 +87,9 @@ public class ConcurrencyModel : PageModel
                 // matches unless an new concurrency issue happens.
                 Department.ConcurrencyToken = (byte[])dbValues.ConcurrencyToken;
                 // Clear the model error for the next postback.
-                //ModelState.Remove($"{nameof(Movie)}.{nameof(Movie.ConcurrencyToken)}");
+                ModelState.Remove($"{nameof(Department)}.{nameof(Department.ConcurrencyToken)}");
             }
         }
-
-        //InstructorNameSL = new SelectList(_context.Instructors,
-        //    "ID", "FullName", departmentToUpdate.InstructorID);
 
         return Page();
     }
