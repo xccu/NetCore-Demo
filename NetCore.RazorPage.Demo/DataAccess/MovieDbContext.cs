@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess;
 
@@ -9,5 +10,5 @@ public class MovieDbContext : DbContext
     {
     }
 
-    public DbSet<DataAccess.Movie> Movie { get; set; } = default!;
+    public DbSet<Movie> Movie { get; set; } = default!;
 }

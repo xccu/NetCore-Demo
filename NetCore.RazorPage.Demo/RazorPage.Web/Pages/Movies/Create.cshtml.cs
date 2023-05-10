@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DataAccess;
+using DataAccess.Models;
 
 namespace RazorPage.Web.Pages.Movies;
 

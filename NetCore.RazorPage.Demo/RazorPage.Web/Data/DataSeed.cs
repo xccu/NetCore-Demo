@@ -1,7 +1,5 @@
 ﻿using DataAccess;
-using Microsoft.Extensions.DependencyInjection;
-using System.Security;
-
+using DataAccess.Models;
 namespace RazorPage.Web.Data;
 
 public class DataSeed
@@ -54,9 +52,9 @@ public class DataSeed
 
             var departmentContext = scope.ServiceProvider.GetRequiredService<DepartmentDbContext>();
             byte[] token = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            departmentContext.Add(new Department() { Name = "English", Budget = 10000, StartDate = DateTime.Now, ConcurrencyToken = token });
-            departmentContext.Add(new Department() { Name = "Chinese", Budget = 20000, StartDate = DateTime.Now, ConcurrencyToken = token });
-            departmentContext.Add(new Department() { Name = "Math", Budget = 30000, StartDate = DateTime.Now, ConcurrencyToken = token });
+            departmentContext.Add(new Department() { Name = "English", Budget = 10000, StartDate = DateTime.Now, Version = token });
+            departmentContext.Add(new Department() { Name = "Chinese", Budget = 20000, StartDate = DateTime.Now, Version = token });
+            departmentContext.Add(new Department() { Name = "Math", Budget = 30000, StartDate = DateTime.Now, Version = token });
             await departmentContext.SaveChangesAsync();
         }
         catch (Exception ex)

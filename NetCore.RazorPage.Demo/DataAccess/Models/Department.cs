@@ -1,16 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace DataAccess;
+namespace DataAccess.Models;
 
-public class Department
+public class Department :IConcurrency<byte[]>
 {
     public int DepartmentID { get; set; }
 
@@ -27,9 +21,10 @@ public class Department
     [Display(Name = "Start Date")]
     public DateTime StartDate { get; set; }
 
-    public int? InstructorID { get; set; }
-
     [Timestamp]
-    public byte[] ConcurrencyToken { get; set; }
+    public byte[] Version { get; set; }
+
+    //[Timestamp]
+    //public byte[] ConcurrencyToken { get; set; }
 
 }

@@ -6,14 +6,14 @@
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using RazorPage.Web.Data;
-using Microsoft.Extensions.DependencyInjection;
-using static System.Formats.Asn1.AsnWriter;
 using Common.Filter;
-using System.Configuration;
 using Common.Convention;
-using Microsoft.Extensions.Options;
+using Common.Authorization;
+using Microsoft.AspNetCore.Authorization;
+using Common.Authentication;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +22,21 @@ var connectionString = configuration.GetConnectionString("Default");
 
 // Add services to the container.
 
+#region Authentication and Authorization
+var permissionRequirement = new MinimumAgeRequirement(18);
+
+//授权
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AtLeast18", policy => policy.Requirements.Add(permissionRequirement));
+});
+// 注入权限处理器
+builder.Services.AddTransient<IAuthorizationHandler, MinimumAgeHandler>();
+
+//Default认证方案(不手动Login)
+builder.Services.AddAuthentication("default")
+                .AddScheme<DefaultSchemeOptions, DefaultHandler>("default", null, null);
+#endregion
 
 builder.Services.AddRazorPages(options =>
 {
@@ -32,6 +47,11 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.ConfigureFilter(new AddHeaderWithFactory());
     #endregion
 
+    #region Authorization
+    //options.Conventions.AuthorizePage("/Test/Authorize", "AtLeast18");
+    options.Conventions.AuthorizeFolder("/Movies", "AtLeast18");
+    #endregion
+
     #region Route and ModelConvention
     options.Conventions.Add(new GlobalTemplatePageRouteModelConvention());
     options.Conventions.AddPageRouteModelConvention("/About", ModelConventions.About);
@@ -39,7 +59,6 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AddPageRoute("/Test/Contact", "TheContactPage/{text?}");
     options.Conventions.AddPageRoute("/Index", "home/Index");
     #endregion
-
 })
 .AddMvcOptions(options => // add global filter 
 {
@@ -90,7 +109,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.Use(async (context, next) =>
+{
+    var enpoint = context.GetEndpoint();
 
+    await next();
+
+});
+//UseAuthentication must before UseAuthorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

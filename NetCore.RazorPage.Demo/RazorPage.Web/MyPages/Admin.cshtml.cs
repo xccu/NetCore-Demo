@@ -1,15 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RazorPage.Web.MyPages
-{
-    public class AdminModel : PageModel
-    {
+namespace RazorPage.Web.MyPages;
 
-        public string Message { get; set; } = string.Empty;
-        public void OnGet()
-        {
-            Message = "Admin Page";
-        }
+public class AdminModel : PageModel
+{
+
+    public string Message { get; set; } = string.Empty;
+
+    public void OnGet()
+    {
+        Message = "Admin Page Get";
+    }
+
+    public void OnPost()
+    {
+        Message = "Admin Page Post";
     }
 }

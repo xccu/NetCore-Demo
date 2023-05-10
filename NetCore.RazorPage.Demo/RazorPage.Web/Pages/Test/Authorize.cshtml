@@ -1,0 +1,18 @@
+﻿@page
+@model RazorPage.Web.Pages.Test.AuthorizeModel
+@{
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<div>@Model.Message</div>
+
+<form method="post"><button>Post</button></form>
+
+<p>Learn about <a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/razor-pages-authorization?view=aspnetcore-6.0">Razorpages Authorization</a>.</p>
+
+
+<p>Note:Policies can not be applied at the Razor Page handler level(IAuthorizeData), they must be applied to the Page.</p>
+<p>See:</p>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-7.0#apply-policies-to-razor-pages">Apply policies to Razor Pages</a></p>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/simple?view=aspnetcore-7.0#authorize-attribute-and-razor-pages">Authorize attribute and Razor Pages</a></p>

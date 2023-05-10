@@ -12,10 +12,10 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Department.DepartmentID" />
-            <input type="hidden" asp-for="Department.ConcurrencyToken" />
+            <input type="hidden" asp-for="Department.Version" />
             <div class="form-group">
-                <label>Version</label>
-                @Utility.GetLastChars(Model.Department.ConcurrencyToken)
+                <label>Version:</label>
+                @Utility.GetLastChars(Model.Department.Version)
             </div>
             <div class="form-group">
                 <label asp-for="Department.Name" class="control-label"></label>
@@ -38,6 +38,12 @@
             </div>
         </form>
     </div>
+</div>
+<br/>
+<div class="container">
+    MS Doc - 
+    <a href="https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/concurrency?view=aspnetcore-6.0&tabs=visual-studio">Concurrency</a> | 
+    <a href="https://learn.microsoft.com/en-us/ef/core/saving/concurrency?tabs=data-annotations">Handling Concurrency Conflicts</a>
 </div>
 
 @section Scripts {

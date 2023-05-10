@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
+using DataAccess.Models;
 
 namespace RazorPage.Web.Pages.Movies;
 

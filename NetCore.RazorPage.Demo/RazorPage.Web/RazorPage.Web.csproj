@@ -5,6 +5,29 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Pages\Movies\Create.cshtml" />
+    <None Include="Pages\Movies\Delete.cshtml" />
+    <None Include="Pages\Movies\Details.cshtml" />
+    <None Include="Pages\Movies\Edit.cshtml" />
+    <None Include="Pages\Movies\Index.cshtml" />
+    <None Include="Pages\OtherPages\Page1.cshtml" />
+    <None Include="Pages\Shared\_Layout.cshtml" />
+    <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Pages\Test\AnchorTag.cshtml" />
+    <None Include="Pages\Test\Authorize.cshtml" />
+    <None Include="Pages\Test\Concurrency.cshtml" />
+    <None Include="Pages\Test\Contact.cshtml" />
+    <None Include="Pages\Test\Filter.cshtml" />
+    <None Include="Pages\Test\Index.cshtml" />
+    <None Include="Pages\Users\Create.cshtml" />
+    <None Include="Pages\Users\Delete.cshtml" />
+    <None Include="Pages\Users\Details.cshtml" />
+    <None Include="Pages\Users\Edit.cshtml" />
+    <None Include="Pages\Users\Index.cshtml" />
+    <None Include="Pages\Users\Test.cshtml" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />

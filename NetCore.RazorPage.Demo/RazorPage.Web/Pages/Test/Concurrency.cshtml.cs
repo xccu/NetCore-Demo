@@ -1,4 +1,5 @@
 using DataAccess;
+using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,7 @@ namespace RazorPage.Web.Pages.Test;
 
 //see:
 //https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/concurrency?view=aspnetcore-6.0&tabs=visual-studio
+//https://learn.microsoft.com/en-us/ef/core/saving/concurrency?tabs=data-annotations
 public class ConcurrencyModel : PageModel
 {
     private readonly DepartmentDbContext _context;
@@ -55,7 +57,7 @@ public class ConcurrencyModel : PageModel
 
         // Set ConcurrencyToken to value read in OnGetAsync
         _context.Entry(departmentToUpdate).Property(
-             d => d.ConcurrencyToken).OriginalValue = Department.ConcurrencyToken;
+             d => d.Version).OriginalValue = Department.Version;
 
 
         if (await TryUpdateModelAsync<Department>(
@@ -83,11 +85,11 @@ public class ConcurrencyModel : PageModel
                 var dbValues = (Department)databaseEntry.ToObject();
                 await SetDbErrorMessage(dbValues, clientValues, _context);
 
-                // Save the current ConcurrencyToken so next postback
+                // Save the current Version so next postback
                 // matches unless an new concurrency issue happens.
-                Department.ConcurrencyToken = (byte[])dbValues.ConcurrencyToken;
+                Department.Version = dbValues.Version;
                 // Clear the model error for the next postback.
-                ModelState.Remove($"{nameof(Department)}.{nameof(Department.ConcurrencyToken)}");
+                ModelState.Remove($"{nameof(Department)}.{nameof(Department.Version)}");
             }
         }
 

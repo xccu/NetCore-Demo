@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DataAccess;
+namespace DataAccess.Models;
 
 public class User
 {
@@ -17,6 +17,6 @@ public class User
 
     public User()
     {
-        this.Id = System.Guid.NewGuid().ToString();
+        Id = Guid.NewGuid().ToString();
     }
 }
