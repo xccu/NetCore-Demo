@@ -11,7 +11,7 @@ namespace WebAPI.Demo.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class AccountController : ControllerBase
 {
     [HttpGet("/Login/{user}/{DateOfBirth}")]
     public async Task<IActionResult> LoginAsync(string user,DateTime DateOfBirth)

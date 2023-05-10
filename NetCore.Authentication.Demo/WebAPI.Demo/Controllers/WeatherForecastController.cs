@@ -1,11 +1,12 @@
+using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Demo.Controllers;
 
 [ApiController]
-[Authorize(Policy = "AtLeast18")]
 [Route("[controller]")]
+//[Permission("AtLeast18")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -21,6 +22,7 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
+    [Permission("AtLeast18")]
     public IEnumerable<WeatherForecast> Get()
     {
         if (!User.Identity.IsAuthenticated)
@@ -32,5 +34,12 @@ public class WeatherForecastController : ControllerBase
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
+    }
+
+    [HttpPost(Name = "PostWeatherForecast")]
+    //[Permission("AtLeast18")]
+    public IActionResult Get(WeatherForecast weather)
+    {
+        return CreatedAtAction(nameof(Get), weather);
     }
 }
