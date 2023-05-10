@@ -67,7 +67,7 @@ public class UserController : ControllerBase
 
     [HttpPut("Update")]
     [Validation]
-    public IActionResult update(User user)
+    public IActionResult Update(User user)
     {
         try
         {
@@ -87,7 +87,7 @@ public class UserController : ControllerBase
     }
 
     [HttpDelete("Delete/{name}")]
-    public IActionResult delete(string name)
+    public IActionResult Delete(string name)
     {
         try
         {
