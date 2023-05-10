@@ -14,6 +14,8 @@ using MinimalAPI.Demo.V6.Filters.EndPointFilter;
 using MinimalAPI.Demo.V6.Extensions;
 using FluentValidation;
 using Common.API;
+using Common.Options;
+using Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +31,11 @@ builder.Services.AddDbContext<UserDbContext>(options => options.UseInMemoryDatab
 
 builder.Services.AddScoped<UserAPI>();
 
-builder.Services.AddSingleton<IFilter,TestFilter>();
+
+Action<BaseOptions> configureAction = Options => { Options.Text = "Test"; };
+builder.Services.Configure(configureAction);
+
+builder.Services.AddSingleton<IFilter, TestFilter>();
 
 var app = builder.Build();
 
@@ -44,26 +50,30 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 //app.UseMiddleware<TestMiddleware>();
+//app.UseCustomExceptionHandler();
 
 #region MinimalUserAPI
 app.UseMinimalUserAPI();
 //app.UseMinimalTestAPI();
-//app.UseMinimalBindingAPI();
 //app.UseParameterBindingAPI();
 //app.UseValidationAPI();
 #endregion
+
+app.UseCustomExceptionHandler();
 
 app.UseRouting();
 
 //app.UseEndpoints(endpoints => {
 //    endpoints.MapGet("/hello", () => { return "Hello"; });
 //});
-
+app.UseMiddleware<TestMiddleware>();
 
 app.ViewEndpoints();
 
+
+
 //Test UseEndpointMiddleware
-app.UseEndpointMiddleware();
+//app.UseEndpointMiddleware();
 
 app.Run();
 

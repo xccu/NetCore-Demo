@@ -28,7 +28,7 @@ public class EndpointMiddleware
         if (_options.Handlers.TryGetValue(key, out handler))
         {
             //context.Response.Headers.Append("TEST_MIDDLEFLAG", "Test");
-            _filter.InvokeAsync(context, handler);
+            await _filter.InvokeAsync(context, handler);
             //handler.Invoke(context);
         }
         else

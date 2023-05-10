@@ -9,6 +9,7 @@ namespace WebAPI.Demo.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Validation]
 public class UserController : ControllerBase
 {
 
@@ -23,15 +24,21 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("GetAll")]
-    public IEnumerable<User> GetAll()
+    public IActionResult GetAll()
     {
-        return _context.User.ToList();
+        var users =  _context.User.ToList();
+        if (users.Count == 0)
+            return NotFound();
+        return Ok(users);
     }
 
     [HttpGet("{name}")]
-    public User GetByName(string name)
+    public IActionResult GetByName(string name)
     {
-        return _context.User.FirstOrDefault(t => t.name == name);
+        var user =  _context.User.FirstOrDefault(t => t.name == name);
+        if (user==null)
+            return NotFound();
+        return Ok(user);
     }
 
     [HttpPost("Add")]
@@ -49,7 +56,8 @@ public class UserController : ControllerBase
             }
             _context.User.Add(user);
             _context.SaveChanges();
-            return Ok();
+            //return Ok();
+            return CreatedAtAction(nameof(GetByName), new { name = user.name }, user);
         }
         catch (Exception ex)
         {

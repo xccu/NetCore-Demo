@@ -23,7 +23,7 @@ public static class UserAPIExtension
         var API = scope.ServiceProvider.GetRequiredService<UserAPI>();
 
         app.MapGet("/api/User/GetAll", API.GetAll).WithFilter<TestFilter>("GetAll");
-        app.MapGet("/api/User/{Id}", API.GetById).WithFilter<TestFilter>("Name");
+        app.MapGet("/api/User/{Id}", API.GetById).WithName("GetUser");
         app.MapPost("/api/User/Add", API.Add);//.AddFilter<TestFilter>();
         app.MapPut("/api/User/Update", API.Update);
         app.MapDelete("/api/User/Delete", API.Delete);

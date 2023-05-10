@@ -18,15 +18,21 @@ public class UserAPI
     }
 
     [Permission("User.View")]
-    public IEnumerable<User> GetAll()
+    public IResult GetAll()
     {
-        return _context.User.ToList();
+        var users =  _context.User.ToList();
+        if(users.Count==0)
+            return Results.NotFound();
+        return Results.Ok(users);
     }
 
     [Permission("User.View")]
-    public User GetById(string Id)
+    public IResult GetById(string Id)
     {
-        return _context.User.FirstOrDefault(t=>t.Id==Id);
+        var user =  _context.User.FirstOrDefault(t=>t.Id==Id);
+        if(user == null)
+            return Results.NotFound();
+        return Results.Ok(user);
     }
 
     [Permission("User.Add")]
@@ -36,7 +42,13 @@ public class UserAPI
         {
             _context.User.Add(user);
             _context.SaveChanges();
-            return Results.Ok();
+                      
+            return Results.Created($"/api/User/{user.Id}", user);
+            
+            //must set WithName("GetUser") by this way
+            //return Results.CreatedAtRoute("GetUser", new { Id = user.Id }, user);
+
+            //return Results.Ok();
         }
         catch (Exception ex)
         {
@@ -78,7 +90,7 @@ public class UserAPI
         }
     }
 
-    [ExceptionRecover]
+    //[ExceptionRecover]
     public IResult GetException()
     {
         throw new Exception("This is a test");

@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using Microsoft.AspNetCore.Routing.Patterns;
+using Microsoft.Extensions.Options;
+using System.Globalization;
 using System.Reflection;
 
 namespace MinimalAPI.Demo.V6.Bindings;
@@ -31,7 +33,6 @@ public class Location
         return false;
     }
     #endregion
-
 
 
 }
