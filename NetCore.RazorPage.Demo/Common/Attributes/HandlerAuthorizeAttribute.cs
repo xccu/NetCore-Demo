@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using System.Net;
 
 namespace Common.Attributes;
 
-public class HandlerAuthorizeAttribute : Attribute, IAsyncPageFilter, IOrderedFilter
+//see:
+//https://learn.microsoft.com/en-us/aspnet/core/security/authorization/simple?view=aspnetcore-7.0#authorize-attribute-and-razor-pages
+public class HandlerAuthorizeAttribute : Attribute, IAsyncPageFilter//, IOrderedFilter
 {
-    public int Order => 100;
+    //public int Order => 100;
 
     public async Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next)
     {
@@ -24,16 +25,30 @@ public class HandlerAuthorizeAttribute : Attribute, IAsyncPageFilter, IOrderedFi
             {
                 return;
             }
-            await AuthorizeAsync(context, policy);
+            var authorized = await AuthorizeAsync(context, policy);
+
+            if (!authorized)
+            { 
+                return;
+            }
         }
         await next();
     }
 
-    private async Task AuthorizeAsync(ActionContext actionContext, AuthorizationPolicy policy)
+    public Task OnPageHandlerSelectionAsync(PageHandlerSelectedContext context)
+    {
+        return Task.CompletedTask;
+    }
+
+    private async Task<bool> AuthorizeAsync(ActionContext actionContext, AuthorizationPolicy policy)
     {
         var httpContext = actionContext.HttpContext;
+
         var policyEvaluator = actionContext.HttpContext.RequestServices.GetRequiredService<IPolicyEvaluator>();
-        var authenticateResult = await policyEvaluator.AuthenticateAsync(policy, httpContext);
+        //don't Authenticate again there, can get authenticateResult from httpContext
+        //var authenticateResult = await policyEvaluator.AuthenticateAsync(policy, httpContext);
+        var authenticateResult = httpContext.Features.Get<IAuthenticateResultFeature>().AuthenticateResult;
+        
         var authorizeResult = await policyEvaluator.AuthorizeAsync(policy, authenticateResult, httpContext, actionContext.ActionDescriptor);
         
         if (authorizeResult.Challenged)
@@ -49,8 +64,7 @@ public class HandlerAuthorizeAttribute : Attribute, IAsyncPageFilter, IOrderedFi
             {               
                 await httpContext.ChallengeAsync();
             }
-
-            return;
+            return false;
         }
         else if (authorizeResult.Forbidden)
         {
@@ -64,14 +78,9 @@ public class HandlerAuthorizeAttribute : Attribute, IAsyncPageFilter, IOrderedFi
             else
             {
                 await httpContext.ForbidAsync();
-                //httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
             }
-            return;
+            return false;
         }
-    }
-
-    public Task OnPageHandlerSelectionAsync(PageHandlerSelectedContext context)
-    {
-        return Task.CompletedTask;
+        return true;
     }
 }

@@ -7,7 +7,7 @@ namespace RazorPage.Web.Pages.Test;
 
 //Q: what if use [Authorize] with different policy both in endpoint level and handler level?
 
-[HandlerAuthorize]
+[HandlerAuthorize] //Attribute implement IAsyncPageFilter 
 public class HandlerAuthorizeModel : PageModel
 {
     public string Message { get; set; }
@@ -18,9 +18,8 @@ public class HandlerAuthorizeModel : PageModel
     {
         Message = "Get used";
     }
-
-    //Handler Level
-    [Authorize(Policy = "AtLeast18")]
+    
+    [Authorize(Policy = "AtLeast18")] //Authorize in Handler Level
     public void OnPost()
     {
         Message = "Post used";

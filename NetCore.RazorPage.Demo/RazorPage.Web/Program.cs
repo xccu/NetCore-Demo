@@ -11,9 +11,6 @@ using Common.Convention;
 using Common.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Common.Authentication;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -118,7 +115,7 @@ app.Use(async (context, next) =>
 });
 //UseAuthentication must before UseAuthorization
 app.UseAuthentication();
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapRazorPages();
 //app.MapControllerRoute("mvc", "{controller=users}/{action=Index}");

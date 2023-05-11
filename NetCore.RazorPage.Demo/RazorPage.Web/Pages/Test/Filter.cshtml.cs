@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Primitives;
@@ -9,6 +8,7 @@ namespace RazorPage.Web.Pages.Test
     {
         public string Message { get; set; } = string.Empty;
         public string UserAgent { get; set; }= string.Empty;
+
         public void OnGet()
         {
             Message = "Filter Page";

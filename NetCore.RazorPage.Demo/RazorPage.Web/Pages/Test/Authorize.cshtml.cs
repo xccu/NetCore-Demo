@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPage.Web.Pages.Test;
 
+//Page Level
 [Authorize(Policy ="AtLeast18")]
 public class AuthorizeModel : PageModel
 {

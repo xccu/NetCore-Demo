@@ -34,7 +34,7 @@ public class DefaultHandler : AuthenticationHandler<DefaultSchemeOptions>
         ClaimsIdentity claimsIdentity = new("default");
 
         claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, "user1"));
-        claimsIdentity.AddClaim(new Claim(ClaimTypes.DateOfBirth, "2023-1-1"));
+        claimsIdentity.AddClaim(new Claim(ClaimTypes.DateOfBirth, "2001-1-1"));
         claimsPrincipal.AddIdentity(claimsIdentity);
         var result = AuthenticateResult.Success(new AuthenticationTicket(claimsPrincipal, "Test"));
 
