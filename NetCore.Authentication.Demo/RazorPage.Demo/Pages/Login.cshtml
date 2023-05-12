@@ -1,0 +1,38 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-page-handler="Login" method="post">
+        <div class="form-group">
+            <label asp-for="User.Name" class="control-label"></label>
+            <input asp-for="User.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="User.BirthDate" class="control-label"></label>
+            <input asp-for="User.BirthDate" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" />           
+        </div>
+        </form>        
+    </div>
+</div>
+
+<form asp-page-handler="Logout" method="post">
+   <button>Logout</button>
+</form>
+
+<form asp-page-handler="Test" method="post">
+    <button>Test</button>
+</form>
+
+<textarea class="form-control" rows="5">@Model.Text</textarea>

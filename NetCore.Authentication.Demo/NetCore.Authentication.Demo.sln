@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{5A8CE8D8-2497-4084-A0DB-83EF5966161C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{5A8CE8D8-2497-4084-A0DB-83EF5966161C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.Demo", "WebAPI.Demo\WebAPI.Demo.csproj", "{1CC72F2D-0728-4C8F-8F92-53174B70B5AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI.Demo", "WebAPI.Demo\WebAPI.Demo.csproj", "{1CC72F2D-0728-4C8F-8F92-53174B70B5AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPage.Demo", "RazorPage.Demo\RazorPage.Demo.csproj", "{26662543-017D-4EA4-90A1-EF91100B7362}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1CC72F2D-0728-4C8F-8F92-53174B70B5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CC72F2D-0728-4C8F-8F92-53174B70B5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CC72F2D-0728-4C8F-8F92-53174B70B5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26662543-017D-4EA4-90A1-EF91100B7362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26662543-017D-4EA4-90A1-EF91100B7362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26662543-017D-4EA4-90A1-EF91100B7362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26662543-017D-4EA4-90A1-EF91100B7362}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

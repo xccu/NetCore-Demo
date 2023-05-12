@@ -11,8 +11,8 @@ public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    };
 
     private readonly ILogger<WeatherForecastController> _logger;
 
@@ -38,7 +38,7 @@ public class WeatherForecastController : ControllerBase
 
     [HttpPost(Name = "PostWeatherForecast")]
     //[Permission("AtLeast18")]
-    public IActionResult Get(WeatherForecast weather)
+    public IActionResult Post(WeatherForecast weather)
     {
         return CreatedAtAction(nameof(Get), weather);
     }
