@@ -16,7 +16,7 @@ public static class ParameterBindingAPIExtension
 {
     public static WebApplication UseParameterBindingAPI(this WebApplication app)
     {
-        var scope = app.Services.CreateScope();
+        //var scope = app.Services.CreateScope();
 
         #region ParameterBinding
         //url:people/1?notify=true
@@ -37,8 +37,6 @@ public static class ParameterBindingAPIExtension
         //This won't compile
         //app.MapGet("/people1", (int pageIndex = 0, int itemsPerPage = 50) => { });
 
-        app.MapGet("/options", (IOptions<BaseOptions> optionsBasic) => { return optionsBasic.Value.Text; })
-            .WithTags("Parameter Binding");
         #endregion
 
         #region Special bindings
