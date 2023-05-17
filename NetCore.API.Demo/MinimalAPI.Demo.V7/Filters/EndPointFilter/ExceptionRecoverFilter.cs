@@ -25,9 +25,7 @@ public class ExceptionRecoverFilter : IEndpointFilter
                 Title = "Test Exception",
                 Detail = $"InternalServerError:{ex.Message}",
             };
-            //var errorJson = JsonSerializer.Serialize(problemDetails);
-            //await context.HttpContext.Response.WriteAsync(errorJson);
-            //return await next(efiContext);
+
             return Results.BadRequest(problemDetails);
         }
     }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebAPI.Demo.Controllers;
 
 [ApiController]
-public class TestController : ControllerBase
+public class LocationController : ControllerBase
 {
     //http://localhost:5163/navigate?location=43.8427,7.8527
     [HttpGet("navigate")]

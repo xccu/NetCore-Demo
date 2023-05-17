@@ -1,6 +1,5 @@
 ﻿using DataAccess;
 using FluentValidation;
-using MinimalAPI.Demo.V6.Extensions;
 
 namespace MinimalAPI.Demo.V6.Validator;
 

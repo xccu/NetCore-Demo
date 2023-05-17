@@ -1,14 +1,8 @@
 ﻿using DataAccess;
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
-using MinimalAPI.Demo.V6.Bindings;
 using MiniValidation;
-using System.ComponentModel.DataAnnotations;
-using System;
-using System.Security.Claims;
-using System.Xml.Linq;
 
-namespace MinimalAPI.Demo.V6.Extensions;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ValidationAPIExtension
 {

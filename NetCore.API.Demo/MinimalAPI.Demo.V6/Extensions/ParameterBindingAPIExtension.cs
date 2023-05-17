@@ -1,5 +1,4 @@
-﻿using Common.Custom.Attributes;
-using Common.Options;
+﻿using Common.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,13 +9,12 @@ using System;
 using System.Security.Claims;
 using System.Xml.Linq;
 
-namespace MinimalAPI.Demo.V6.Extensions;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ParameterBindingAPIExtension
 {
     public static WebApplication UseParameterBindingAPI(this WebApplication app)
     {
-        //var scope = app.Services.CreateScope();
 
         #region ParameterBinding
         //url:people/1?notify=true

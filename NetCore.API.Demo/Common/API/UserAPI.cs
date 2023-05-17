@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DataAccess;
-using Microsoft.EntityFrameworkCore;
-using Common.Custom.Attributes;
 using Common.Model;
 using Microsoft.AspNetCore.Http;
 
@@ -17,7 +15,6 @@ public class UserAPI
         _context = context;
     }
 
-    [Permission("User.View")]
     public IResult GetAll()
     {
         var users =  _context.User.ToList();
@@ -26,7 +23,6 @@ public class UserAPI
         return Results.Ok(users);
     }
 
-    [Permission("User.View")]
     public IResult GetById(string Id)
     {
         var user =  _context.User.FirstOrDefault(t=>t.Id==Id);
@@ -35,7 +31,6 @@ public class UserAPI
         return Results.Ok(user);
     }
 
-    [Permission("User.Add")]
     public IResult Add(User user)
     {
         try

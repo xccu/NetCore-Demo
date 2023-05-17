@@ -5,26 +5,14 @@
 
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
-using Common.Custom;
-using Microsoft.AspNetCore.Builder;
-using Common.Custom.Middlewares;
-using Microsoft.Extensions.Options;
-using Common.Custom.Interfaces;
-using MinimalAPI.Demo.V6.Filters.EndPointFilter;
-using MinimalAPI.Demo.V6.Extensions;
 using FluentValidation;
 using Common.API;
-using Common.Options;
-using Common;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.Net.Http.Headers;
-using Microsoft.OpenApi.Models;
 using Common.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Common.Authentication;
+using Common.Custom.Interfaces;
+using MinimalAPI.Demo.V6.Filters.EndPointFilter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,7 +51,7 @@ builder.Services.AddDbContext<UserDbContext>(options => options.UseInMemoryDatab
 builder.Services.AddScoped<UserAPI>();
 
 
-#region
+#region Authentication and Authorization
 // 授权
 builder.Services.AddAuthorization(options =>
 {
@@ -105,25 +93,26 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-//app.UseMiddleware<TestMiddleware>();
 //app.UseCustomExceptionHandler();
 
 #region MinimalUserAPI
-app.UseMinimalUserAPI();
-//app.UseMinimalTestAPI();
+app.UseUserAPI();
+//app.UseTestAPI();
 //app.UseParameterBindingAPI();
 //app.UseValidationAPI();
-app.UseAuthorizationAPI();
+//app.UseAuthorizationAPI();
+app.UseFooAPI();
 #endregion
 
-app.UseCustomExceptionHandler();
+//app.UseCustomExceptionHandler();
 
 app.UseRouting();
 
 //app.UseEndpoints(endpoints => {
 //    endpoints.MapGet("/hello", () => { return "Hello"; });
 //});
-app.UseMiddleware<TestMiddleware>();
+
+//app.UseMiddleware<TestMiddleware>();
 
 //Authentication and Authorization
 app.UseAuthentication();

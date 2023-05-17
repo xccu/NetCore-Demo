@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace MinimalAPI.Demo.V6.Extensions;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class AuthorizationAPIExtension
 {

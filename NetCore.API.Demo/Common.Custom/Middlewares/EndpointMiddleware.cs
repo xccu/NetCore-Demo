@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Common.Custom.Middlewares;
 
+//not used
 public class EndpointMiddleware
 {
     private readonly RequestDelegate _next;
