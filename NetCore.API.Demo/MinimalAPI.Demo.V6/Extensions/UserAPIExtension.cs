@@ -25,6 +25,7 @@ public static class UserAPIExtension
         app.MapGet("/api/User/Ok", API.Ok);
         app.MapPost("/api/User/Binder", API.Binder);
 
+        //TestFilter will running after ExceptionFilter run
         app.MapGet("/api/User/GetException", API.GetException)
             .WithFilter<TestFilter>()
             .WithFilter<ExceptionFilter>();
