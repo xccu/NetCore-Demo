@@ -1,0 +1,17 @@
+﻿@page
+
+@model RazorPage.Web.Pages.Test.CustomTagModel
+@{
+    ViewData["Title"] = "Custom Tag";
+}
+
+<address>
+    <strong>Support:</strong><email mail-to="Support"></email><br />
+    <strong>Marketing:</strong><email mail-to="Marketing"></email> @*use as self-closing tag*@
+</address>
+
+<p bold>Use this area to provide additional information.</p>
+
+<bold>Is this bold?</bold>
+
+<p>See:<a href="https://learn.microsoft.com/zh-cn/aspnet/core/mvc/views/tag-helpers/authoring?view=aspnetcore-6.0">Custom tag helpers</a></p>

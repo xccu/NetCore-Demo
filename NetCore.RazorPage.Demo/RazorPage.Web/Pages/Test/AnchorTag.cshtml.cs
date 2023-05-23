@@ -14,6 +14,7 @@ public class AnchorModel : PageModel
     //GET: /Test/AnchorTag
     public void OnGet()
     {
+        //PageBase
         Message = "Get used";
     }
 

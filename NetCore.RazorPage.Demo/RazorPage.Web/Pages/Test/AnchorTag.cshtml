@@ -4,6 +4,7 @@
     ViewData["Title"] = "Test";
 }
 
+<cache enabled="DateTime.Now.DayOfWeek != DayOfWeek.Sunday">@DateTime.Now</cache>
 
 <h3>@Model.Message</h3>
 
