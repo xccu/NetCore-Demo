@@ -7,7 +7,7 @@ namespace RazorPage.Web.Pages;
 
 
 [AddHeader("PAGE_FLAG", "Anchor")]
-public class AnchorModel : PageModel
+public class AnchorTagModel : PageModel
 {
     public string Message { get; set; }
 
