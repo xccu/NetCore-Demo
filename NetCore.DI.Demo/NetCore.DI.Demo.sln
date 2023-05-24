@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore.DI.Demo", "NetCore.DI.Demo\NetCore.DI.Demo.csproj", "{F244A5B2-251A-464C-B1B5-82F0C219E6B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom", "Custom\Custom.csproj", "{504A7DAE-8B1E-426A-95E0-5666E8122F16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F244A5B2-251A-464C-B1B5-82F0C219E6B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F244A5B2-251A-464C-B1B5-82F0C219E6B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F244A5B2-251A-464C-B1B5-82F0C219E6B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F244A5B2-251A-464C-B1B5-82F0C219E6B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{504A7DAE-8B1E-426A-95E0-5666E8122F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{504A7DAE-8B1E-426A-95E0-5666E8122F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{504A7DAE-8B1E-426A-95E0-5666E8122F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{504A7DAE-8B1E-426A-95E0-5666E8122F16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33F64B9C-D375-4943-B168-BC06B97BE38F}
+	EndGlobalSection
+EndGlobal
