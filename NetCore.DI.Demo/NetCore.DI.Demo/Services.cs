@@ -8,7 +8,7 @@ public interface IBaz { }
 public interface IQux { }
 public interface IFoobar<T1, T2> { }
 
-public class Services : Base, IFoo { }
+public class Foo : Base, IFoo { }
 public class Bar : Base, IBar { }
 public class Baz : Base, IBaz { }
 
