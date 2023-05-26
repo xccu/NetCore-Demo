@@ -11,6 +11,12 @@ using Common.Convention;
 using Common.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Common.Authentication;
+using RazorPage.Web;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +40,9 @@ builder.Services.AddTransient<IAuthorizationHandler, MinimumAgeHandler>();
 builder.Services.AddAuthentication("default")
                 .AddScheme<DefaultSchemeOptions, DefaultHandler>("default", null, null);
 #endregion
+
+//dynamic add [Authorize] in Razorpage
+builder.Services.AddSingleton<IActionDescriptorProvider, AuthorizeDescriptorProvider>();
 
 builder.Services.AddRazorPages(options =>
 {
@@ -106,16 +115,46 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//get path
 app.Use(async (context, next) =>
 {
-    var enpoint = context.GetEndpoint();
+    var endpoint = context.GetEndpoint();
+
+    if (endpoint is not null)
+    {
+
+        var page = endpoint.Metadata.GetOrderedMetadata<ActionDescriptor>()[0];
+
+        var t = endpoint.Metadata.GetOrderedMetadata<DataTokensMetadata>();
+
+        var routeData = new RouteData(context.Request.RouteValues);
+
+        ActionContext actionContext = new ActionContext(context, routeData, page);
+
+        var selector = context.RequestServices.GetRequiredService<IPageHandlerMethodSelector>();
+
+        //var item = context.RequestServices.GetRequiredService<PageActionInvokerCache>();
+
+        var qwe = Unsafe.As<CompiledPageActionDescriptor>(page);
+
+        PageContext pageContext = new PageContext(actionContext)
+        {
+            ActionDescriptor = qwe
+        };
+
+        var result = selector.Select(pageContext);
+
+    }
+
 
     await next();
 
 });
+
 //UseAuthentication must before UseAuthorization
 app.UseAuthentication();
-//app.UseAuthorization();
+app.UseAuthorization();
 
 app.MapRazorPages();
 //app.MapControllerRoute("mvc", "{controller=users}/{action=Index}");

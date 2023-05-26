@@ -31,8 +31,14 @@ public class AnchorTagModel : PageModel
     }
 
     //POST: /Test/AnchorTag?handler=Param
-    public void OnPostParam(string id)
+    public  void OnPostParam(string id)
     {
         Message = $"Post param used:{id}";
     }
+
+    //POST: /Test/AnchorTag?handler=Param
+    //public async void OnPostParamAsync(string id)
+    //{
+    //    Message = $"Post param used:{id}";
+    //}
 }

@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace RazorPage.Web.Pages.Test;
 
 //Page Level
-[Authorize(Policy ="AtLeast18")]
+//remove[Authorize] when use CustomDescriptorProvider
+//[Authorize(Policy ="AtLeast18")]
 public class AuthorizeModel : PageModel
 {
     public string Message { get; set; }
@@ -19,7 +20,7 @@ public class AuthorizeModel : PageModel
     }
 
     //Handler Level
-    //[Authorize(Policy = "AtLeast18")]
+    [Authorize(Policy = "AtLeast18")]
     public void OnPost()
     {       
         Message = "Post used";
