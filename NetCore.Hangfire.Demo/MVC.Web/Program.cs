@@ -1,4 +1,8 @@
 using Hangfire;
+using JobTypes;
+
+//see:
+//https://www.hangfire.io/
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,15 +12,7 @@ var connectionString = configuration.GetConnectionString("HangfireConnection");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddHangfire(configuration => configuration
-       .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
-       .UseSimpleAssemblyNameTypeSerializer()
-       .UseRecommendedSerializerSettings()
-       .UseSqlServerStorage(connectionString));
-
-// Add the processing server as IHostedService
-builder.Services.AddHangfireServer();
-
+builder.Services.AddHangfire(cig => cig.UseSqlServerStorage(connectionString));
 
 var app = builder.Build();
 
@@ -24,7 +20,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -33,16 +28,25 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.Use(async (context, next) =>
+{
+    var endpoint = context.GetEndpoint();
+
+    await next();
+});
+
 app.UseAuthorization();
-app.UseHangfireDashboard();
+
+//app.UseHangfireDashboard("/hangfire", new DashboardOptions());
+
+//use as hangfire client
+JobService.Start(app.Services);
 
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();
-    endpoints.MapHangfireDashboard();
 });
 
-BackgroundJob.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
 
 app.MapControllerRoute(
     name: "default",

@@ -1,12 +1,8 @@
 ﻿using Hangfire;
-using Hangfire.Dashboard;
-using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
-using RazorPage.Web;
 using System.Runtime.CompilerServices;
 
 //see:
@@ -22,11 +18,12 @@ var connectionString = configuration.GetConnectionString("HangfireConnection");
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddHangfire(config =>
-{
-    config.UseStorage(new MemoryStorage());
-    //config.UseSqlServerStorage(connectionString);
-});
+// Add Hangfire services.
+builder.Services.AddHangfire(cig => cig.UseSqlServerStorage(connectionString));
+
+//use as hangfire Server
+// Add the processing server as IHostedService
+builder.Services.AddHangfireServer();
 
 var app = builder.Build();
 
@@ -83,33 +80,12 @@ app.Use(async (context, next) =>
 
 app.UseAuthorization();
 
+app.UseHangfireDashboard("/hangfire", new DashboardOptions());
+
 app.MapRazorPages();
 
-app.UseHangfireServer();
-app.UseHangfireDashboard("/hangfire", new DashboardOptions()
-{
-    //访问面板需要登录，此处也可以不设置
-    //Authorization = new[]
-    //{
-    //    new BasicAuthAuthorizationFilter(new BasicAuthAuthorizationFilterOptions
-    //        {
-    //            SslRedirect = false,          // 是否将所有非SSL请求重定向到SSL URL
-    //            RequireSsl = false,           // 需要SSL连接才能访问HangFire Dahsboard。强烈建议在使用基本身份验证时使用SSL
-    //            LoginCaseSensitive = false,   //登录检查是否区分大小写
-    //            Users = new[]                 //配置登陆账号和密码
-    //            {
-    //                new BasicAuthAuthorizationUser
-    //                {
-    //                    Login ="admin",
-    //                    PasswordClear="123456"
-    //                }
-    //            }
-    //        })
-    //}
-});
+app.UseHangfireDashboard();
 
-
-HangfireJobs.Start();
-
+//JobService.Start();
 
 app.Run();
