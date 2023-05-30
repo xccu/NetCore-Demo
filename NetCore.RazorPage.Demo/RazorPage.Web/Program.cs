@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
+using System.Reflection;
+using Common.Attributes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +45,7 @@ builder.Services.AddAuthentication("default")
 
 //dynamic add [Authorize] in Razorpage
 builder.Services.AddSingleton<IActionDescriptorProvider, AuthorizeDescriptorProvider>();
-
+builder.Services.AddHttpContextAccessor(); 
 builder.Services.AddRazorPages(options =>
 {
     #region Filters
@@ -107,7 +109,8 @@ await DataSeed.SqlServerSeedAsync(app.Services);
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // The default HSTS value is 30 days. You may want to change this for production scenarios,
+    // see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -116,40 +119,40 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-//get path
+//get handlerName
 app.Use(async (context, next) =>
 {
     var endpoint = context.GetEndpoint();
 
     if (endpoint is not null)
     {
-
         var page = endpoint.Metadata.GetOrderedMetadata<ActionDescriptor>()[0];
 
-        var t = endpoint.Metadata.GetOrderedMetadata<DataTokensMetadata>();
+        if (page is CompiledPageActionDescriptor) //Check whether is a razorPage
+        {           
+            var routeData = new RouteData(context.Request.RouteValues);
 
-        var routeData = new RouteData(context.Request.RouteValues);
+            ActionContext actionContext = new ActionContext(context, routeData, page);
 
-        ActionContext actionContext = new ActionContext(context, routeData, page);
+            var actionDescriptor = Unsafe.As<CompiledPageActionDescriptor>(page);
 
-        var selector = context.RequestServices.GetRequiredService<IPageHandlerMethodSelector>();
+            PageContext pageContext = new PageContext(actionContext)
+            {
+                ActionDescriptor = actionDescriptor
+            };
 
-        //var item = context.RequestServices.GetRequiredService<PageActionInvokerCache>();
+            var selector = context.RequestServices.GetRequiredService<IPageHandlerMethodSelector>();
 
-        var qwe = Unsafe.As<CompiledPageActionDescriptor>(page);
+            HandlerMethodDescriptor result = selector.Select(pageContext);
+            //get handlerName like "OnPostParam"
+            string handlerName = $"On{result.HttpMethod}{result.Name}";
 
-        PageContext pageContext = new PageContext(actionContext)
-        {
-            ActionDescriptor = qwe
-        };
+            var method = actionDescriptor.HandlerMethods.FirstOrDefault(t => t.MethodInfo.Name == handlerName);
 
-        var result = selector.Select(pageContext);
-
+            string policy = method?.MethodInfo.GetCustomAttribute<PermissionAttribute>()?.Policy;
+        }     
     }
-
-
     await next();
-
 });
 
 //UseAuthentication must before UseAuthorization

@@ -31,6 +31,7 @@ public class AnchorTagModel : PageModel
     }
 
     //POST: /Test/AnchorTag?handler=Param
+    [Permission("atleast18")]
     public  void OnPostParam(string id)
     {
         Message = $"Post param used:{id}";
