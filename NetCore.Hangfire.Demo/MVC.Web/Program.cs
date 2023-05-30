@@ -1,4 +1,5 @@
 using Hangfire;
+using Hangfire.MemoryStorage;
 using JobTypes;
 
 //see:
@@ -12,7 +13,11 @@ var connectionString = configuration.GetConnectionString("HangfireConnection");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddHangfire(cig => cig.UseSqlServerStorage(connectionString));
+builder.Services.AddHangfire(cig => cig.UseMemoryStorage());
+
+// use as hangfire Server
+// Add the processing server as IHostedService
+builder.Services.AddHangfireServer();
 
 var app = builder.Build();
 
@@ -37,10 +42,8 @@ app.Use(async (context, next) =>
 
 app.UseAuthorization();
 
-//app.UseHangfireDashboard("/hangfire", new DashboardOptions());
-
-//use as hangfire client
-JobService.Start(app.Services);
+//Use Hangfire Dashboard (UI)
+app.UseHangfireDashboard();
 
 app.UseEndpoints(endpoints =>
 {
@@ -51,5 +54,8 @@ app.UseEndpoints(endpoints =>
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//use as hangfire client
+JobService.Start(app.Services);
 
 app.Run();

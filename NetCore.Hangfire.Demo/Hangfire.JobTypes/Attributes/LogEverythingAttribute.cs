@@ -7,6 +7,8 @@ using Hangfire.Storage;
 
 namespace JobTypes.Attributes;
 
+// See:
+// https://docs.hangfire.io/en/latest/extensibility/using-job-filters.html?highlight=iclientfilter#
 public class LogEverythingAttribute : JobFilterAttribute,
     IClientFilter, IServerFilter, IElectStateFilter, IApplyStateFilter
 {
@@ -14,12 +16,14 @@ public class LogEverythingAttribute : JobFilterAttribute,
 
     public void OnCreating(CreatingContext context)
     {
-        Logger.InfoFormat("Creating a job based on method `{0}`...", context.Job.Method.Name);
+        //Logger.InfoFormat
+        Console.WriteLine("Creating a job based on method `{0}`...", context.Job.Method.Name);
     }
 
     public void OnCreated(CreatedContext context)
     {
-        Logger.InfoFormat(
+        //Logger.InfoFormat
+        Console.WriteLine(
             "Job that is based on method `{0}` has been created with id `{1}`",
             context.Job.Method.Name,
             context.BackgroundJob?.Id);
@@ -27,12 +31,14 @@ public class LogEverythingAttribute : JobFilterAttribute,
 
     public void OnPerforming(PerformingContext context)
     {
-        Logger.InfoFormat("Starting to perform job `{0}`", context.BackgroundJob.Id);
+        //Logger.InfoFormat
+        Console.WriteLine("Starting to perform job `{0}`", context.BackgroundJob.Id);
     }
 
     public void OnPerformed(PerformedContext context)
     {
-        Logger.InfoFormat("Job `{0}` has been performed", context.BackgroundJob.Id);
+        //Logger.InfoFormat
+        Console.WriteLine("Job `{0}` has been performed", context.BackgroundJob.Id);
     }
 
     public void OnStateElection(ElectStateContext context)
@@ -40,7 +46,8 @@ public class LogEverythingAttribute : JobFilterAttribute,
         var failedState = context.CandidateState as FailedState;
         if (failedState != null)
         {
-            Logger.WarnFormat(
+            //Logger.WarnFormat
+            Console.WriteLine(
                 "Job `{0}` has been failed due to an exception `{1}`",
                 context.BackgroundJob.Id,
                 failedState.Exception);
@@ -49,7 +56,8 @@ public class LogEverythingAttribute : JobFilterAttribute,
 
     public void OnStateApplied(ApplyStateContext context, IWriteOnlyTransaction transaction)
     {
-        Logger.InfoFormat(
+        //Logger.InfoFormat
+        Console.WriteLine(
             "Job `{0}` state was changed from `{1}` to `{2}`",
             context.BackgroundJob.Id,
             context.OldStateName,
@@ -58,7 +66,8 @@ public class LogEverythingAttribute : JobFilterAttribute,
 
     public void OnStateUnapplied(ApplyStateContext context, IWriteOnlyTransaction transaction)
     {
-        Logger.InfoFormat(
+        //Logger.InfoFormat
+        Console.WriteLine(
             "Job `{0}` state `{1}` was unapplied.",
             context.BackgroundJob.Id,
             context.OldStateName);
