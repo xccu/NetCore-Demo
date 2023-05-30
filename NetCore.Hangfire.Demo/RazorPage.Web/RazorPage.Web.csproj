@@ -15,7 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\JobTypes\JobTypes.csproj" />
+	  <ProjectReference Include="..\Hangfire.JobTypes\Hangfire.JobTypes.csproj" />
 	</ItemGroup>
 
 </Project>

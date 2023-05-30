@@ -1,4 +1,6 @@
-﻿namespace JobTypes;
+﻿using JobTypes.Attributes;
+
+namespace JobTypes;
 
 public class Jobtypes
 {
@@ -9,6 +11,7 @@ public class Jobtypes
         Console.WriteLine($"{DateTime.Now.ToString(timeFormat)}:Run-Per-Minute!");
     }
 
+    [LogEverything]
     public void RunTargetTime()
     {
         Console.WriteLine($"{DateTime.Now.ToString(timeFormat)}:Run-Target-Time!");
