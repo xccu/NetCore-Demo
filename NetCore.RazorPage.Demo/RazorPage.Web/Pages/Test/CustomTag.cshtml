@@ -10,10 +10,17 @@
     <strong>Marketing:</strong><email mail-to="Marketing"></email> @*use as self-closing tag*@
 </address>
 
-<permission-button>Button</permission-button>
-
 <p bold>Use this area to provide additional information.</p>
 
 <bold>Is this bold?</bold>
+
+<form method="post">
+    <input type="hidden" name="id" value="23" />
+    <input type="hidden" name="name" value="user1"></input>
+    <permission-button type="submit" asp-page-handler="Param">Button1</permission-button>
+    <button type="submit" asp-page-handler="Param">Button2</button>
+</form>
+
+
 
 <p>See:<a href="https://learn.microsoft.com/zh-cn/aspnet/core/mvc/views/tag-helpers/authoring?view=aspnetcore-6.0">Custom tag helpers</a></p>

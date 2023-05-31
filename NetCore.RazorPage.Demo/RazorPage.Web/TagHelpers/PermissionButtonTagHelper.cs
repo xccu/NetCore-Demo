@@ -2,16 +2,18 @@
 using DataAccess.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Net;
 
 namespace RazorPage.Web.TagHelpers;
 
-public class PermissionButtonTagHelper : TagHelper
+public class PermissionButtonTagHelper : FormActionTagHelper
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public PermissionButtonTagHelper(IHttpContextAccessor httpContextAccessor)
+    public PermissionButtonTagHelper(IHttpContextAccessor httpContextAccessor, IUrlHelperFactory urlHelperFactory):base(urlHelperFactory)
     {
         _httpContextAccessor = httpContextAccessor;
     }
@@ -23,7 +25,7 @@ public class PermissionButtonTagHelper : TagHelper
         // Use HttpContext here
         var authorizationService = httpContext.RequestServices.GetRequiredService<IAuthorizationService>();
         var builder = new AuthorizationPolicyBuilder();
-        builder.AddRequirements(new MinimumAgeRequirement(18));
+        builder.AddRequirements(new MinimumAgeRequirement(1));
         //var authenticateResult = httpContext.Features.Get<IAuthenticateResultFeature>().AuthenticateResult;
         var result = await authorizationService.AuthorizeAsync(httpContext.User, null, builder.Build());
         
@@ -31,7 +33,7 @@ public class PermissionButtonTagHelper : TagHelper
         {
             string text = output.Content.GetContent();
             output.TagName = "button";
-           
+            base.Process(context, output);
             //output.Content.SetContent("Test");
         }
         else
