@@ -1,5 +1,5 @@
 ﻿using Hangfire;
-using JobTypes;
+using Hangfire.Job;
 
 //see:
 //https://www.cnblogs.com/PrintY/p/15807575.html
@@ -39,6 +39,6 @@ app.UseHangfireDashboard();
 app.MapRazorPages();
 
 //use as hangfire client
-JobService.Start(app.Services);
+JobService.UseBasicJobType(app.Services);
 
 app.Run();

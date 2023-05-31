@@ -5,7 +5,7 @@ using Hangfire.Server;
 using Hangfire.States;
 using Hangfire.Storage;
 
-namespace JobTypes.Attributes;
+namespace Hangfire.Job.Attributes;
 
 // See:
 // https://docs.hangfire.io/en/latest/extensibility/using-job-filters.html?highlight=iclientfilter#
