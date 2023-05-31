@@ -11,6 +11,7 @@ public static class CatExtensions
 {
     public static Cat Register(this Cat cat, Type from, Type to, Lifetime lifetime)
     {
+        //创建委托，在需要使用实例时才调用
         Func<Cat, Type[], object?> factory = (c, arguments) => Create(c, to, arguments);
         cat.Register(new ServiceRegistry(from, lifetime, factory));
         return cat;

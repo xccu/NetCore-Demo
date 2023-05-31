@@ -8,7 +8,7 @@ namespace Custom;
 
 public enum Lifetime
 {
-    Root,
-    Self,
-    Transient
+    Root,       //生命周期为单例
+    Self,       //生命周期与Cat容器一致
+    Transient   //生命周期瞬时
 }

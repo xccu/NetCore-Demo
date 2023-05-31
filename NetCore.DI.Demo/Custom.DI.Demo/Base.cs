@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetCore.DI.Demo;
+namespace Custom.DI.Demo;
 
 public class Base : IDisposable
 {

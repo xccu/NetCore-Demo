@@ -1,6 +1,6 @@
-﻿
+﻿using Custom;
 
-namespace NetCore.DI.Demo;
+namespace Custom.DI.Demo;
 
 public interface IFoo { public void print(); }
 public interface IBar { public void print(); }
@@ -23,7 +23,7 @@ public class Baz : Base, IBaz
     public void print() => Console.WriteLine($"Instance {GetType().Name}:{ID}");
 }
 
-//[MapTo(typeof(IQux), Lifetime.Root)]
+[MapTo(typeof(IQux), Lifetime.Root)]
 public class Qux : Base, IQux
 {
     public void print() => Console.WriteLine($"Instance {GetType().Name}:{ID}");

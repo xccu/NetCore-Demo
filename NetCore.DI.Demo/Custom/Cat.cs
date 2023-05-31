@@ -6,8 +6,8 @@ namespace Custom;
 public class Cat : IServiceProvider, IDisposable
 {
     internal readonly Cat _root;
-    internal readonly ConcurrentDictionary<Type, ServiceRegistry> _registries;
-    private readonly ConcurrentDictionary<Key, object?> _services;
+    internal readonly ConcurrentDictionary<Type, ServiceRegistry> _registries;   //存储所有添加的服务注册
+    private readonly ConcurrentDictionary<Key, object?> _services;               //非Trnasient服务实例保存
     private readonly ConcurrentBag<IDisposable> _disposables;
     private volatile bool _disposed;
 

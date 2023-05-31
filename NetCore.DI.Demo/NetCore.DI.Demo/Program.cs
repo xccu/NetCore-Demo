@@ -1,33 +1,48 @@
-﻿// See
-// https://www.cnblogs.com/artech/p/inside-asp-net-core-6-4.html
-// https://github.com/jiangjinnan/InsideAspNet6/tree/main/02/S201
-
-
-using Custom;
+﻿using Microsoft.Extensions.DependencyInjection;
 using NetCore.DI.Demo;
+using System.Diagnostics;
 
-var root = new Cat()
-    .Register<IFoo, Foo>(Lifetime.Transient)
-    .Register<IBar>(_ => new Bar(), Lifetime.Self)
-    .Register<IBaz, Baz>(Lifetime.Root)
-    .Register(typeof(Foo).Assembly);
-var cat1 = root.CreateChild();
-var cat2 = root.CreateChild();
+var provider = new ServiceCollection()
+    .AddTransient<IFoo, Foo>()
+    .AddScoped(_ => new Bar())
+    .AddSingleton<IBaz, Baz>()
+    .BuildServiceProvider();
 
-void GetServices<TService>(Cat cat) where TService : class
-{
-    cat.GetService<TService>();
-    cat.GetService<TService>();
-}
+#region S301
+//Debug.Assert(provider.GetService<IFoo>() is Foo);
+//Debug.Assert(provider.GetService<IBar>() is Bar);
+//Debug.Assert(provider.GetService<IBaz>() is Baz);
+#endregion
 
-GetServices<IFoo>(cat1);
-GetServices<IBar>(cat1);
-GetServices<IBaz>(cat1);
-GetServices<IQux>(cat1);
+#region S302
+//var foobar = (Foobar<IFoo, IBar>?)provider.GetService<IFoobar<IFoo, IBar>>();
+//Debug.Assert(foobar?.Foo is Foo);
+//Debug.Assert(foobar?.Bar is Bar);
+#endregion
+
+#region S303
+//var services = provider.GetServices<Base>();
+//Debug.Assert(services.OfType<Foo>().Any());
+//Debug.Assert(services.OfType<Bar>().Any());
+//Debug.Assert(services.OfType<Baz>().Any());
+#endregion
+
+
+#region S304
+var provider1 = provider.CreateScope().ServiceProvider;
+var provider2 = provider.CreateScope().ServiceProvider;
+
+GetServices<IFoo>(provider1);
+GetServices<IBar>(provider1);
+GetServices<IBaz>(provider1);
 Console.WriteLine();
-GetServices<IFoo>(cat2);
-GetServices<IBar>(cat2);
-GetServices<IBaz>(cat2);
-GetServices<IQux>(cat2);
+GetServices<IFoo>(provider2);
+GetServices<IBar>(provider2);
+GetServices<IBaz>(provider2);
 
-Console.ReadKey();
+static void GetServices<T>(IServiceProvider provider)
+{
+    provider.GetService<T>();
+    provider.GetService<T>();
+}
+#endregion
