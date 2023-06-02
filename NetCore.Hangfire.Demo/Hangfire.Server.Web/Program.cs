@@ -17,7 +17,9 @@ builder.Services.AddHangfire(cig => cig.UseSqlServerStorage(connectionString));
 
 // use as hangfire Server
 // Add the processing server as IHostedService
-builder.Services.AddHangfireServer();
+builder.Services.AddHangfireServer(
+    option=>option.Queues = new string[] { "default", "alpha", "beta" }
+);
 
 var app = builder.Build();
 

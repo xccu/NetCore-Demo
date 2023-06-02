@@ -62,11 +62,11 @@ public static class JobService
         //    () => jobs.ContinueWith());
         #endregion
 
-        recurringJob.AddOrUpdate(
-            "Throw-Exception",
-            () => jobs.ThrowException(),
-            "0 00 14 * * ?",
-            new RecurringJobOptions() { TimeZone = TimeZoneInfo.Local });
+        //recurringJob.AddOrUpdate(
+        //    "Throw-Exception",
+        //    () => jobs.ThrowException(),
+        //    "0 00 14 * * ?",
+        //    new RecurringJobOptions() { TimeZone = TimeZoneInfo.Local });
 
         //backgroundJob.Enqueue(
         //    "q1",
@@ -81,5 +81,39 @@ public static class JobService
         //Passing Dependencies see:
         //https://docs.hangfire.io/en/latest/background-methods/passing-dependencies.html
         backgroundJob.Enqueue<EmailSenderJobType>(x => x.Send( "Hello!"));
+    }
+
+    public static void UseQueueJobType(IServiceProvider provider)
+    {
+        QueueJobType jobs = new QueueJobType();
+
+        var backgroundJob = provider.GetRequiredService<IBackgroundJobClient>();
+
+        var recurringJob = provider.GetRequiredService<IRecurringJobManager>();
+
+        recurringJob.AddOrUpdate(
+           "Run-In-Default",
+           () => jobs.RunInDefault(),
+           Cron.Minutely); 
+
+        recurringJob.AddOrUpdate(
+            "Run-In-Alpha",
+            () => jobs.RunInAlpha(),
+            Cron.Minutely); 
+
+        var jobId = backgroundJob.Enqueue(() => jobs.RunInDefault());
+
+        //backgroundJob.ContinueJobWith(jobId,() => jobs.ContinueWith());
+
+        backgroundJob.Enqueue(() => jobs.RunInAlpha());
+
+        backgroundJob.Enqueue(() => jobs.RunInAlpha2());
+
+        backgroundJob.Enqueue(() => jobs.RunInBeta());
+
+        backgroundJob.Enqueue(() => jobs.RunInBeta2());
+
+        backgroundJob.Enqueue(() => jobs.RunInBeta3());
+
     }
 }

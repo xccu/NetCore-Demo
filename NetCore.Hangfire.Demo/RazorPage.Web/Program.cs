@@ -39,6 +39,6 @@ app.UseHangfireDashboard();
 app.MapRazorPages();
 
 //use as hangfire client
-JobService.UseBasicJobType(app.Services);
-
+//JobService.UseBasicJobType(app.Services);
+JobService.UseQueueJobType(app.Services);
 app.Run();

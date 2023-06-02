@@ -19,7 +19,7 @@ builder.Services.AddHangfire(configuration =>configuration.UseMemoryStorage());
 // use as hangfire Server
 // Add the processing server as IHostedService
 builder.Services.AddHangfireServer(option=>
-    option.Queues = new string[] { "default", "q1", "q2" }
+    option.Queues = new string[] { "default", "alpha", "beta" }
 );
 
 builder.Services.AddTransient<EmailSenderJobType>();
@@ -60,9 +60,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-AttributeInfoProvider p = new AttributeInfoProvider(); 
+AttributeInfoProvider p = new AttributeInfoProvider();
 //use as hangfire client
 //JobService.UseBasicJobType(app.Services);
-JobService.UseEmailSenderJobType(app.Services);
+//JobService.UseEmailSenderJobType(app.Services);
+JobService.UseQueueJobType(app.Services);
 
 app.Run();

@@ -8,10 +8,8 @@ namespace Hangfire.Job.JobTypes;
 
 public class EmailSenderJobType
 {
-    public string timeFormat = "yyyy-MM-dd HH:mm:ss.fff";
-
     public void Send(string message)
     {
-        Console.WriteLine($"{DateTime.Now.ToString(timeFormat)}:Send:{message}");
+        Console.WriteLine($"{DateTime.Now.ToString(Constants.Format.timeFormat)}:Send:{message}");
     }
 }
