@@ -94,10 +94,11 @@ public static class JobService
         recurringJob.AddOrUpdate(
            "Run-In-Default",
            () => jobs.RunInDefault(),
-           Cron.Minutely); 
+           Cron.Minutely);
 
         recurringJob.AddOrUpdate(
-            "Run-In-Alpha",
+            "Run-In-Alpha",    
+            "alpha",
             () => jobs.RunInAlpha(),
             Cron.Minutely); 
 
