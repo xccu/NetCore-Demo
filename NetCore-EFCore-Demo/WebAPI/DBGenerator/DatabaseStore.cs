@@ -10,9 +10,9 @@ static class DatabaseStore
         _source = new Dictionary<string, Func<string, Action<DbContextOptionsBuilder>>>(StringComparer.OrdinalIgnoreCase)
         {
             {"SqlServer", connString => dbOption => dbOption.UseSqlServer(connString) },
-            //{"MySql", connString => dbOption => dbOption.UseMySQL(connString) },
-            //{"Oracle", connString => dbOption => dbOption.UseOracle(connString)},
-            //{"PostgreSql", connString => dbOption => dbOption.UseNpgsql(connString) }
+            {"MySql", connString => dbOption => dbOption.UseMySQL(connString) },
+            {"Oracle", connString => dbOption => dbOption.UseOracle(connString)},
+            {"PostgreSql", connString => dbOption => dbOption.UseNpgsql(connString) }
         };
     }
 
