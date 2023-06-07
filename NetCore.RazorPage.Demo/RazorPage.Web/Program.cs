@@ -38,13 +38,14 @@ builder.Services.AddAuthorization(options =>
 // 注入权限处理器
 builder.Services.AddTransient<IAuthorizationHandler, MinimumAgeHandler>();
 
-//Default认证方案(不手动Login)
+// Default认证方案(不手动Login)
 builder.Services.AddAuthentication("default")
                 .AddScheme<DefaultSchemeOptions, DefaultHandler>("default", null, null);
 #endregion
 
-//dynamic add [Authorize] in Razorpage
+// dynamic add [Authorize] in Razorpage
 builder.Services.AddSingleton<IActionDescriptorProvider, AuthorizeDescriptorProvider>();
+// use for PermissionButton
 builder.Services.AddHttpContextAccessor(); 
 builder.Services.AddRazorPages(options =>
 {
@@ -129,20 +130,21 @@ app.Use(async (context, next) =>
         var page = endpoint.Metadata.GetOrderedMetadata<ActionDescriptor>()[0];
 
         if (page is CompiledPageActionDescriptor) //Check whether is a razorPage
-        {           
+        {
+            //Create RouteData
             var routeData = new RouteData(context.Request.RouteValues);
-
+            //Create ActionContext
             ActionContext actionContext = new ActionContext(context, routeData, page);
-
+            //Convert to CompiledPageActionDescriptor
             var actionDescriptor = Unsafe.As<CompiledPageActionDescriptor>(page);
-
+            //Create PageContext
             PageContext pageContext = new PageContext(actionContext)
             {
                 ActionDescriptor = actionDescriptor
             };
-
+            //Get IPageHandlerMethodSelector
             var selector = context.RequestServices.GetRequiredService<IPageHandlerMethodSelector>();
-
+            //Get HandlerMethodDescriptor
             HandlerMethodDescriptor result = selector.Select(pageContext);
             //get handlerName like "OnPostParam"
             string handlerName = $"On{result.HttpMethod}{result.Name}";

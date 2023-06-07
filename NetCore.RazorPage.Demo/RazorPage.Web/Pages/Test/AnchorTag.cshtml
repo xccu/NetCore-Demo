@@ -17,6 +17,14 @@
 
 <a asp-page-handler="Param" asp-route-id="12">Get Param</a>
 
+<form method="get">
+    <input type="hidden" name="id" value="12" />
+    <input type="hidden" name="handler" value="Param" />
+    <button>Get Param</button>
+</form>
+
+<button onclick="location.href='@Url.Page("/Index")'">Skip</button>
+
 <form asp-page-handler="Param" method="post">
     <input type="hidden" name="id" value="23" />
     <button>Post Param</button>
