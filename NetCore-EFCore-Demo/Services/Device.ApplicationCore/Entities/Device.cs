@@ -20,8 +20,8 @@ public class Device
     [Column("DEVICE_DESCRIPTION")]
     public String description { get; set; }
     [Column("DEVICE_NO")]
-    public String Number { get; set; }
+    public String deviceNumber { get; set; }
     [Column("REGISTED_DATE")]
-    public DateTime date { get; set; }
+    public DateTime registedDate { get; set; }
 
 }

@@ -14,7 +14,7 @@ namespace Device.ApplicationCore.Services;
 
 public class DeviceService : IDeviceService
 {
-    private IDeviceRepository _deviceRepository;
+    private readonly IDeviceRepository _deviceRepository;
 
     public DeviceService(IDeviceRepository deviceRepository)
     {
@@ -34,8 +34,8 @@ public class DeviceService : IDeviceService
             id = device.id,
             name = device.name,
             description= device.description,
-            Number = device.Number,
-            date= device.date
+            Number = device.deviceNumber,
+            date= device.registedDate
         };
         return dto;
     }
@@ -99,4 +99,5 @@ public class DeviceService : IDeviceService
     {
         return await _deviceRepository.UpdateAsync(device);
     }
+
 }

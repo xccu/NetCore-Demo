@@ -22,6 +22,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCacheFactory();
+
+#region AddUser
 builder.Services.AddUser(
     builder => builder.UseDataBase(options =>
     {
@@ -36,7 +38,6 @@ builder.Services.AddUser(
     }
 );
 
-
 //builder.Services.AddDbContext<UserContext>(options =>
 //{
 //    options.UseSqlServer(connectionString);
@@ -48,20 +49,23 @@ builder.Services.AddUser(
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
 //builder.Services.AddScoped<IUserCourseRepository, UserCourseRepository>();
 //builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+#endregion
 
+//"MysqlConnection": "Data Source=127.0.0.1;port=3306;Initial Catalog=DemoEfCore;user id=root;password=123456;"
 builder.Services.AddDbContext<DeviceContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 builder.Services.AddScoped<IDeviceService, DeviceService>();
 
 var app = builder.Build();
-EFCoreDbGenerator.SeedData(app.Services);
+
+app.SeedData("SqlServer");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+ 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

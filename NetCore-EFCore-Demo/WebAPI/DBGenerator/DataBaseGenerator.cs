@@ -1,46 +1,46 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Quartz.Impl.AdoJobStore.Common;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace WebAPI.DBGenerator;
 
-static class EFCoreDbGenerator
+static class DataBaseGenerator
 {
-
-
-    public static void SeedData(IServiceProvider serviceProvider)
+    public static void SeedData(this WebApplication app, string database = null)
     {
+        IServiceProvider serviceProvider = app.Services;
+
+        //MemoryDb
+        if (string.IsNullOrEmpty(database))
+        {
+            DataStore.ImportData(serviceProvider);
+            return;
+        }
+
         var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .Build();
 
         var dataPath = configuration["DbDataPath"];
         var connectionStringsSection = configuration.GetSection("ConnectionStrings");
-        var dbConfigs = connectionStringsSection
+        var dbConfig = connectionStringsSection
             .GetChildren()
-            .Select(x => ValueTuple.Create(x.Key, x.Value))
-            .ToArray();
+            .Select(x => ValueTuple.Create(x.Key, x.Value)).FirstOrDefault(t => t.Item1 == database);
 
         //(databaseName, connString)
-        //create Database from dbConfigs
-        foreach (var config in dbConfigs)
+        try
         {
-            try
+            //Generate Db succeed then import Data
+            if (dbConfig.GenerateDb(serviceProvider))
             {
-                //Generate Db succeed then import Data from .xlsx
-                if (config.GenerateDb(serviceProvider))
-                {
-                    DataStore.ImportData(dataPath, serviceProvider);
-                }
+                DataStore.ImportData(serviceProvider);
             }
-            catch (Exception ex)
-            {
-                //drop Database when exception
-                GetLog(serviceProvider).LogError(ex.Message);
-                config.DatabaseDeleted();
-            }
+        }
+        catch (Exception ex)
+        {
+            //drop Database when exception
+            GetLog(serviceProvider).LogError(ex.Message);
+            dbConfig.DatabaseDeleted();
         }
     }
 
@@ -48,7 +48,7 @@ static class EFCoreDbGenerator
     {
         var (dbName, connString) = dbConfig;
         GetLog(provider).LogInformation($"Generating database:{dbName}");
-        if (DatabaseStore.TryGetConfig(dbConfig.Item1, out var configure))
+        if (DatabaseStore.TryGetConfig(dbName, out var configure))
         {
             //if DataBase exist then not create table
             if (!DatabaseCreated(configure!(connString)))
@@ -60,7 +60,7 @@ static class EFCoreDbGenerator
             //get all DbContexts and create tables into same DataBase
             foreach (var factory in DbContextStore.Contexts)
             {
-                var method = typeof(EFCoreDbGenerator).GetMethod(nameof(Generate), new[] { typeof(Action<DbContextOptionsBuilder>) });
+                var method = typeof(DataBaseGenerator).GetMethod(nameof(Generate), new[] { typeof(Action<DbContextOptionsBuilder>) });
                 method = method!.MakeGenericMethod(factory());
                 method.Invoke(null, new object[] { configure!(connString) });
             }           
@@ -133,7 +133,6 @@ static class EFCoreDbGenerator
         
         databaseCreator.CreateTables();
     }
-
 
     public static ILogger GetLog(IServiceProvider provider)
     {

@@ -1,86 +1,46 @@
 ﻿
 using Device.Infrastructure.Data;
-using ExcelDataReader;
-using System.Data;
-using User.ApplicationCore.Entities;
 using User.Infrastructure.Data;
+using Users = User.ApplicationCore.Entities;
+using Devices = Device.ApplicationCore.Entities;
 
-namespace WebAPI.DBGenerator
+namespace WebAPI.DBGenerator;
+
+public static class DataStore
 {
-    public static class DataStore
+    public static void ImportData(IServiceProvider provider)
     {
-        static string _path = Directory.GetCurrentDirectory();
+        using var scope = provider.CreateScope();
+        provider = scope.ServiceProvider;
+        WriteUser(provider);
+        WriteDevice(provider);
+    }
 
-        public static void ImportData(string filePath, IServiceProvider provider)
-        {
-            using var scope = provider.CreateScope();
-            provider = scope.ServiceProvider;
+    private static void WriteUser(IServiceProvider provider)
+    {
+        var context = provider.GetRequiredService<UserContext>();
+        context.Add(new Users.User() { name = "Weslie", password= "Psd%123", age= 12, gender= "Male", race= "Caprinae" });
+        context.Add(new Users.User() { name = "Wolffy", password = "Psd%123", age = 34, gender = "Male", race = "Lupo" });
+        context.Add(new Users.User() { name = "Paddi", password = "Psd%123", age = 10, gender = "Male", race = "Caprinae" });
+        context.Add(new Users.User() { name = "Tibby", password = "Psd%123", age = 11, gender = "Female", race = "Caprinae" });
+        context.Add(new Users.User() { name = "Sparky", password = "Psd%123", age = 13, gender = "Male", race = "Caprinae" });
+        context.Add(new Users.User() { name = "Jonie", password = "Psd%123", age = 13, gender = "Female", race = "Caprinae" });
+        context.Add(new Users.User() { name = "Slowy", password = "Psd%123", age = 80, gender = "Male", race = "Caprinae" });
+        context.Add(new Users.User() { name = "Wolnie", password = "Psd%123", age = 33, gender = "Female", race = "Lupo" });
+        context.Add(new Users.User() { name = "Wilie", password = "Psd%123", age = 3, gender = "Male", race = "Lupo" });
 
-            filePath = $"{_path}\\{filePath}";
-            FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
-            IExcelDataReader excelReader;
+        context.SaveChanges();
+    }
 
-            if (Path.GetExtension(filePath).ToUpper() == ".XLS")
-            {
-                excelReader = ExcelReaderFactory.CreateBinaryReader(stream);//*.xls
-            }
-            else
-            {
-                excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);//*.xlsx
-            }
+    private static void WriteDevice(IServiceProvider provider)
+    {
+        var context = provider.GetRequiredService<DeviceContext>();
+        context.Add(new Devices.Device() { name = "DELL-Laptop", description = "Laptop", deviceNumber = "H000001", registedDate = Convert.ToDateTime("2023-1-1") });
+        context.Add(new Devices.Device() { name = "HP-Screen", description = "Screen", deviceNumber = "H000002", registedDate = Convert.ToDateTime("2023-1-1") });
+        context.Add(new Devices.Device() { name = "Desk", description = "Desk", deviceNumber = "H000003", registedDate = Convert.ToDateTime("2023-1-1") });
+        context.Add(new Devices.Device() { name = "Chair", description = "Chair", deviceNumber = "H000004", registedDate = Convert.ToDateTime("2023-1-1") });
+        context.Add(new Devices.Device() { name = "MircoPhone", description = "MircoPhone", deviceNumber = "H000005", registedDate = Convert.ToDateTime("2023-1-1") });
 
-            //DataSet
-            DataSet ds = excelReader.AsDataSet();
-            for (int i = 0; i < ds.Tables.Count; i++)
-            {
-                var tableName = ds.Tables[i].TableName;
-                var dt = ds.Tables[i];
-                switch (tableName)
-                {
-                    case "T_USER": provider.WriteUser(dt); break;
-                    case "T_DEVICE": provider.WriteDevice(dt); break;
-                    //case "T_COURSE": provider.WriteCourse(dt); break;
-                    //case "T_USER_COURSE": provider.WriteUserCourse(dt); break;
-
-                }
-            }
-        }
-
-        private static void WriteUser(this IServiceProvider provider, DataTable dt)
-        {
-            var context = provider.GetRequiredService<UserContext>();
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                var item = new User.ApplicationCore.Entities.User();
-                //item.id = Convert.ToInt32(dt.Rows[i][1].ToString());
-                item.name = dt.Rows[i][1].ToString();
-                item.password = dt.Rows[i][2].ToString();
-                item.age = Convert.ToInt32(dt.Rows[i][3].ToString());
-                item.gender = dt.Rows[i][4].ToString();
-                item.race = dt.Rows[i][5].ToString();
-                context.Add(item);
-            }
-            context.SaveChanges();
-        }
-
-        private static void WriteDevice(this IServiceProvider provider, DataTable dt)
-        {
-            var context = provider.GetRequiredService<DeviceContext>();
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                var item = new Device.ApplicationCore.Entities.Device();
-                //item.id = Convert.ToInt32(dt.Rows[i][1].ToString());
-                item.name = dt.Rows[i][1].ToString();
-                item.description = dt.Rows[i][2].ToString();
-                item.Number = dt.Rows[i][3].ToString();
-                item.date = Convert.ToDateTime(dt.Rows[i][4].ToString());
-
-                context.Add(item);
-            }
-            context.SaveChanges();
-        }
-
-        private static string NULLConvert(this object obj) => obj.ToString() == "NULL" ? null : obj.ToString();
-
+        context.SaveChanges();
     }
 }
