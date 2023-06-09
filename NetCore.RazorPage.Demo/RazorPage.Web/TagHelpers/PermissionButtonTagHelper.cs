@@ -20,12 +20,13 @@ public class PermissionButtonTagHelper : FormActionTagHelper
 
     public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
     {
+
         var httpContext = _httpContextAccessor.HttpContext;
 
         // Use HttpContext here
         var authorizationService = httpContext.RequestServices.GetRequiredService<IAuthorizationService>();
         var builder = new AuthorizationPolicyBuilder();
-        builder.AddRequirements(new MinimumAgeRequirement(1));
+        builder.AddRequirements(new MinimumAgeRequirement(18));
         //var authenticateResult = httpContext.Features.Get<IAuthenticateResultFeature>().AuthenticateResult;
         var result = await authorizationService.AuthorizeAsync(httpContext.User, null, builder.Build());
         

@@ -5,22 +5,74 @@
     ViewData["Title"] = "Custom Tag";
 }
 
-<address>
-    <strong>Support:</strong><email mail-to="Support"></email><br />
-    <strong>Marketing:</strong><email mail-to="Marketing"></email> @*use as self-closing tag*@
-</address>
+
+<email mail-to="Support"></email>
+@*<email mail-to="Marketing"></email>*@ @*use as self-closing tag*@
+<p/>
 
 <p bold>Use this area to provide additional information.</p>
 
+<p>Use this area to provide additional information.</p>
+
 <bold>Is this bold?</bold>
 
-<form method="post">
-    <input type="hidden" name="id" value="23" />
-    <input type="hidden" name="name" value="user1"></input>
-    <permission-button type="submit" asp-page-handler="Param">Button1</permission-button>
-    <button type="submit" asp-page-handler="Param">Button2</button>
-</form>
+<p/>
 
+<label enable="true">label1</label>
+<label enable="false">label2</label>
 
+<div class="col-md-4">
+    <div>Form1</div>
+    <form method="post">
+        <div class="form-group">
+            <label class="control-label">ID</label>
+            <input type="text" name="id" value="1" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" name="name" value="User1" class="form-control" />
+        </div>
+        <div class="form-group">
+            <permission-button type="submit" asp-page-handler="Param" class="btn btn-primary">POST1</permission-button>
+            <button type="submit" asp-page-handler="Param" enable="true" class="btn btn-primary">POST2</button>
+            <button type="submit" asp-page-handler="Param" enable="false" class="btn btn-primary">POST3</button>
+        </div>
+    </form>
+</div>
+
+@*this div will be hidden*@
+<div enable="false" class="col-md-4">
+    <div>Form2</div>
+    <form method="post">
+        <div class="form-group">
+            <label class="control-label">ID</label>
+            <input type="text" name="id" value="2" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" name="name" value="User2" class="form-control" />
+        </div>
+        <div class="form-group">
+            <button type="submit" asp-page-handler="Param" class="btn btn-primary">POST</button>
+        </div>
+    </form>
+</div>
+
+<div enable="true" class="col-md-4">
+    <div>Form3</div>
+    <form method="post">
+        <div class="form-group">
+            <label class="control-label">ID</label>
+            <input type="text" name="id" value="3" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" name="name" value="User3" class="form-control" />
+        </div>
+        <div class="form-group">
+            <button type="submit" asp-page-handler="Param" class="btn btn-primary">POST</button>
+        </div>
+    </form>
+</div>
 
 <p>See:<a href="https://learn.microsoft.com/zh-cn/aspnet/core/mvc/views/tag-helpers/authoring?view=aspnetcore-6.0">Custom tag helpers</a></p>

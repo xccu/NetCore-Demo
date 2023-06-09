@@ -50,6 +50,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages(options =>
 {
     #region Filters
+    options.Conventions.AddPageApplicationModelConvention( //add filter for special page
+    "/Test/Authorize",
+    model => model.Filters.Add(new HttpAsyncPageFilter()));
     options.Conventions.AddFolderApplicationModelConvention( //add filter for special folder path
         "/Movies",
         model => model.Filters.Add(new HttpAsyncPageFilter()));
@@ -57,7 +60,7 @@ builder.Services.AddRazorPages(options =>
     #endregion
 
     #region Authorization
-    //options.Conventions.AuthorizePage("/Test/Authorize", "AtLeast18");
+    options.Conventions.AuthorizePage("/Test/Authorize", "AtLeast18");
     options.Conventions.AuthorizeFolder("/Movies", "AtLeast18");
     #endregion
 
