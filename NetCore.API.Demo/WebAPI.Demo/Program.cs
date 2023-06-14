@@ -2,12 +2,20 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using System.Text.Json;
 using Common.ModelBinder;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(opt =>
+{
+    //Refit doesn’t support enum in request bu default.
+    //config this to support enum
+    //See: https://cloud.tencent.com/developer/ask/sof/1231983/answer/1708895
+    opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

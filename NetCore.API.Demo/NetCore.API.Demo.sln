@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Custom", "Common.Cus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{CBB07969-2498-4FA2-A6B9-2957978EA6AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalAPI.Demo.V7", "MinimalAPI.Demo.V7\MinimalAPI.Demo.V7.csproj", "{131CAADF-97CA-43A2-B289-61DE80B15F3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalAPI.Demo.V7", "MinimalAPI.Demo.V7\MinimalAPI.Demo.V7.csproj", "{131CAADF-97CA-43A2-B289-61DE80B15F3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{E2276123-D1F0-4CFD-A184-E883CAD9862E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.MVC", "Web.MVC\Web.MVC.csproj", "{5B02CC4F-CA91-4D50-8922-15D03809E89B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +49,16 @@ Global
 		{131CAADF-97CA-43A2-B289-61DE80B15F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{131CAADF-97CA-43A2-B289-61DE80B15F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{131CAADF-97CA-43A2-B289-61DE80B15F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B02CC4F-CA91-4D50-8922-15D03809E89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B02CC4F-CA91-4D50-8922-15D03809E89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B02CC4F-CA91-4D50-8922-15D03809E89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B02CC4F-CA91-4D50-8922-15D03809E89B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5B02CC4F-CA91-4D50-8922-15D03809E89B} = {E2276123-D1F0-4CFD-A184-E883CAD9862E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E4D7210-5D86-4052-8A37-27BC3CD1A752}
