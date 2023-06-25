@@ -1,5 +1,8 @@
 using Refit;
+using System.Net.Http.Json;
+using System.Text.Json;
 using System.Text.Json.Serialization;
+using Web.MVC;
 using Web.MVC.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,8 +10,32 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddRefitClient<IFooService>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5163"));
+
+
+//convert enum to string
+//https://stackoverflow.com/questions/68888251/the-json-value-could-not-be-converted-to-enum-in-refit
+var refitSettings = new RefitSettings
+{
+    ContentSerializer = new SystemTextJsonContentSerializer(new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true,
+        NumberHandling = JsonNumberHandling.AllowReadingFromString,
+        Converters =
+        {
+            new OrderJsonConverter()
+            //new JsonStringEnumConverter(JsonNamingPolicy.CamelCase,true)
+        }
+    })
+};
+
+
+builder.Services.AddHttpClient("default").ConfigureHttpClient(http =>
+{
+    http.BaseAddress = new Uri("http://localhost:5163");
+});
+
+
+builder.Services.AddRefitClient<IFooService>(refitSettings).ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5163"));
 
 var app = builder.Build();
 

@@ -11,7 +11,8 @@ public class FooController : ControllerBase
     [HttpGet("Get")]
     public IActionResult FooGet()
     {
-        return Ok(new Foo());
+        var result = new Foo();
+        return Ok(result);
     }
 
     [HttpGet("Get/{id}")]

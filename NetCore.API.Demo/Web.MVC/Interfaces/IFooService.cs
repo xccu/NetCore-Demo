@@ -8,6 +8,7 @@ public interface IFooService
     [Post("/api/Foo/Post")]
     Task<Foo> FooPost(Foo foo);
 
-    [Post("/api/Foo/Get")]
-    Task<Foo> FooGet(Foo foo);
+    [Get("/api/Foo/Get")]
+    Task<Foo> FooGet();
+
 }
