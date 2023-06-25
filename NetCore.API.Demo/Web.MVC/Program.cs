@@ -1,3 +1,4 @@
+using Common.Model;
 using Refit;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -12,19 +13,22 @@ builder.Services.AddControllersWithViews();
 
 
 
-//convert enum to string
+
 //https://stackoverflow.com/questions/68888251/the-json-value-could-not-be-converted-to-enum-in-refit
 var refitSettings = new RefitSettings
 {
+
+    //create new JsonSerializerOptions instance will solve json string to enum error
+    //https://github.com/reactiveui/refit#json-content
+    //https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-source-generator/
     ContentSerializer = new SystemTextJsonContentSerializer(new JsonSerializerOptions
     {
-        PropertyNameCaseInsensitive = true,
-        NumberHandling = JsonNumberHandling.AllowReadingFromString,
-        Converters =
-        {
-            new OrderJsonConverter()
-            //new JsonStringEnumConverter(JsonNamingPolicy.CamelCase,true)
-        }
+        //PropertyNameCaseInsensitive = true,
+        //NumberHandling = JsonNumberHandling.AllowReadingFromString,
+        //Converters =
+        //{
+        //    new OrderJsonConverter() //convert enum Order to int
+        //}
     })
 };
 

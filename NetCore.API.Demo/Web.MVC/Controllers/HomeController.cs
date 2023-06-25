@@ -37,6 +37,7 @@ namespace Web.MVC.Controllers
             var foo = new Common.Model.Foo();
             foo.Id = 100;
             foo.Order = Common.Model.Order.Descending;
+            foo.State = Common.Model.State.Unknown;
             foo.Text = "Posted";
 
             var result = await _fooService.FooPost(foo);
