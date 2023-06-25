@@ -10,5 +10,4 @@ public interface IFooService
 
     [Get("/api/Foo/Get")]
     Task<Foo> FooGet();
-
 }

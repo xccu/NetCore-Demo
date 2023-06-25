@@ -42,6 +42,7 @@ builder.Services.AddHttpClient("default").ConfigureHttpClient(http =>
 
 
 builder.Services.AddRefitClient<IFooService>(refitSettings).ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5163"));
+builder.Services.AddRefitClient<IUserService>(refitSettings).ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5163"));
 
 var app = builder.Build();
 

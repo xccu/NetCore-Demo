@@ -1,0 +1,50 @@
+﻿
+@model List<DataAccess.User>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>User</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].race)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.race)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
