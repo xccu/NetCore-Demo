@@ -18,7 +18,9 @@ builder.Services.AddControllersWithViews();
 var refitSettings = new RefitSettings
 {
 
-    //create new JsonSerializerOptions instance will solve json string to enum error
+    //Refit will convert json data enum to string when post by default(JsonStringEnumConverter)
+    //create new JsonSerializerOptions instance to override the default JsonStringEnumConverter
+    //will solve json string to enum error
     //https://github.com/reactiveui/refit#json-content
     //https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-source-generator/
     ContentSerializer = new SystemTextJsonContentSerializer(new JsonSerializerOptions
