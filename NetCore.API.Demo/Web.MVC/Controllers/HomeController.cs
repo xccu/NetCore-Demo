@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using Web.MVC.Interfaces;
 using Web.MVC.Models;
+using Common.Model;
 
 namespace Web.MVC.Controllers
 {
@@ -24,21 +25,26 @@ namespace Web.MVC.Controllers
 
         public IActionResult Index()
         {         
-            return View(new Common.Model.Foo());
+            return View(new Foo());
         }
 
-        public async Task<IActionResult> FooPost()
+        public async Task<IActionResult> FooGet()
+        {
+            var result = await _fooService.FooGet();
+            return View(nameof(Index), result);
+        }
+
+        public async Task<IActionResult> FooPost(Foo foo)
         {
 
             //https://github.com/reactiveui/refit/issues/184
             //https://github.com/reactiveui/refit/issues/1526
 
-
-            var foo = new Common.Model.Foo();
-            foo.Id = 100;
-            foo.Order = Common.Model.Order.Descending;
-            foo.State = Common.Model.State.Unknown;
-            foo.Text = "Posted";
+            //var foo = new Foo();
+            //foo.Id = 100;
+            //foo.Order = Order.Descending;
+            //foo.State = State.Unknown;
+            //foo.Text = "Posted";
 
             var result = await _fooService.FooPost(foo);
             return View(nameof(Index), result);

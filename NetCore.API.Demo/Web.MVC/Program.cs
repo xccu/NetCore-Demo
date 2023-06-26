@@ -11,22 +11,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
-
-
-//https://stackoverflow.com/questions/68888251/the-json-value-could-not-be-converted-to-enum-in-refit
+//Refit will convert json data enum to string when post by default(JsonStringEnumConverter)
+//create new JsonSerializerOptions instance to override the default JsonStringEnumConverter
+//will solve json string to enum error
+//https://github.com/reactiveui/refit#json-content
+//https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-source-generator/
 var refitSettings = new RefitSettings
 {
-
-    //Refit will convert json data enum to string when post by default(JsonStringEnumConverter)
-    //create new JsonSerializerOptions instance to override the default JsonStringEnumConverter
-    //will solve json string to enum error
-    //https://github.com/reactiveui/refit#json-content
-    //https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-source-generator/
     ContentSerializer = new SystemTextJsonContentSerializer(new JsonSerializerOptions
     {
-        //PropertyNameCaseInsensitive = true,
-        //NumberHandling = JsonNumberHandling.AllowReadingFromString,
+        PropertyNameCaseInsensitive = true,
+        //PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         //Converters =
         //{
         //    new OrderJsonConverter() //convert enum Order to int

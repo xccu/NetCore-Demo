@@ -11,8 +11,12 @@ public class FooController : ControllerBase
     [HttpGet("Get")]
     public IActionResult FooGet()
     {
-        var result = new Foo();
-        return Ok(result);
+        var foo = new Foo();
+        foo.Id = 20;
+        foo.Order = Order.Descending;
+        foo.Text = "Getted";
+        foo.State = State.Unknown;
+        return Ok(foo);
     }
 
     [HttpGet("Get/{id}")]

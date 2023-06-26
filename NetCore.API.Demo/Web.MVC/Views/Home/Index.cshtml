@@ -14,7 +14,23 @@
 <div>Order:@Model.Order</div>
 <div>State:@Model.State</div>
 
-
-<form asp-controller="Home" asp-action="FooPost" method="Post">
-    <input type="submit" value="post" />
+<form asp-controller="Home" asp-action="FooPost" method="post">
+    <div>
+        <input data-val="true" id="Id" name="Foo.Id" type="text" value="10">
+    </div>
+    <div>
+        <input id="Text" name="Foo.Text" type="text" value="Posted">
+    </div>
+    <div>
+        <input data-val="true" id="Order" name="Foo.Order" type="text" value="Ascending">
+    </div>
+    <div>
+        <input data-val="true" id="State" name="Foo.State" type="text" value="Warning">
+    </div> 
+    <input type="submit" value="post">
 </form>
+<form asp-controller="Home" asp-action="FooGet" method="Get">
+    <input type="submit" value="Get" />
+</form>
+
+
