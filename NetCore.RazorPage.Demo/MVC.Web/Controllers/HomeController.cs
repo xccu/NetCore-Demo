@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace MVC.Web.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,6 +16,14 @@ namespace MVC.Web.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(string id)
+        {
+            string str = id;
             return View();
         }
 

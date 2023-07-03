@@ -1,0 +1,46 @@
+﻿@page
+@model RazorPage.Web.Pages.Test.FormsModel
+@{
+}
+
+<h3>@Model.Message</h3>
+
+<form method="get">
+    <input type="hidden" name="id" value="12" />
+    <input type="hidden" name="handler" value="Param" />
+    <button>Get Param</button>
+</form>
+
+<br />
+
+<button onclick="location.href='@Url.Page("/Index")'">Skip</button>
+
+<br />
+
+<form asp-page-handler="Param" method="post" asp-route-id="23">
+    @*<input type="hidden" name="id" value="23" />*@
+    <button>Post Param</button>
+</form>
+
+<br />
+
+<form method="post">
+    <input type="hidden" name="id" value="23" />
+    <button type="submit" asp-page-handler="Param">Post Param</button>
+</form>
+
+<form method="post" asp-page-handler="Model">
+    <input type="hidden" name="Id" value="20" />
+    <input type="hidden" name="User.Id" value="10" />
+    <input asp-for="User.Name" value="user1" />
+    <input asp-for="User.Age" value="20" />
+    <button type="submit">Post Model</button>
+</form>
+
+<form method="post" asp-page-handler="ModelParam" asp-route-id = "20">
+    @*<input type="hidden" name="User.Id" value="10">*@
+    @*<input type="hidden" name="id" value="20" />*@
+    <input value="user1" type="text" id="User_Name" name="User.Name">
+    <input value="20" type="number" id="User_Age" name="User.Age">
+    <button type="submit">Post Model</button>
+</form>

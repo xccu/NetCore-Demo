@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace RazorPage.Web.TagHelpers;
@@ -19,6 +20,8 @@ public class EmailTagHelper : TagHelper
         var address = MailTo + "@" + EmailDomain;
         output.Attributes.SetAttribute("href", "mailto:" + address);
         output.Content.SetContent(address);
+
+        //output.CopyHtmlAttribute("mail-to", context);
     }
 }
 

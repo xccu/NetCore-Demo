@@ -18,10 +18,10 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        User = new List<DataAccess.Models.User>();
-        //if (_context.User != null)
-        //{
-        //    User = await _context.User.ToListAsync();
-        //}
+        //User = new List<DataAccess.Models.User>();
+        if (_context.User != null)
+        {
+            User = await _context.User.ToListAsync();
+        }
     }
 }

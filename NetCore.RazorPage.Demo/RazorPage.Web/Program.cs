@@ -151,7 +151,7 @@ app.Use(async (context, next) =>
             HandlerMethodDescriptor result = selector.Select(pageContext);
             //get handlerName like "OnPostParam"
             string handlerName = $"On{result.HttpMethod}{result.Name}";
-
+            handlerName = result.MethodInfo.Name;
             var method = actionDescriptor.HandlerMethods.FirstOrDefault(t => t.MethodInfo.Name == handlerName);
 
             string policy = method?.MethodInfo.GetCustomAttribute<PermissionAttribute>()?.Policy;
@@ -160,11 +160,12 @@ app.Use(async (context, next) =>
     await next();
 });
 
+
 //UseAuthentication must before UseAuthorization
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
 //app.MapControllerRoute("mvc", "{controller=users}/{action=Index}");
-
+app.ViewEndpoints();
 app.Run();

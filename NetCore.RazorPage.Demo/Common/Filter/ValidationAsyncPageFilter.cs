@@ -12,7 +12,7 @@ public class ValidationAsyncPageFilter : IAsyncPageFilter, IOrderedFilter
     {
         if (!context.ModelState.IsValid)
         {
-            context.HttpContext.Response.Headers.Append("VALIDATE_FLAG", "FAILED");
+            //context.HttpContext.Response.Headers.Append("VALIDATE_FLAG", "FAILED");
             //var validationProblemDetails = new ValidationProblemDetails(context.ModelState)
             //{
             //    Type = "https://datatracker.ietf.org/doc/html/rfc7807",
@@ -22,7 +22,7 @@ public class ValidationAsyncPageFilter : IAsyncPageFilter, IOrderedFilter
             //    Detail = string.Format("Error Count:{0}", context.ModelState.Count)
             //};
             //context.Result = new BadRequestObjectResult(validationProblemDetails);
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+            //context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             //return;
         }
 
