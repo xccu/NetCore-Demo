@@ -1,0 +1,46 @@
+﻿@page "/signin"
+
+@using Security;
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Authentication.Cookies;
+
+@inject IAuthorizationService AuthorizationService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<div>Name:</div>
+<div>
+    <input @bind="_userName" />
+</div>
+<div>Birth Date:</div>
+<div>
+    <input @bind="_birthDate" />
+</div>
+<div>
+    <button @onclick="SignInAsync">Sign in</button>
+    <button @onclick="SignOutAsync">Sign Out</button>
+</div>
+
+<AuthorizeView>
+    <Authorized>
+        <p>Hello, @context.User.Identities.FirstOrDefault()?.Claims?.FirstOrDefault(t => t.Type == ClaimTypes.NameIdentifier)?.Value</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>You're not authorized.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    public string _userName = "user1";
+    public DateTime _birthDate = DateTime.Now.AddYears(-18);
+
+    private async Task SignInAsync()
+    {
+        ((CustomAuthenticationStateProvider)AuthenticationStateProvider).AuthenticateUser(_userName, _birthDate.ToString("yyyy-MM-dd"));
+    }
+
+    private async Task SignOutAsync()
+    {
+        
+    }
+}

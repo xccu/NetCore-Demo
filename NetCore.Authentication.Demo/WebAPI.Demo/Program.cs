@@ -3,8 +3,8 @@
 //https://learn.microsoft.com/zh-cn/aspnet/core/security/authorization/policies?view=aspnetcore-7.0
 
 
-using Common.Authentication;
-using Common.Authorization;
+using Security.Authentication;
+using Security.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -33,31 +33,31 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddTransient<IAuthorizationHandler, MinimumAgeHandler>();
 
 //Default认证方案(不手动Login)
-builder.Services.AddAuthentication("default")
-                .AddScheme<DefaultSchemeOptions, DefaultHandler>("default", null, null);
+//builder.Services.AddAuthentication("default")
+//                .AddScheme<DefaultSchemeOptions, DefaultHandler>("default", null, null);
 
 //Cookie认证方案
 //https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-7.0
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//.AddCookie(options =>
-//{
-//    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-//    options.SlidingExpiration = true;
-//    options.AccessDeniedPath = "/Failed"; //授权失败则跳转
-//});
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.SlidingExpiration = true;
+    options.AccessDeniedPath = "/Failed"; //授权失败则跳转
+});
 
 //Jwt方案
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecuritystring")),
-        ValidIssuer = "https://www.packtpub.com",
-        ValidAudience = "Minimal APIs Client"
-    };
-});
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//.AddJwtBearer(options =>
+//{
+//    options.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidateIssuerSigningKey = true,
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecuritystring")),
+//        ValidIssuer = "https://www.packtpub.com",
+//        ValidAudience = "Minimal APIs Client"
+//    };
+//});
 #endregion
 
 var app = builder.Build();

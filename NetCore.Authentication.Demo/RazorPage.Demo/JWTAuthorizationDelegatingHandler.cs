@@ -1,7 +1,7 @@
 ﻿using RazorPage.Demo.Services;
 using System.Net.Http.Headers;
 
-namespace Common;
+namespace Security;
 
 public class JWTAuthorizationDelegatingHandler : DelegatingHandler
 {
