@@ -15,7 +15,7 @@ public static class AuthorizationServiceExtensions
     public static async Task<bool> AuthorizeWithMinimalAgeAsync(this IAuthorizationService authorizationService, ClaimsPrincipal user)
     {
         var builder = new AuthorizationPolicyBuilder();
-        builder.AddRequirements(new BlazorMinimumAgeRequirement(18));
+        builder.AddRequirements(new MinimumAgeRequirement(18));
 
         var result = await authorizationService.AuthorizeAsync(user, null, builder.Build());
         return result.Succeeded;

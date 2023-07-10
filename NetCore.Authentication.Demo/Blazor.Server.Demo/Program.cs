@@ -19,7 +19,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider,CustomAuthenticationStateProvider>();
 
 #region
-var permissionRequirement = new BlazorMinimumAgeRequirement(18);
+var permissionRequirement = new MinimumAgeRequirement(18);
 
 //授权
 builder.Services.AddAuthorization(options =>
@@ -27,7 +27,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AtLeast18", policy => policy.Requirements.Add(permissionRequirement));
 });
 // 注入权限处理器
-builder.Services.AddTransient<IAuthorizationHandler, BlazorMinimumAgeHandler>();
+builder.Services.AddTransient<IAuthorizationHandler, MinimumAgeHandler>();
 
 //Cookie认证方案
 //https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-7.0

@@ -41,6 +41,6 @@
 
     private async Task SignOutAsync()
     {
-        
+        ((CustomAuthenticationStateProvider)AuthenticationStateProvider).Signout();
     }
 }

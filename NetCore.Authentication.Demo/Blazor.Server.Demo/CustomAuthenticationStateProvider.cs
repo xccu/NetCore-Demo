@@ -32,5 +32,12 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
         NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
     }
 
+    public void Signout()
+    {
+        var identity = new ClaimsIdentity();
+        var user = new ClaimsPrincipal(identity);
+        NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
+    }
+
 
 }
