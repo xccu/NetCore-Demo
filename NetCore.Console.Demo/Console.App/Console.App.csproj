@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Demo.Algorithms\Demo.Algorithms.csproj" />
+    <ProjectReference Include="..\Demo.Decorator\Demo.Decorator.csproj" />
     <ProjectReference Include="..\Demo.Delegates\Demo.Delegates.csproj" />
     <ProjectReference Include="..\Demo.ExpressionTree\Demo.ExpressionTree.csproj" />
   </ItemGroup>
