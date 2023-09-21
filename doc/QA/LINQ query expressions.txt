@@ -1,0 +1,10 @@
+LINQ query expressions are a syntactic sugar for writing queries using keywords like from, where, select, etc. They are translated into extension methods that operate on IQueryable<T> or IEnumerable<T> interfaces[1].
+
+IQueryable<T> is an interface that allows querying a remote data source, such as a database, by translating the query into an expression tree that can be executed by the provider[2][3].
+
+IEnumerable<T> is an interface that allows iterating over a collection of objects in memory using a foreach loop or a yield return statement[2].
+
+Here are some links for more details:
+[1] https://stackoverflow.com/questions/796246/what-is-the-difference-between-linq-query-expressions-and-extension-methods
+[2] https://stackoverflow.com/questions/252785/what-is-the-difference-between-iqueryablet-and-ienumerablet
+[3] https://learn.microsoft.com/en-us/dotnet/csharp/linq/
