@@ -6,7 +6,7 @@ using SqlSugar;
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
-var conn = configuration.GetConnectionString("MySql");
+var conn = configuration.GetConnectionString("SqlServer");
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -14,25 +14,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//注册SqlSugar用AddScoped
+//https://www.donet5.com/Home/Doc?typeId=2247
+//Register SqlSugar
 builder.Services.AddScoped<ISqlSugarClient>(s =>
 {
-    //Scoped用SqlSugarClient 
     SqlSugarClient sqlSugar = new SqlSugarClient(new ConnectionConfig()
     {
-        DbType = SqlSugar.DbType.MySql,
+        DbType = SqlSugar.DbType.SqlServer,
         ConnectionString = conn,
         IsAutoCloseConnection = true,
     },
    db =>
    {
-       //单例参数配置，所有上下文生效
        db.Aop.OnLogExecuting = (sql, pars) =>
        {
-           //获取IOC对象不要求在一个上下文
            //vra log=s.GetService<Log>()
 
-           //获取IOC对象要求在一个上下文
            //var appServive = s.GetService<IHttpContextAccessor>();
            //var log= appServive?.HttpContext?.RequestServices.GetService<Log>();
        };
@@ -41,6 +38,7 @@ builder.Services.AddScoped<ISqlSugarClient>(s =>
 });
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ULockService>();
 
 var app = builder.Build();
 
