@@ -22,6 +22,13 @@ public class UserController : ControllerBase
         return result;
     }
 
+    [HttpGet("paging/{index}/{size}")]
+    public IEnumerable<User> GetAllPaging(int index,int size)
+    {
+        var result = _service.GetAllPaging(index, size);
+        return result;
+    }
+
     [HttpGet("name/{name}")]
     public User GetByName(string name)
     {
@@ -29,10 +36,24 @@ public class UserController : ControllerBase
         return result;
     }
 
+    [HttpGet("name/like/{name}")]
+    public IEnumerable<User> GetByNameLike(string name)
+    {
+        var result = _service.GetByNameRawQuery(name);
+        return result;
+    }
+
     [HttpGet("race/{race}")]
     public IEnumerable<User> GetByRace(string race)
     {
         var result = _service.GetByRace(race);
+        return result;
+    }
+
+    [HttpGet("race/query/{race}")]
+    public IEnumerable<User> GetByRaceQuery(string race)
+    {
+        var result = _service.GetByRaceQuery(race);
         return result;
     }
 

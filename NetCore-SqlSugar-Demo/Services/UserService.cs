@@ -1,7 +1,6 @@
 ﻿using Services.Entities;
 using SqlSugar;
 
-
 namespace Services;
 
 public class UserService
@@ -13,10 +12,40 @@ public class UserService
         _db = db;
     }
 
+    #region Get
     public List<User> GetAll()
     {
         List<User> list = _db.Queryable<User>().ToList();
         return list;
+    }
+
+    public List<User> GetAllPaging(int index,int size)
+    {
+        int total = 0;
+        List<User> list = _db.Queryable<User>()
+            .OrderBy("USER_ID asc")
+            .ToPageList(index, size, ref total);
+        return list.ToList();
+    }
+
+    //https://www.donet5.com/Home/Doc?typeId=1197
+    public List<User> GetByRaceQuery(string race)
+    {
+        var list = _db.SqlQueryable<User>("select * from T_USER")
+            .Where(it => it.race == race)//可以表达式
+            //.Where("RACE=@race", new { race = race })
+            .OrderBy("USER_ID asc");//也可以SQL
+        return list.ToList();
+    }
+
+    //https://www.donet5.com/Home/Doc?typeId=1198
+    public List<User> GetByNameRawQuery(string name)
+    {
+        //var dt = _db.Ado.GetDataTable("select * from T_USER where USER_NAME like @name", new { name = "%" + name + "%" });
+        var list = _db.Ado.SqlQuery<User>(
+            "select * from T_USER where USER_NAME like @name", 
+            new { name = "%" + name + "%" });
+        return list.ToList();
     }
 
     public User GetByName(string name)
@@ -28,6 +57,7 @@ public class UserService
     {
         return _db.Queryable<User>().Where(t => t.race == race).ToList();
     }
+    #endregion
 
     public int Create(User user)
     {
