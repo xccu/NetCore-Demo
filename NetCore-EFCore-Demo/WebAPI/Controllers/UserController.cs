@@ -57,16 +57,16 @@ namespace WebAPI.Controllers
             return user.FirstOrDefault();
         }
 
-        [HttpGet]
+        [HttpPut]
         [Route("update")]
         public bool UpdateUser()
         {
             var user = _service.GetUser(3);
-            user.name = "懒羊羊";
+            user.name = "Paddi";
             return _service.Update(user);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("insert")]
         public bool InsertUser()
         {
@@ -75,14 +75,28 @@ namespace WebAPI.Controllers
             user.gender = "male";
             user.password = "123";
             user.age = 100;
+            user.race = "unknown";
             return _service.Insert(user);
         }
 
-        [HttpGet]
-        [Route("delete")]
-        public bool DeleteUser()
+        [HttpPost]
+        [Route("insertAsync")]
+        public async Task<bool> InsertUserAsync()
         {
-            var user = _service.GetUser(9);
+            var user = new Entities.User();
+            user.name = "test";
+            user.gender = "male";
+            user.password = "123";
+            user.age = 100;
+            user.race = "unknown";
+            return await _service.InsertAsync(user);
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public bool DeleteUser(int id)
+        {
+            var user = _service.GetUser(id);
             return _service.Delete(user);
         }
 

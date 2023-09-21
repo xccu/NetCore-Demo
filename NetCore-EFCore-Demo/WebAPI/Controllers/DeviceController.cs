@@ -18,29 +18,28 @@ public class DeviceController : ControllerBase
 {
     private readonly ILogger<DeviceController> _logger;
     private readonly IDeviceService _service;
-    private DeviceContext _context;
 
-    public DeviceController(ILogger<DeviceController> logger, IDeviceService service, DeviceContext context)
+    public DeviceController(ILogger<DeviceController> logger, IDeviceService service)
     {
         _logger = logger;
         _service = service;
-        _context = context;
     }
 
     [HttpGet]
     [Route("query")]
     public string GetQuery()
     {
-        DateTime date= DateTime.Now;
-        IQueryable<Entities.Device> query = this._context.Device;
-        query = query.Where(t => t.registedDate <= date);
-        string str = query.ToQueryString();
-        
+        //DateTime date= DateTime.Now;
+        //IQueryable<Entities.Device> query = this._context.Device;
+        //query = query.Where(t => t.registedDate <= date);
+        //string str = query.ToQueryString();
 
-        _logger.LogDebug(query.ToQueryString());
 
-        var result = query.ToList();
-        return str;
+        //_logger.LogDebug(query.ToQueryString());
+
+        //var result = query.ToList();
+        //return str;
+        return "";
     }
 
     //https://localhost:5001/device
@@ -65,5 +64,29 @@ public class DeviceController : ControllerBase
     {
         var dto = _service.GetDevice(id);
         return dto;
+    }
+
+    [HttpPost]
+    [Route("InsertAsync")]
+    public async Task<bool> InsertDevicesAsync()
+    {
+        Entities.Device device = new Entities.Device();
+        device.deviceNumber = "1";
+        device.name = "1";
+        device.description = "test";
+        device.registedDate= DateTime.Now;
+        return await _service.InsertAsync(device);
+    }
+
+    [HttpPost]
+    [Route("Insert")]
+    public void InsertDevices()
+    {
+        Entities.Device device = new Entities.Device();
+        device.deviceNumber = "1";
+        device.name = "1";
+        device.description = "test";
+        device.registedDate = DateTime.Now;
+        _service.Insert(device);
     }
 }

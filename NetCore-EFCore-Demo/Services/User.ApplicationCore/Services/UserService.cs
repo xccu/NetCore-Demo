@@ -60,7 +60,7 @@ public class UserService : IUserService
     }
 
     public IEnumerable<Entities.User> SearchCondition(Expression<Func<Entities.User, bool>> expression)
-    {
+    {        
         return _userRepository.GetByCondition(expression);
     }
 
@@ -74,6 +74,12 @@ public class UserService : IUserService
     {
         RefreshCache();
         return _userRepository.Insert(user);
+    }
+
+    public async Task<bool> InsertAsync(Entities.User user)
+    {
+        RefreshCache();
+        return await _userRepository.InsertAsync(user);
     }
 
     public bool Delete(Entities.User user)

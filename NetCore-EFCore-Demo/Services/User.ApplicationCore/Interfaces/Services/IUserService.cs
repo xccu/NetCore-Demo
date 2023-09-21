@@ -17,5 +17,7 @@ namespace User.ApplicationCore.Interfaces.Services
         public bool Insert(Entities.User user);
         public bool Delete(Entities.User user);
         public bool Delete(int id);
+
+        public Task<bool> InsertAsync(Entities.User user);
     }
 }

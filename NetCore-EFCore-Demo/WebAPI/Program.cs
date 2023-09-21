@@ -28,7 +28,7 @@ builder.Services.AddUser(
     builder => builder.UseDataBase(options =>
     {
         options.UseSqlServer(connectionString);
-        options.AddInterceptors(new DbSaveChangesInterceptor());
+        options.AddInterceptors(new LoggerSaveChangesInterceptor());
         options.ReplaceService<IModelCustomizer, UserModelCustomizer>();
     }),
     option =>
@@ -52,7 +52,11 @@ builder.Services.AddUser(
 #endregion
 
 //"MysqlConnection": "Data Source=127.0.0.1;port=3306;Initial Catalog=DemoEfCore;user id=root;password=123456;"
-builder.Services.AddDbContext<DeviceContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DeviceContext>(options => 
+{
+    options.UseSqlServer(connectionString);
+    options.AddInterceptors( new LoggerSaveChangesInterceptor());
+});
 builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 builder.Services.AddScoped<IDeviceService, DeviceService>();
 

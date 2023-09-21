@@ -11,7 +11,7 @@ public class DeviceContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ApplicationCore.Entities.Device>();
+        //modelBuilder.Entity<ApplicationCore.Entities.Device>();
     }
 
     public virtual DbSet<ApplicationCore.Entities.Device> Device { get; set; }
