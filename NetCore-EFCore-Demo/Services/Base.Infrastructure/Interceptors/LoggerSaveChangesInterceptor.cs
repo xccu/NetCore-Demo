@@ -28,9 +28,14 @@ public class LoggerSaveChangesInterceptor : SaveChangesInterceptor
         return await base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 
+    public override InterceptionResult ThrowingConcurrencyException(ConcurrencyExceptionEventData eventData,InterceptionResult result)
+    {
+        return base.ThrowingConcurrencyException(eventData, result);
+    }
+
     private void HandleChanges(DbContext dbContext)
     {
-         var entries = dbContext.ChangeTracker.Entries().ToArray();
+        var entries = dbContext.ChangeTracker.Entries().ToArray();
         foreach (var entityEntry in entries)
         {
             var state = entityEntry.State;

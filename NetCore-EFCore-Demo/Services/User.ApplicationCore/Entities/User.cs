@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Base.ApplicationCore.Entities;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace User.ApplicationCore.Entities;
 
 [Table("T_USER")]
-public class User
+public class User : IVersion
 {
     [Key]
     [Required]
@@ -21,5 +22,6 @@ public class User
     public String gender { get; set; }
     [Column("RACE")]
     public String race { get; set; }
-
+    [Column("VERSION_NO")]
+    public int VersionNo { get; set; }
 }
