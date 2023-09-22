@@ -57,11 +57,11 @@ namespace Base.Infrastructure.Repositories
                 return bRet;
             }
 
-            bRet = IsEntityTracked(entity);
-            if (!bRet)
-            {
-                return bRet;
-            }
+            //bRet = IsEntityTracked(entity);
+            //if (!bRet)
+            //{
+            //    return bRet;
+            //}
 
             bRet = IsEntityValid(entity);
             if (!bRet)
@@ -82,11 +82,11 @@ namespace Base.Infrastructure.Repositories
                 return bRet;
             }
 
-            bRet = IsEntityTracked(entity);
-            if (!bRet)
-            {
-                return bRet;
-            }
+            //bRet = IsEntityTracked(entity);
+            //if (!bRet)
+            //{
+            //    return bRet;
+            //}
 
             bRet = IsEntityValid(entity);
             if (!bRet)
@@ -107,11 +107,11 @@ namespace Base.Infrastructure.Repositories
                 return bRet;
             }
 
-            bRet = IsEntityTracked(entity);
-            if (!bRet)
-            {
-                return bRet;
-            }
+            //bRet = IsEntityTracked(entity);
+            //if (!bRet)
+            //{
+            //    return bRet;
+            //}
 
             bRet = IsEntityValid(entity);
             if (!bRet)
@@ -132,11 +132,11 @@ namespace Base.Infrastructure.Repositories
                 return bRet;
             }
 
-            bRet = IsEntityTracked(entity);
-            if (!bRet)
-            {
-                return bRet;
-            }
+            //bRet = IsEntityTracked(entity);
+            //if (!bRet)
+            //{
+            //    return bRet;
+            //}
 
             bRet = IsEntityValid(entity);
             if (!bRet)

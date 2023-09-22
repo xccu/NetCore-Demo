@@ -59,10 +59,8 @@ namespace WebAPI.Controllers
 
         [HttpPut]
         [Route("update")]
-        public bool UpdateUser()
+        public bool UpdateUser(Entities.User user)
         {
-            var user = _service.GetUser(3);
-            user.name = "Paddi";
             return _service.Update(user);
         }
 
