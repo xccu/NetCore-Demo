@@ -5,6 +5,10 @@
 @using AntDesign*@
 
 <h3>Basic Usage</h3>
+<div>Table 控件 OnChange 事件触发:</div>
+<li>OnInitializedAsync方法中执行第一个await异步方法时</li>
+<li>PageSize属性改变时</li>
+
 <Table TItem="Data" DataSource="@data" OnRowClick="OnRowClick" OnChange="OnChange">
   <PropertyColumn Property="c=>c.Name">
     <a>@context.Name</a>
@@ -39,7 +43,7 @@
 </Table>
 
 @code {
-  Data[] data = new Data[]
+    Data[] data = new Data[]
   {
         new()
         {
@@ -67,26 +71,32 @@
         }
   };
 
-  public class Data
-  {
-    [DisplayName("Key")]
-    public string Key { get; set; }
+    public class Data
+    {
+        [DisplayName("Key")]
+        public string Key { get; set; }
 
-    [DisplayName("Name")]
-    public string Name { get; set; }
+        [DisplayName("Name")]
+        public string Name { get; set; }
 
-    [DisplayName("Age")]
-    public int Age { get; set; }
+        [DisplayName("Age")]
+        public int Age { get; set; }
 
-    [DisplayName("Address")]
-    public string Address { get; set; }
+        [DisplayName("Address")]
+        public string Address { get; set; }
 
-    [DisplayName("Tags")]
-    public string[] Tags { get; set; }
-  }
+        [DisplayName("Tags")]
+        public string[] Tags { get; set; }
+    }
 
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+        await base.OnInitializedAsync();
+    }
     public async Task OnChange(QueryModel<Data> queryModel)
     {
+        await Task.Delay(1000);
         Console.WriteLine("Onchange");
     }
 

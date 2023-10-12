@@ -1,0 +1,81 @@
+﻿@inherits LayoutComponentBase
+
+@*<PageTitle>Ant-Layout-Demo</PageTitle>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>*@
+
+
+<Layout Style="min-height: 100vh;">
+    <Header Style="padding:0 50px; position: fixed; z-index: 1; width: 100%; ">
+        <div class="logo" />
+        <Menu Theme="MenuTheme.Dark" Mode="MenuMode.Horizontal" DefaultSelectedKeys=@(new[]{"2"})>
+            <MenuItem Key="1">nav 1</MenuItem>
+            <MenuItem Key="2">nav 2</MenuItem>
+            <MenuItem Key="3">nav 3</MenuItem>
+        </Menu>
+    </Header>
+    <Content Class="site-layout" Style="padding:0 50px; margin-top: 64px; ">
+        <Breadcrumb Style=" margin: 16px 0;">
+            <BreadcrumbItem>Home</BreadcrumbItem>
+            <BreadcrumbItem>List</BreadcrumbItem>
+            <BreadcrumbItem>App</BreadcrumbItem>
+        </Breadcrumb>
+        <div class="site-layout-background" style="padding: 24px; min-height: 380px ">
+            @Body
+        </div>
+    </Content>
+    <Footer Style="text-align: center;">Ant Design ©2018 Created by Ant UED</Footer>
+</Layout>
+
+
+@*<Layout Style="min-height: 100vh;">
+           
+    <GridRow Style="min-height: 100vh;">
+                   
+        <GridCol Span="2" Style="background: #f0f2f5;" />
+        <GridCol Span="20">
+            <Header>
+                <div class="logo" />
+                <Menu Theme="MenuTheme.Dark" Mode="MenuMode.Horizontal" DefaultSelectedKeys=@(new[]{"2"})>
+                    <MenuItem Key="1">nav 1</MenuItem>
+                    <MenuItem Key="2">nav 2</MenuItem>
+                    <MenuItem Key="3">nav 3</MenuItem>
+                </Menu>
+            </Header>
+
+            <Content Style="margin:0 6px;">@Body</Content>
+
+            <Footer Style="padding:0 50px; background: #fff;" Class="text-center">Copyright &copy; @DateTime.Now.ToString("yyyy") NCS Pte Ltd. All Rights Reserved.</Footer>
+        </GridCol>
+        <GridCol Span="2" Style="background: #f0f2f5;" />
+                    
+    </GridRow>
+</Layout>*@
+
+<style>
+    #components-layout-demo-fixed .logo {
+        width: 120px;
+        height: 31px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 16px 24px 16px 0;
+        float: left;
+    }
+
+    .site-layout .site-layout-background {
+        background: #fff;
+    }
+</style>

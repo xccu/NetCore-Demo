@@ -1,0 +1,54 @@
+﻿@page "/customer"
+
+@if (testcurrent)
+{
+    <Pagination PageSize="@pagesize" Total="@total" Current="@currentpage" ShowSizeChanger="@false" />
+}
+else
+{
+    <Pagination PageSize="@pagesize" Total="@total" DefaultCurrent="@currentpage" ShowSizeChanger="@false" />
+}
+
+<button onclick="@Refresh">Refresh: @count</button>
+@code {
+
+    int pagesize = 0;
+    int total = 0;
+    int currentpage = 1;
+    int count = 0;
+    bool testcurrent = true;
+
+    //protected override void OnInitialized()
+    //{
+    //    pagesize = 10;
+    //    total = 24;
+    //    currentpage = 2;
+    //}
+    protected override async Task OnInitializedAsync()
+    {
+        var b = ShouldRender();
+        await Task.Delay(1000);
+        pagesize = 10;
+        total = 24;
+        currentpage = 2; 
+        await base.OnInitializedAsync();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        var b = ShouldRender();
+        pagesize = 10;
+        total = 24;
+        currentpage = 2;
+        base.OnAfterRender(firstRender);
+    }
+
+    public void Refresh()
+    {
+        pagesize = 10;
+        total = 24;
+        currentpage = 2;
+        count++;
+        StateHasChanged();
+    }
+}

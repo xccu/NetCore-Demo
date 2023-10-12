@@ -1,0 +1,20 @@
+﻿@page "/customer"
+
+<Select Mode="default"
+        Style="width:120px"
+        DataSource="@List"
+        DefaultValue="@Item"
+        @bind-Value="@Item">
+</Select>
+
+@code {
+
+    protected List<String> List = new List<string>() { "Foo","Bar","Baz" };
+    string Item = "Foo";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Item = "Bar";        
+        await base.OnInitializedAsync();
+    }
+}
