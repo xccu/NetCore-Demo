@@ -1,9 +1,18 @@
-need to install primeng:
+
+NodeJs
+=========================================================================
+node-v18.12.1-x64.msi
+
+PrimeNG
+=========================================================================
 cmd:
-npm install primeng
+...\ClientApp>npm install primeng
+...\ClientApp>npm install primeng@12.0.0
 
-see doc:
-https://primeng.org/installation
-
-Angular 环境：
+Documents
+=========================================================================
+Angular 环境
 https://codeleading.com/article/15492294338/
+
+PrimeNG 文档
+https://primeng.org/installation
