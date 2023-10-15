@@ -10,7 +10,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-//import { InputSwitchComponent } from './input-switch/input-switch.component';
+import { InputSwitchComponent } from './input-switch/input-switch.component';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    //InputSwitchComponent
+    InputSwitchComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,8 +30,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent }
-      //{ path: 'input-switch', component: InputSwitchComponent }
+      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'input-switch', component: InputSwitchComponent }
     ])
   ],
   providers: [],

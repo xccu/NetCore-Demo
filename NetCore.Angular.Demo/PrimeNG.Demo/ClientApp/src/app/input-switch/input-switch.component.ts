@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'input-switch-component',
-  templateUrl: './app.input-switch.html'
+  templateUrl: './input-switch.component.html'
 })
 export class InputSwitchComponent {
   checked1: boolean = false;
