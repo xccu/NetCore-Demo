@@ -1,0 +1,16 @@
+To configure and read the environment in a Blazor app, you can follow the guidance provided by Microsoft Learn[1]. When running an app locally, the environment defaults to Development. When the app is published, the environment defaults to Production[1]. The environment can be set using any of the following approaches[1]:
+
+1) Blazor start configuration: The environment can be set via startup configuration. For example, you can start Blazor in the Staging environment if the hostname includes localhost[1].
+2) Blazor-Environment header: The environment can be specified for other hosting environments by adding the Blazor-Environment header[1].
+3) Azure App Service: The environment can be set for Azure App Service[1].
+
+Please note that Blazor WebAssembly is currently in preview and not officially supported for production use[2]. However, you can still use it in production at your own discretion[2].
+
+For more information on how to host and deploy Blazor WebAssembly, you can refer to the Microsoft Learn documentation[3].
+
+Learn more:
+[1] https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/environments?view=aspnetcore-7.0
+[2] https://stackoverflow.com/questions/58539116/can-blazor-webassembly-app-be-used-for-production
+[3] https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-7.0
+[4] https://learn.microsoft.com/en-us/training/modules/build-blazor-webassembly-visual-studio-code/
+[5] https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-blazor-webassembly-single-tenant?tabs=before
