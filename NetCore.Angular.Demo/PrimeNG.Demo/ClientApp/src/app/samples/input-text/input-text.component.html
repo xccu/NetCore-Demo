@@ -1,0 +1,45 @@
+<h5>Basic</h5>
+<input type="text" pInputText [(ngModel)]="value1">
+<span class="p-ml-2">{{value1}}</span>
+
+<h5>Float Label</h5>
+<span class="p-float-label">
+  <input id="float-input" type="text" pInputText [(ngModel)]="value2">
+  <label for="float-input">Username</label>
+</span>
+
+<h5>Left Icon</h5>
+<span class="p-input-icon-left">
+  <i class="pi pi-search"></i>
+  <input type="text" pInputText placeholder="Search" [(ngModel)]="value3" />
+</span>
+
+<h5>Right Icon</h5>
+<span class="p-input-icon-right">
+  <i class="pi pi-spin pi-spinner"></i>
+  <input type="text" pInputText />
+</span>
+
+<h5>Help Text</h5>
+<div class="p-field">
+  <label for="username1">Username</label>
+  <input id="username1" type="username" aria-describedby="username1-help" pInputText [(ngModel)]="value4" />
+  <small id="username1-help">Enter your username to reset your password.</small>
+</div>
+
+<h5>Invalid</h5>
+<div class="p-field">
+  <label for="username2">Username</label>
+  <input id="username2" type="username" aria-describedby="username2-help" class="p-invalid" pInputText />
+  <small id="username2-help" class="p-invalid">Username is not available.</small>
+</div>
+
+<h5>Disabled</h5>
+<input id="disabled-input" type="text" pInputText [disabled]="disabled" [(ngModel)]="value5" />
+
+<h5>Sizes</h5>
+<div class="sizes">
+  <input type="text" class="p-inputtext-sm" placeholder="Small" pInputText />
+  <input type="text" placeholder="Normal" pInputText />
+  <input type="text" class="p-inputtext-lg" placeholder="Large" pInputText />
+</div>
