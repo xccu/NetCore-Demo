@@ -19,3 +19,6 @@ https://primeng.org/installation
 
 Angular 升级
 https://update.angular.io/?v=12.0-17.0
+
+安装angular到指定版本
+https://blog.csdn.net/zf2451597310/article/details/129989137

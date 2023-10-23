@@ -3,14 +3,22 @@
 <ul>
   <li><a href='https://primeng.org/installation'>PrimeNG</a> Document</li>
   <li><a href='https://angular.io/cli'>Angular CLI</a> Install</li>
-  <li><a href='https://www.lsjlt.com/news/269229.html'>Angular CLI Install online and offline</a></li>
+  <li><a href='https://www.lsjlt.com/news/269229.html'>Angular CLI 如何安装</a></li>
 </ul>
 
-<p-panel header="Input">
+
+<p-panel header="Input" [toggleable]="true">
+  <ng-template pTemplate="icons">
+    <button pButton class="p-panel-header-icon p-link" icon="pi pi-cog"  (click)="menu.toggle($event)">
+    </button>
+    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+  </ng-template>
   <li><a [routerLink]="['/input-switch']">Input Switch</a></li>
   <li><a [routerLink]="['/input-text']">Input Text</a></li>
 </p-panel>
+
 <p></p>
+
 <p-panel header="Panel">
   <li><a [routerLink]="['/panel']">Panel </a></li>
 </p-panel>
