@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, VERSION } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { MenuItem } from 'primeng/api';
 
@@ -9,7 +9,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class HomeComponent {
   items: MenuItem[];
-
+  version = VERSION.full;
   constructor(private messageService: MessageService) { }
 
   ngOnInit() {
