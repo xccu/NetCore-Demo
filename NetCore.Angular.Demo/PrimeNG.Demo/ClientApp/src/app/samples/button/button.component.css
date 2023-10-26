@@ -1,0 +1,19 @@
+.content {
+  background-color: rgb(112, 255, 119);
+  width: 300px;
+  margin-top: 25px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.dark-mode {
+  background-color: rgb(9, 8, 8);
+  color: white;
+}
+
+::ng-deep .test {
+  background-color: rgb(9, 8, 8);
+  color: white;
+}

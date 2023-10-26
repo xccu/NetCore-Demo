@@ -8,6 +8,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { PanelModule } from 'primeng/panel';
 import { MenuModule } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
+import { MenubarModule } from 'primeng/menubar';
+import { StyleClassModule } from 'primeng/styleclass';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -17,6 +19,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { InputSwitchComponent } from './samples/input-switch/input-switch.component';
 import { InputTextComponent } from './samples/input-text/input-text.component';
 import { PanelComponent } from './samples/panel/panel.component';
+import { MenuBarComponent } from './samples/menu-bar/menu-bar.component';
+import { ButtonComponent } from './samples/button/button.component';
 
 
 @NgModule({
@@ -28,7 +32,9 @@ import { PanelComponent } from './samples/panel/panel.component';
     FetchDataComponent,
     InputSwitchComponent,
     InputTextComponent,
-    PanelComponent,    
+    PanelComponent,
+    MenuBarComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,14 +44,18 @@ import { PanelComponent } from './samples/panel/panel.component';
     PanelModule,
     BrowserAnimationsModule,
     MenuModule,
+    MenubarModule,
     ButtonModule,
+    StyleClassModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'input-switch', component: InputSwitchComponent },
       { path: 'input-text', component: InputTextComponent },
-      { path: 'panel', component: PanelComponent }
+      { path: 'panel', component: PanelComponent },
+      { path: 'menu-bar', component: MenuBarComponent },
+      { path: 'button', component: ButtonComponent }
     ])
   ],
   providers: [],

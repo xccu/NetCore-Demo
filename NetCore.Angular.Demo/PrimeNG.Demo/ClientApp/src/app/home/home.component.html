@@ -8,17 +8,14 @@
 
 
 <p-panel header="Input" [toggleable]="true">
-  <ng-template pTemplate="icons">
-    <button pButton class="p-panel-header-icon p-link" icon="pi pi-cog"  (click)="menu.toggle($event)">
-    </button>
-    <p-menu #menu [model]="items" [popup]="true"></p-menu>
-  </ng-template>
   <li><a [routerLink]="['/input-switch']">Input Switch</a></li>
   <li><a [routerLink]="['/input-text']">Input Text</a></li>
 </p-panel>
-
 <p></p>
-
-<p-panel header="Panel">
+<p-panel header="Panel" [toggleable]="true">
   <li><a [routerLink]="['/panel']">Panel </a></li>
+</p-panel>
+<p></p>
+<p-panel header="Menu" [toggleable]="true">
+  <li><a [routerLink]="['/menu-bar']">MenuBar</a></li>
 </p-panel>
