@@ -1,20 +1,28 @@
-<h2 style="color: green">GeeksforGeeks</h2>
-<h4>Angular PrimeNG StyleClass Properties</h4>
+<h1>Button</h1>
+<p>
+  <a href="https://primeng.org/button">Button</a>  is an extension to standard button element with icons and theming.
+</p>
 
+<!--https://geek-docs.com/angularjs/angularjs-tutorials/angular-primeng-styleclass-properties.html-->
+
+<p-button label="Submit"></p-button>
+<p></p>
 <p-button label="dark-button" [styleClass]="'test'"> </p-button>
 <p></p>
-
+<p-button icon="pi pi-check"></p-button>
+<p-button label="Submit" icon="pi pi-check"></p-button>
+<p-button label="Submit" icon="pi pi-check" iconPos="right"></p-button>
+<p></p>
+<p-button label="Primary"></p-button>
+<p-button label="Secondary" severity="secondary"></p-button>
+<p-button label="Success" severity="success"></p-button>
+<p-button label="Info" severity="info"></p-button>
+<p-button label="Warning" severity="warning"></p-button>
+<p-button label="Help" severity="help"></p-button>
+<p-button label="Danger" severity="danger"></p-button>
+<p></p>
 <button pButton label="ToggleClass dark-mode"
         pStyleClass="@next"
         toggleClass="dark-mode">
 </button>
-
-
-
-<div class="content">
-  GeeksforGeeks is a computer science
-  portal for geeks. It offers articles
-  on various computer science subjects
-  like Data Structures, Algorithms,
-  Compiler Design, Computer Networks, etc.
-</div>
+<div class="content">this is a test div</div>
