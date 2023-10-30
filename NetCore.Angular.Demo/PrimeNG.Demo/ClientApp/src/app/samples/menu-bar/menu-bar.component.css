@@ -1,5 +1,9 @@
 
 ::ng-deep .my-menubar {
-  width:800px;
+  width: 800px;
   color: white;
+}
+
+::ng-deep .p-ripple {
+  text-decoration: none;
 }

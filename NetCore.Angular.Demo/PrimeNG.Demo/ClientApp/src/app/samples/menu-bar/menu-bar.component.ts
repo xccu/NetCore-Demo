@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { StyleClass } from 'primeng/styleclass';
 
 @Component({
   selector: 'app-menu-bar',
