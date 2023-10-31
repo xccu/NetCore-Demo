@@ -1,0 +1,19 @@
+﻿@page "/render-mode-3"
+@rendermode RenderMode.InteractiveWebAssembly
+
+<h3>WebAssembly Render Mode</h3>
+<p>
+    <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#webassembly-render-mode">MS Document</a>
+</p>
+
+<button @onclick="UpdateMessage">Click me</button> @message
+
+@code {
+    private string message = "Not clicked yet.";
+
+    private void UpdateMessage()
+    {
+        Console.WriteLine("WebAssemblyRender UpdateMessage clicked");
+        message = "Somebody clicked me!";
+    }
+}

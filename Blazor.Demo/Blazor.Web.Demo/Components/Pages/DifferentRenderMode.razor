@@ -1,0 +1,12 @@
+﻿@page "/render-mode-7"
+
+<h3>Child components with different render modes</h3>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#child-components-with-different-render-modes">MS Document</a></p>
+
+
+<p>InteractiveServer</p>
+<SharedMessage @rendermode="RenderMode.InteractiveServer" />
+<p></p>
+
+<p>InteractiveWebAssembly</p>
+<SharedMessage @rendermode="RenderMode.InteractiveWebAssembly" />

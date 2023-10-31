@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Blazor.Web.Demo.Client\**" />
+    <Compile Remove="Blazor.Web.Demo\**" />
+    <Content Remove="Blazor.Web.Demo.Client\**" />
+    <Content Remove="Blazor.Web.Demo\**" />
+    <EmbeddedResource Remove="Blazor.Web.Demo.Client\**" />
+    <EmbeddedResource Remove="Blazor.Web.Demo\**" />
+    <None Remove="Blazor.Web.Demo.Client\**" />
+    <None Remove="Blazor.Web.Demo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-rc.2.23480.2" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Blazor.Web.Demo.Client\Blazor.Web.Demo.Client.csproj" />
+		<ProjectReference Include="..\Models\Models.csproj" />
+		<ProjectReference Include="..\Services\Services.csproj" />
+	</ItemGroup>
+
+</Project>

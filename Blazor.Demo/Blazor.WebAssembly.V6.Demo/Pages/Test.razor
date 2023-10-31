@@ -1,0 +1,25 @@
+﻿@page "/test"
+@using Services;
+@inject FooService FooService
+@inject BarService BarService
+
+<PageTitle>Home</PageTitle>
+
+<h1>Test</h1>
+
+<p></p>
+
+<p>@FooService.GetInfo()</p>
+<p>@BarService.GetInfo()</p>
+
+<p role="status">Current count: @currentCount</p>
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}

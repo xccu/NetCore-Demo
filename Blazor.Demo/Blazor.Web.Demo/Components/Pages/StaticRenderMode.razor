@@ -1,0 +1,18 @@
+﻿@page "/render-mode-1"
+
+<h3>Static Render Mode</h3>
+<p>
+    <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#static-render-mode">static-render-mode</a>
+</p>
+
+<button @onclick="UpdateMessage">Click me</button> @message
+
+@code {
+    private string message = "Not clicked yet.";
+
+    private void UpdateMessage()
+    {
+        Console.WriteLine("StaticRender UpdateMessage clicked");
+        message = "Somebody clicked me!";
+    }
+}

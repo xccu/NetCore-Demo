@@ -1,0 +1,40 @@
+﻿@page "/lifecycle"
+@rendermode RenderMode.InteractiveServer
+@using Services;
+@inject FooService FooService
+@inject BarService BarService
+
+<PageTitle>Home</PageTitle>
+
+<h1>Test</h1>
+
+<p></p>
+
+<p>@FooService.GetInfo()</p>
+<p>@BarService.GetInfo()</p>
+
+<p role="status">Current count: @currentCount</p>
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    protected override void OnInitialized() => Console.WriteLine("OnInitialized");
+
+    protected override async Task OnInitializedAsync() => Console.WriteLine("OnInitializedAsync");
+
+    protected override void OnParametersSet() => Console.WriteLine("OnParametersSet");
+
+    protected override async Task OnParametersSetAsync() => Console.WriteLine("OnParametersSetAsync");
+
+    protected override void OnAfterRender(bool firstRender) => Console.WriteLine($"OnAfterRender (First render: {firstRender})");
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) => Console.WriteLine($"OnAfterRenderAsync (First render: {firstRender})");
+
+
+}

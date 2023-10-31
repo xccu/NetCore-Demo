@@ -1,0 +1,19 @@
+﻿@page "/render-mode-2"
+@rendermode RenderMode.InteractiveServer
+
+<h3>Server Render Mode</h3>
+<p>
+    <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#server-render-mode">MS Document</a>
+</p>
+
+<button @onclick="UpdateMessage">Click me</button> @message
+
+@code {
+    private string message = "Not clicked yet.";
+
+    private void UpdateMessage()
+    {
+        Console.WriteLine("ServerRender UpdateMessage clicked");
+        message = "Somebody clicked me!";
+    }
+}
