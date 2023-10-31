@@ -1,0 +1,12 @@
+﻿@page "/render-mode-8"
+<h3>Child component with a serializable parameter</h3>
+
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#child-component-with-a-serializable-parameter">MS Document</a></p>
+
+<SharedMessage @rendermode="RenderMode.InteractiveServer" Greeting="Welcome!" />
+
+
+@* this will throw InvalidOperationException *@
+@* <SharedMessage @rendermode="RenderMode.InteractiveServer">
+    Child content
+</SharedMessage> *@
