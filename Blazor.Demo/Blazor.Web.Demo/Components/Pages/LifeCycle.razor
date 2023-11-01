@@ -6,9 +6,9 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Test</h1>
+<h1>Life Cycle</h1>
 
-<p></p>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-8.0">MS Document</a></p>
 
 <p>@FooService.GetInfo()</p>
 <p>@BarService.GetInfo()</p>
@@ -22,6 +22,13 @@
     private void IncrementCount()
     {
         currentCount++;
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        Console.WriteLine("SetParametersAsync - Begin");
+        await base.SetParametersAsync(parameters);
+        Console.WriteLine("SetParametersAsync - End");
     }
 
     protected override void OnInitialized() => Console.WriteLine("OnInitialized");

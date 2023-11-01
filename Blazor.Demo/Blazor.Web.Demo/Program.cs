@@ -1,3 +1,4 @@
+using Blazor.Web.Demo;
 using Blazor.Web.Demo.Client.Pages;
 using Blazor.Web.Demo.Components;
 using Blazor.Web.Demo.Components.Pages;
@@ -39,6 +40,16 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(Counter).Assembly);
-    //.AddAdditionalAssemblies(typeof(WebAssemblyRenderMode).Assembly);
+//.AddAdditionalAssemblies(typeof(WebAssemblyRenderMode).Assembly);
+
+
+app.ViewEndpoints();
+
+app.Use(async (context, next) =>
+{
+    var endpoint = context.GetEndpoint();    
+    await next();
+});
+
 
 app.Run();
