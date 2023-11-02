@@ -1,0 +1,18 @@
+﻿@page "/on-init"
+@rendermode RenderMode.InteractiveServer
+<h3>Component initialization</h3>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-8.0#component-initialization-oninitializedasync">MS Document</a></p>
+
+
+<p>@message</p>
+
+@code {
+    private string? message;
+
+    protected override void OnInitialized()
+    {
+        message = $"Initialized at {DateTime.Now}";
+        Console.WriteLine("OnInitialized");
+        Console.WriteLine(message);
+    }
+}

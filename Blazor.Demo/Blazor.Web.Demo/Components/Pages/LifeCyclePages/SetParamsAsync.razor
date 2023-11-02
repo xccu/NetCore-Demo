@@ -1,0 +1,32 @@
+﻿@page "/set-params-async/{Param?}"
+@rendermode RenderMode.InteractiveServer
+<h3>When parameters are set (SetParametersAsync)</h3>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-8.0#when-parameters-are-set-setparametersasync">MS Document</a></p>
+
+<p>@message</p>
+
+@code {
+    private string message = "Not set";
+
+    [Parameter]
+    public string? Param { get; set; }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        Console.WriteLine("SetParametersAsync");
+        if (parameters.TryGetValue<string>(nameof(Param), out var value))
+        {
+            if (value is null)
+            {
+                message = "The value of 'Param' is null.";
+            }
+            else
+            {
+                message = $"The value of 'Param' is {value}.";
+            }
+            Console.WriteLine(message);
+        }
+
+        await base.SetParametersAsync(parameters);
+    }
+}

@@ -1,0 +1,16 @@
+﻿@page "/event-handler-example-4"
+
+<h3>Lambda Expressions</h3>
+<p><a href="https://learn.microsoft.com/zh-cn/aspnet/core/blazor/components/event-handling?view=aspnetcore-8.0#lambda-expressions">MS Document</a></p>
+
+<h5>@heading</h5>
+
+<p>
+    <button @onclick="@(e => heading = "New heading!!!")">
+        Update heading
+    </button>
+</p>
+
+@code {
+    private string heading = "Initial heading";
+}
