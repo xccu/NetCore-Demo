@@ -1,0 +1,26 @@
+﻿@page "/nav-sample"
+@inject NavigationManager Navigation
+
+<h3>NavPage</h3>
+<button @onclick="ToDiv1">To Div1</button>
+<button @onclick="ToDiv2">To Div2</button>
+<button @onclick="ToDiv3">To Div3</button>
+<div id="div1" style="background-color:greenyellow;height:300px">Div1</div>
+<div id="div2" style="background-color:aquamarine;height:300px">Div2</div>
+<div id="div3" style="background-color:aqua;height:300px">Div3</div>
+@code {
+    public void ToDiv1()
+    {
+        Navigation.NavigateTo("/nav-sample#div1");
+    }
+    public void ToDiv2()
+    {
+        Navigation.NavigateTo("/nav-sample#div2");
+    }
+
+    public void ToDiv3()
+    {
+        Navigation.NavigateTo("/nav-sample#div3");
+    }
+
+}

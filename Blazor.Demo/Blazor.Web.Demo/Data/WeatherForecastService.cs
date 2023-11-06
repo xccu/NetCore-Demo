@@ -1,4 +1,4 @@
-namespace Blazor.Server.Demo.Data
+namespace Blazor.Web.Demo.Data
 {
     public class WeatherForecastService
     {
@@ -8,7 +8,7 @@ namespace Blazor.Server.Demo.Data
         };
 
         public async Task<WeatherForecast[]> GetForecastAsync(DateOnly startDate)
-        {
+        {            
             await Task.Delay(3000);
             return await Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

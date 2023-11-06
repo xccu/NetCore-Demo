@@ -1,7 +1,7 @@
 using Blazor.Web.Demo;
 using Blazor.Web.Demo.Client.Pages;
 using Blazor.Web.Demo.Components;
-using Blazor.Web.Demo.Components.Pages;
+using Blazor.Web.Demo.Data;
 using Models;
 using Services;
 
@@ -12,13 +12,17 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+builder.Services.AddSingleton<WeatherForecastService>();
+
 builder.Services.AddSingleton<Foo>();
 builder.Services.AddSingleton<Bar>();
 builder.Services.AddSingleton<FooService>();
 builder.Services.AddSingleton<BarService>();
 
+
 var app = builder.Build();
 
+app.UseExceptionHandler("/Error", createScopeForErrors: true);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -26,7 +30,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }

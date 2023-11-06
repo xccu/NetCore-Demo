@@ -1,6 +1,4 @@
 using Blazor.Server.Demo.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Models;
 using Services;
 

@@ -1,0 +1,24 @@
+﻿@page "/bind"
+
+
+<h3>Bind</h3>
+<p><a href="https://learn.microsoft.com/zh-cn/aspnet/core/blazor/components/data-binding?view=aspnetcore-8.0">MS Document</a></p>
+
+<p>
+    <input @bind="inputValue" />
+</p>
+
+<p>
+    <input @bind="InputValue" />
+</p>
+
+<ul>
+    <li><code>inputValue</code>: @inputValue</li>
+    <li><code>InputValue</code>: @InputValue</li>
+</ul>
+
+@code {
+    private string? inputValue;
+
+    private string? InputValue { get; set; }
+}

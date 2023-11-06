@@ -1,26 +1,29 @@
 ﻿@page "/"
-@using Services;
-@inject FooService FooService
-@inject BarService BarService
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
-<p></p>
-
-<p>@FooService.GetInfo()</p>
-<p>@BarService.GetInfo()</p>
-
-<p role="status">Current count: @currentCount</p>
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
-@code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
-}
+<li>
+    Event Handling
+    <ul>
+        <li><a href="/event-handler-example-1">EventHandler Example</a></li>
+        <li><a href="/event-handler-example-2">EventHandler Async Example</a></li>
+        <li><a href="/event-handler-example-3">Built-in event arguments</a></li>
+        <li><a href="/event-handler-example-4">Lambda Expressions</a></li>
+        <li><a href="/event-handler-example-5">Lambda Expressions With Parameters</a></li>
+        <li><a href="/event-handler-example-6">Prevent Default Actions</a></li>
+        <li><a href="/event-handler-example-7">Stop Event Propagation</a></li>
+        <li><a href="/parent">Parent</a></li>
+    </ul>
+</li>
+<li>
+    Form
+    <ul>
+        <li><a href="/starship-plain-form">Form1</a></li>
+        <li><a href="/starship-1">Edit Form</a></li>
+        <li><a href="/starship-2">Edit Form With Validation</a></li>
+        <li><a href="/enhance-form">Edit Form Enhance</a></li>
+    </ul>
+</li>

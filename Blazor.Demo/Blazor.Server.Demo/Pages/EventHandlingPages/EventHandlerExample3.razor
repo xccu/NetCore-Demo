@@ -1,0 +1,25 @@
+﻿@page "/event-handler-example-3"
+
+<h3>Built-in event arguments</h3>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling?view=aspnetcore-8.0#built-in-event-arguments">MS Document</a></p>
+
+
+@for (var i = 0; i < 4; i++)
+{
+    <p>
+        <button @onclick="ReportPointerLocation">
+            Where's my mouse pointer for this button?
+        </button>
+    </p>
+}
+
+<p>@mousePointerMessage</p>
+
+@code {
+    private string? mousePointerMessage;
+
+    private void ReportPointerLocation(MouseEventArgs e)
+    {
+        mousePointerMessage = $"Mouse coordinates: {e.ScreenX}:{e.ScreenY}";
+    }
+}

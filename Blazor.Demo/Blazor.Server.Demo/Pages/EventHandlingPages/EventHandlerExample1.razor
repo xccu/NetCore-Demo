@@ -1,0 +1,38 @@
+﻿@page "/event-handler-example-1"
+
+<h3>EventHandler Example</h3>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling?view=aspnetcore-8.0">MS Document</a></p>
+<h5>@currentHeading</h5>
+
+<p>
+    <label>
+        New title
+        <input @bind="newHeading" />
+    </label>
+    <button @onclick="UpdateHeading">
+        Update heading
+    </button>
+</p>
+
+<p>
+    <label>
+        <input type="checkbox" @onchange="CheckChanged" />
+        @checkedMessage
+    </label>
+</p>
+
+@code {
+    private string currentHeading = "Initial heading";
+    private string? newHeading;
+    private string checkedMessage = "Not changed yet";
+
+    private void UpdateHeading()
+    {
+        currentHeading = $"{newHeading}!!!";
+    }
+
+    private void CheckChanged()
+    {
+        checkedMessage = $"Last changed at {DateTime.Now}";
+    }
+}

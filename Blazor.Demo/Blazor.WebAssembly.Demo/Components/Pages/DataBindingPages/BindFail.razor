@@ -1,0 +1,36 @@
+﻿@page "/bind-fail"
+
+<h3>Bind Fail</h3>
+
+<p>Failed</p>
+<p>
+    <input value="@inputValue" @oninput="OnInputEvent" />
+</p>
+<p>
+    <code>inputValue Failed</code>: @inputValue
+</p>
+
+<p>Succeed</p>
+<p>
+    <input @bind:event="oninput" @bind:get="inputValue2" @bind:set="OnInput" />
+</p>
+<p>
+    <code>inputValue Succeed</code>: @inputValue2
+</p>
+
+@code {
+    private string? inputValue;
+    private string? inputValue2;
+
+    private void OnInputEvent(ChangeEventArgs args)
+    {
+        var newValue = args.Value?.ToString() ?? string.Empty;
+        inputValue = newValue.Length > 4 ? "Long!" : newValue;
+    }
+
+    private void OnInput(string value)
+    {
+        var newValue = value ?? string.Empty;
+        inputValue2 = newValue.Length > 4 ? "Long!" : newValue;
+    }
+}

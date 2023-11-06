@@ -1,0 +1,28 @@
+﻿
+@page "/event-handler-example-2"
+
+<h3>EventHandler Async Example</h3>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling?view=aspnetcore-8.0">MS Document</a></p>
+<h5>@currentHeading</h5>
+
+<p>
+    <label>
+        New title
+        <input @bind="newHeading" />
+    </label>
+    <button @onclick="UpdateHeading">
+        Update heading
+    </button>
+</p>
+
+@code {
+    private string currentHeading = "Initial heading";
+    private string? newHeading;
+
+    private async Task UpdateHeading()
+    {
+        await Task.Delay(2000);
+
+        currentHeading = $"{newHeading}!!!";
+    }
+}

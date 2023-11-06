@@ -1,0 +1,20 @@
+﻿@page "/throw"
+@rendermode RenderMode.InteractiveWebAssembly
+<h3>Throw</h3>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-8.0?view=aspnetcore-8.0#error-page-support">MS Document</a></p>
+<button @onclick="Test">Throw</button>
+
+@code {
+
+    protected override  void OnInitialized()
+    {
+        // int i = 0;
+        // int r = 10 / i;
+    }
+
+    public void Test()
+    {
+        int i = 0;
+        int r = 10 / i;       
+    }
+}
