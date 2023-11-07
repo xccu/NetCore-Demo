@@ -1,8 +1,9 @@
 ﻿@page "/throw"
-@rendermode RenderMode.InteractiveWebAssembly
+@rendermode RenderMode.InteractiveServer
 <h3>Throw</h3>
 <p><a href="https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-8.0?view=aspnetcore-8.0#error-page-support">MS Document</a></p>
-<button @onclick="Test">Throw</button>
+<button @onclick="ThrowEx">Throw</button>
+<button @onclick="ThrowExAsync">ThrowAsync</button>
 
 @code {
 
@@ -12,9 +13,23 @@
         // int r = 10 / i;
     }
 
-    public void Test()
+    public async Task ThrowExAsync()
+    {
+        try
+        {
+            int i = 0;
+            int r = 10 / i;
+            await Task.CompletedTask;
+        }
+        catch (Exception ex)
+        {
+            await DispatchExceptionAsync(ex);
+        }
+    }
+
+    public void ThrowEx()
     {
         int i = 0;
-        int r = 10 / i;       
+        int r = 10 / i;
     }
 }

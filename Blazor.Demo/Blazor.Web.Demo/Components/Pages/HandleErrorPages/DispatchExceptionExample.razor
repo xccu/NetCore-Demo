@@ -1,40 +1,42 @@
-﻿@page "/test"
+﻿@page "/dispatch-exception"
+@rendermode RenderMode.InteractiveServer
 @using Services;
 @inject FooService FooService
-@inject BarService BarService
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Dispatch Exception</PageTitle>
 
-<h1>Test</h1>
+<h1>Dispatch Exception</h1>
 
 <p></p>
 
 <p>@FooService.GetInfo()</p>
-<p>@BarService.GetInfo()</p>
 
-<p role="status">Current count: @currentCount</p>
 <button class="btn btn-primary" @onclick="ThrowEx">Throw</button>
 <button class="btn btn-primary" @onclick="ThrowExAsync">ThrowAsync</button>
 
 @code {
     private int currentCount = 0;
 
+    
     private void ThrowEx()
     {
-        _ = FooService.ThrowAsync();   
+        //sync method invoke async method, exceptions will outside of life cycle and can't be catched
+        _ = FooService.ThrowAsync();
+
         //_ = ThrowExceptionAsync();
     }
 
     public async Task ThrowExAsync()
-    {        
+    {
         try
         {
             await ThrowExceptionAsync();
         }
         catch (Exception ex)
         {
+            //Handle caught exceptions outside of a Razor component's lifecycle
             await DispatchExceptionAsync(ex);
-        }       
+        }
     }
 
     private async Task ThrowExceptionAsync()
