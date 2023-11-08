@@ -2,8 +2,14 @@ using Blazor.Web.Demo;
 using Blazor.Web.Demo.Client.Pages;
 using Blazor.Web.Demo.Components;
 using Blazor.Web.Demo.Data;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Endpoints;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Models;
 using Services;
+using System.ComponentModel.Design;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,7 +57,24 @@ app.ViewEndpoints();
 
 app.Use(async (context, next) =>
 {
-    var endpoint = context.GetEndpoint();    
+    var endpoint = context.GetEndpoint();
+    if (endpoint is not null)
+    {
+        //__PrivateComponentRenderModeAttribute
+        var metadata = endpoint.Metadata.GetOrderedMetadata<ComponentTypeMetadata>();
+        
+        if (metadata?.Count > 0)
+        {
+            var typ = metadata[0].Type;
+            Type[] types = typ.GetNestedTypes(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var attr = types.FirstOrDefault(t => t.Name == "__PrivateComponentRenderModeAttribute") ;
+            //var method = attr?.GetMethods();
+            //var result = method?[0].Invoke(new(),null);
+        }        
+        var routeEndpoint = (RouteEndpoint)endpoint;
+        Console.WriteLine($"DisplayName:{routeEndpoint.DisplayName}\t RoutePattern:{routeEndpoint.RoutePattern.RawText}");
+    }
+    
     await next();
 });
 

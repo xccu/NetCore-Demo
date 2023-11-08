@@ -13,7 +13,7 @@ public static class EndpointExtensions
                 var pattern = endpoint.RoutePattern;
                 var @delegate = endpoint.RequestDelegate;
 
-                Console.WriteLine($"name:{displayname},pattern:{pattern.ToString()}");
+                //Console.WriteLine($"name:{displayname},pattern:{pattern.ToString()}");
             }
         }
     }
