@@ -21,10 +21,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddSingleton<Foo>();
-builder.Services.AddSingleton<Bar>();
 builder.Services.AddSingleton<FooService>();
-builder.Services.AddSingleton<BarService>();
-
 
 var app = builder.Build();
 
@@ -68,11 +65,10 @@ app.Use(async (context, next) =>
             var typ = metadata[0].Type;
             Type[] types = typ.GetNestedTypes(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             var attr = types.FirstOrDefault(t => t.Name == "__PrivateComponentRenderModeAttribute") ;
-            //var method = attr?.GetMethods();
-            //var result = method?[0].Invoke(new(),null);
+
         }        
         var routeEndpoint = (RouteEndpoint)endpoint;
-        Console.WriteLine($"DisplayName:{routeEndpoint.DisplayName}\t RoutePattern:{routeEndpoint.RoutePattern.RawText}");
+        //Console.WriteLine($"DisplayName:{routeEndpoint.DisplayName}\t RoutePattern:{routeEndpoint.RoutePattern.RawText}");
     }
     
     await next();

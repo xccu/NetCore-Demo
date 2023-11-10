@@ -1,14 +1,20 @@
 ﻿@page "/render-mode-1"
-
+@using Services;
+@inject FooService FooService
 <h3>Static Render Mode</h3>
 <p>
     <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#static-render-mode">static-render-mode</a>
 </p>
-
+<p>@FooService.GetInfo()</p>
 <button @onclick="UpdateMessage">Click me</button> @message
 
 @code {
     private string message = "Not clicked yet.";
+
+        protected override void OnInitialized()
+    {
+        Console.WriteLine($"StaticRender OnInitialized: {FooService.GetInfo()}");
+    }
 
     private void UpdateMessage()
     {

@@ -1,15 +1,22 @@
 ﻿@page "/render-mode-2"
 @rendermode RenderMode.InteractiveServer
+@using Services;
+@inject FooService FooService
 
 <h3>Server Render Mode</h3>
 <p>
     <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#server-render-mode">MS Document</a>
 </p>
-
+<p>@FooService.GetInfo()</p>
 <button @onclick="UpdateMessage">Click me</button> @message
 
 @code {
     private string message = "Not clicked yet.";
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"ServerRender OnInitialized: {FooService.GetInfo()}");
+    }
 
     private void UpdateMessage()
     {

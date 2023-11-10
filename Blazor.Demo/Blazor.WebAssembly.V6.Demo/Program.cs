@@ -11,8 +11,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 builder.Services.AddSingleton<Foo>();
-builder.Services.AddSingleton<Bar>();
 builder.Services.AddSingleton<FooService>();
-builder.Services.AddSingleton<BarService>();
 
 await builder.Build().RunAsync();
