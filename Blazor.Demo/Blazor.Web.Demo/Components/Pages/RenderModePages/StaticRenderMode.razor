@@ -6,7 +6,7 @@
     <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#static-render-mode">static-render-mode</a>
 </p>
 <p>@FooService.GetInfo()</p>
-<button @onclick="UpdateMessage">Click me</button> @message
+<button class="btn btn-primary" @onclick="UpdateMessage">Click me</button> @message
 
 @code {
     private string message = "Not clicked yet.";
