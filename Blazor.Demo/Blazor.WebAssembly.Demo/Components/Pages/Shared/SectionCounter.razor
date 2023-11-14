@@ -1,0 +1,12 @@
+﻿
+<SectionContent SectionName="counter">
+    <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+</SectionContent>
+
+@code {
+    private int currentCount;
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}

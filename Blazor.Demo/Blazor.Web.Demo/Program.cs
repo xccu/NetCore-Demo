@@ -20,8 +20,11 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddSingleton<WeatherForecastService>();
 
-builder.Services.AddSingleton<Foo>();
+builder.Services.AddSingleton(sp => { return new Foo() { Name = "Client Foo" }; });
 builder.Services.AddSingleton<FooService>();
+
+builder.Services.AddCascadingValue(provider => new Foo { Name = "Cascading Foo" });
+builder.Services.AddCascadingValue("Alpha", sp => new Foo { Name = "Cascading Alpha Foo" });
 
 var app = builder.Build();
 

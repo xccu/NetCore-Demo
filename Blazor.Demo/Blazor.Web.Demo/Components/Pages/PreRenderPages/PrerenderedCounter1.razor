@@ -21,7 +21,7 @@
     protected override void OnInitialized()
     {
         currentCount = r.Next(100);
-        Logger.LogInformation("currentCount set to {Count}", currentCount);
+        Logger.LogInformation("currentCount set to {0},Foo is {1}", currentCount, FooService.GetInfo());
     }
 
     private void IncrementCount()
