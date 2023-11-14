@@ -1,0 +1,10 @@
+﻿@using Models
+
+<div>Cascading Child Component</div>
+<div>@Foo.Name-@Foo.Id</div>
+
+
+@code {
+    [CascadingParameter]
+    protected Foo? Foo { get; set; }
+}

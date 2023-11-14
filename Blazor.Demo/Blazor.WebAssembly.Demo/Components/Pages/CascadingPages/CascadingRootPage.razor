@@ -1,0 +1,20 @@
+﻿@page "/cascading-root"
+@using Models
+
+<h3>Cascading Value</h3>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/cascading-values-and-parameters?preserve-view=true&view=aspnetcore-8.0#root-level-cascading-values">MS Document</a></li>
+<p>@Foo.Name-@Foo.Id</p>
+<p>@AlphaFoo.Name-@AlphaFoo.Id</p>
+
+@code {
+    [CascadingParameter]
+    public Foo? Foo { get; set; }
+
+    [CascadingParameter(Name = "Alpha")]
+    public Foo? AlphaFoo { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"OnInitialized {Foo.Name}:{Foo.Id}\t{AlphaFoo.Name}:{AlphaFoo.Id}");
+    }
+}

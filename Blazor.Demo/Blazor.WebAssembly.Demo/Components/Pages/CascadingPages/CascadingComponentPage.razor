@@ -1,0 +1,15 @@
+﻿@page "/cascading-component"
+@using Models
+
+<h3>Cascading Component Value</h3>
+<div>@Foo.Name-@Foo.Id</div>
+
+<p></p>
+<p>Cascading Value:</p>
+<CascadingValue Value="@Foo">
+    <CascadingChild></CascadingChild>
+</CascadingValue>
+
+@code {
+    private Foo Foo = new() { Name = "Cascading Parent Foo" };
+}

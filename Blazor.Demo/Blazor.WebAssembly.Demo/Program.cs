@@ -1,7 +1,6 @@
 using Blazor.WebAssembly.Demo.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Models;
 using Services;
 
@@ -14,6 +13,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddSingleton<Foo>();
 builder.Services.AddSingleton<FooService>();
 
-
+builder.Services.AddCascadingValue(provider => new Foo { Name = "Cascading Foo" });
+builder.Services.AddCascadingValue("Alpha", sp => new Foo { Name = "Cascading Alpha Foo" });
 
 await builder.Build().RunAsync();
