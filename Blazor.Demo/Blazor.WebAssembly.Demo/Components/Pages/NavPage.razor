@@ -5,10 +5,21 @@
 <button @onclick="ToDiv1">To Div1</button>
 <button @onclick="ToDiv2">To Div2</button>
 <button @onclick="ToDiv3">To Div3</button>
+<button @onclick="SetQuery">Set Query</button>
 <div id="div1" style="background-color:greenyellow;height:300px">Div1</div>
 <div id="div2" style="background-color:aquamarine;height:300px">Div2</div>
 <div id="div3" style="background-color:aqua;height:300px">Div3</div>
 @code {
+
+    [SupplyParameterFromQuery]
+    public string? Filter { get; set; }
+
+    [SupplyParameterFromQuery]
+    public int? Page { get; set; }
+
+    [SupplyParameterFromQuery(Name = "star")]
+    public string[]? Stars { get; set; }
+
     public void ToDiv1()
     {
         Navigation.NavigateTo("/nav-sample#div1");
@@ -23,4 +34,15 @@
         Navigation.NavigateTo("/nav-sample#div3");
     }
 
+    public void SetQuery()
+    {
+        string url = Navigation.GetUriWithQueryParameters(
+            new Dictionary<string, object?>
+                {
+                    ["filter"] = "f1",
+                    ["name"] = "user1",
+                    ["id"] = null
+                });
+        Navigation.NavigateTo(url);
+    }
 }

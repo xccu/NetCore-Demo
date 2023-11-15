@@ -2,7 +2,7 @@
 @using Blazor.Web.Demo.Data
 @attribute [StreamRendering(true)] 
 
-@inject WeatherForecastService ForecastService
+@* @inject WeatherForecastService ForecastService *@
 
 <PageTitle>Weather</PageTitle>
 
@@ -40,6 +40,9 @@ else
 }
 
 @code {
+
+    [Inject(Key = "forecast-service")]
+    public WeatherForecastService ForecastService { get; set; }
 
     private WeatherForecast[]? forecasts;
 

@@ -18,9 +18,10 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
-builder.Services.AddSingleton<WeatherForecastService>();
 
-builder.Services.AddSingleton(sp => { return new Foo() { Name = "Client Foo" }; });
+builder.Services.AddKeyedSingleton<WeatherForecastService>("forecast-service");
+
+builder.Services.AddSingleton(sp => { return new Foo() { Name = "Server Foo" }; });
 builder.Services.AddSingleton<FooService>();
 
 builder.Services.AddCascadingValue(provider => new Foo { Name = "Cascading Foo" });
