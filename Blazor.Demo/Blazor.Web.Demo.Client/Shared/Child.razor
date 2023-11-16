@@ -1,11 +1,24 @@
-﻿<p>
+﻿
+<p>
     <button class="btn btn-primary"  @onclick="OnClickCallback">
         Trigger a Parent component method
     </button>
 </p>
 
-<SectionContent SectionName="child-content">
-    <button class="btn btn-primary" @onclick="OnClickCallback">Section Content </button>
+<SectionContent SectionName="child-content-p">
+    <p>To control the content in a Razor component from a child Razor component, Blazor supports sections using the following built-in components:</p>
+</SectionContent>
+
+<SectionContent SectionName="child-content-li1">
+    <li>SectionOutlet: Renders content provided by SectionContent components with matching SectionName or SectionId arguments. </li>
+</SectionContent>
+
+<SectionContent SectionName="child-content-li2">
+    <li>SectionContent: Provides content as a RenderFragment to SectionOutlet components with a matching SectionName or SectionId. </li>
+</SectionContent>
+
+<SectionContent SectionName="child-content-a">
+    <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/sections?preserve-view=true&view=aspnetcore-8.0">MS Document</a>
 </SectionContent>
 
 @code {

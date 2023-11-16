@@ -1,0 +1,64 @@
+﻿@page "/data-binding"
+@rendermode RenderMode.InteractiveServer
+<h3>Data Binding</h3>
+
+<p>Normal Bind</p>
+<p>
+    <input @bind="bindValue" />
+    <code>bind Value</code>: @bindValue
+</p>
+
+<p>Bind After</p>
+<p>
+    <input @bind="bindValue" @bind:after="After" /> 
+    <code>bind After</code>: @bindAfterValue
+</p>
+
+<p>Bind Event</p>
+<p>
+    <input @bind="inputValue" @bind:event="oninput"/>
+    @* <input value="@inputValue" @oninput="OnInputEvent" /> *@
+    <code>input Value</code>: @inputValue
+</p>
+
+<p>Two Way</p>
+<p>
+    <div>
+        <input value="@failedValue" @oninput="OnInputFailEvent" />
+        <code>input Value Failed</code>: @failedValue
+    </div>
+    <div>
+        <input @bind:event="oninput" @bind:get="twowayValue" @bind:set="OnInputTwoway" />
+        <code>input Value Succeed</code>: @twowayValue
+    </div>    
+</p>
+
+@code {
+    private string? bindValue;
+    private string? inputValue;
+    private string? failedValue;
+    private string? twowayValue;
+    private string? bindAfterValue;
+
+    // private void OnInputEvent(ChangeEventArgs args)
+    // {
+    //     inputValue = args.Value?.ToString() ?? string.Empty;
+    // }
+
+    private void OnInputFailEvent(ChangeEventArgs args)
+    {
+        var newValue = args.Value?.ToString() ?? string.Empty;
+        failedValue = newValue.Length > 4 ? "Long!" : newValue;
+    }
+
+    private void OnInputTwoway(string value)
+    {
+        var newValue = value ?? string.Empty;
+        twowayValue = newValue.Length > 4 ? "Long!" : newValue;
+    }
+
+    private void After()
+    {
+        bindAfterValue = "Bind After";
+    }
+}

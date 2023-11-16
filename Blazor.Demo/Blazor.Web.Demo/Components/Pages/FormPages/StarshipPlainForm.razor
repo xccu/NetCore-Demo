@@ -1,12 +1,21 @@
 ﻿@page "/starship-plain-form"
-
+@rendermode RenderMode.InteractiveServer
 @inject ILogger<StarshipPlainForm> Logger
+@using Microsoft.AspNetCore.Antiforgery
+@attribute [RequireAntiforgeryToken(required: true)]
 
+<p>Form</p>
 <form method="post" @onsubmit="Submit" @formname="starship-plain-form">
-    <AntiforgeryToken />
+    <AntiforgeryToken /> 
     <InputText @bind-Value="Model!.Id" />
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
+
+<p>Edit Form</p>
+<EditForm Model="@Model" OnSubmit="@Submit">
+    <InputText @bind-Value="Model!.Id" />
+    <button class="btn btn-primary" type="submit">Submit</button>
+</EditForm>
 
 @code {
     [SupplyParameterFromForm]
@@ -16,8 +25,9 @@
 
     private void Submit()
     {
-        Logger.LogInformation("Id = {Id}", Model?.Id);
+        Logger.LogInformation("Model.Id = {Id}", Model?.Id);
     }
+
 
     public class Starship
     {
