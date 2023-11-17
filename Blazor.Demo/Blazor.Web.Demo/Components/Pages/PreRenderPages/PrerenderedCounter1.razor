@@ -1,7 +1,8 @@
 ﻿@page "/prerendered-counter-1"
+@using Services;
+
 @rendermode RenderMode.InteractiveServer
 @inject ILogger<PrerenderedCounter1> Logger
-@using Services;
 @inject FooService FooService
 
 <PageTitle>Prerendered Counter 1</PageTitle>

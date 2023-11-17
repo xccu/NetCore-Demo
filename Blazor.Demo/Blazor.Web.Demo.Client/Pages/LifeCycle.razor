@@ -1,8 +1,7 @@
 ﻿@page "/lifecycle"
-@* @rendermode RenderMode.InteractiveWebAssembly *@
-
-@attribute [RenderModeInteractiveServer(prerender: true)]
 @using Services;
+
+@rendermode RenderMode.InteractiveWebAssembly
 @inject FooService FooService
 
 <PageTitle>Life Cycle</PageTitle>

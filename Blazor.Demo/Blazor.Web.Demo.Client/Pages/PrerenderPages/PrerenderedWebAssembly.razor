@@ -1,9 +1,11 @@
 ﻿@page "/prerendered-counter-webassembly"
-@attribute [RenderModeInteractiveWebAssembly(prerender: false)]
+@using Services;
+
+@* @rendermode RenderMode.InteractiveWebAssembly *@
+@rendermode CustomerRenderMode.InteractiveWebAssemblyWithoutPrerender
 @implements IDisposable
 @inject ILogger<PrerenderedWebAssembly> Logger
 @inject PersistentComponentState ApplicationState
-@using Services;
 @inject FooService FooService
 
 <PageTitle>Prerendered WebAssembly</PageTitle>
@@ -17,6 +19,7 @@
 
 @code {
 
+    
     private int currentCount;
     private Random r = new Random();
     private PersistingComponentStateSubscription persistingSubscription;

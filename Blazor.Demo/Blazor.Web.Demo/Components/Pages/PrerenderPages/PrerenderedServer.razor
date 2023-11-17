@@ -1,9 +1,11 @@
 ﻿@page "/prerendered-counter-server"
-@attribute [RenderModeInteractiveServer(prerender: true)]
+@using Services;
+
+@* @rendermode RenderMode.InteractiveServer *@
+@rendermode CustomerRenderMode.InteractiveServerWithoutPrerender
 @implements IDisposable
 @inject ILogger<PrerenderedServer> Logger
 @inject PersistentComponentState ApplicationState
-@using Services;
 @inject FooService FooService
 
 <PageTitle>Prerendered Server</PageTitle>

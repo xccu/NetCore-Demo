@@ -24,6 +24,13 @@ builder.Services.AddKeyedSingleton<WeatherForecastService>("forecast-service");
 builder.Services.AddSingleton(sp => { return new Foo() { Name = "Server Foo" }; });
 builder.Services.AddSingleton<FooService>();
 
+//builder.Services.AddCascadingValue(sp =>
+//{
+//    var foo = new Foo { Name = "Cascading Foo" };
+//    var source = new CascadingValueSource<Foo>(foo, isFixed: true);
+//    return source;
+//});
+
 builder.Services.AddCascadingValue(provider => new Foo { Name = "Cascading Foo" });
 builder.Services.AddCascadingValue("Alpha", sp => new Foo { Name = "Cascading Alpha Foo" });
 
