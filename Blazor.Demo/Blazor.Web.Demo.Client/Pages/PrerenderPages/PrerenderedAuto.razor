@@ -1,8 +1,8 @@
 ﻿@page "/prerendered-counter-auto"
 @using Services;
 
-@* @rendermode RenderMode.InteractiveAuto *@
-@rendermode CustomerRenderMode.InteractiveAutoWithoutPrerender
+@rendermode RenderMode.InteractiveAuto
+@* @rendermode CustomerRenderMode.InteractiveAutoWithoutPrerender *@
 @implements IDisposable
 @inject ILogger<PrerenderedAuto> Logger
 @inject PersistentComponentState ApplicationState

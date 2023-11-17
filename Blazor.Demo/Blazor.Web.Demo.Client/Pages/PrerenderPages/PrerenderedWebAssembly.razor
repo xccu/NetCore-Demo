@@ -1,8 +1,8 @@
 ﻿@page "/prerendered-counter-webassembly"
 @using Services;
 
-@* @rendermode RenderMode.InteractiveWebAssembly *@
-@rendermode CustomerRenderMode.InteractiveWebAssemblyWithoutPrerender
+@rendermode RenderMode.InteractiveWebAssembly
+@* @rendermode CustomerRenderMode.InteractiveWebAssemblyWithoutPrerender *@
 @implements IDisposable
 @inject ILogger<PrerenderedWebAssembly> Logger
 @inject PersistentComponentState ApplicationState

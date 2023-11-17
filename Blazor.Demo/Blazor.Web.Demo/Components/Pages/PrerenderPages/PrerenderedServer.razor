@@ -1,8 +1,8 @@
 ﻿@page "/prerendered-counter-server"
 @using Services;
 
-@* @rendermode RenderMode.InteractiveServer *@
-@rendermode CustomerRenderMode.InteractiveServerWithoutPrerender
+@rendermode RenderMode.InteractiveServer
+@* @rendermode CustomerRenderMode.InteractiveServerWithoutPrerender *@
 @implements IDisposable
 @inject ILogger<PrerenderedServer> Logger
 @inject PersistentComponentState ApplicationState
