@@ -1,0 +1,27 @@
+Difference between SSRRender and Prerender in .net 8 blazor
+---------------------------------------------------------------------------------------------------------------------------------
+SSRRender and Prerender are two different render modes for Blazor components in .NET 8. They determine how the components are rendered, where they are rendered, and whether they are interactive or not.
+
+SSRRender stands for Server-Side Render, which means that the component is rendered on the server and sent to the client as HTML. This mode is useful for static pages that do not require interactivity or real-time updates. SSRRender components can be interactive by using SignalR or other methods to communicate with the server.
+
+Prerender stands for Pre-rendering, which means that the component is rendered on the client before it is requested by the user. This mode is useful for dynamic pages that require interactivity or real-time updates. Prerender components can be interactive by using SignalR or other methods to communicate with the server.
+
+The main difference between SSRRender and Prerender is that SSRRender components are always rendered on the server, while Prerender components are rendered on the client before they are requested by the user. This affects how the component behaves when it receives user input or updates its state.
+
+For example, if you have a counter component that increments a value based on user input, you can use SSRRender to display a fixed value on every page request, or you can use Prerender to display a dynamic value based on user input and update it in real-time.
+
+To apply a render mode to a component, you can use the @rendermode directive on either the component instance or definition. For example, @rendermode Server will apply Server render mode to all instances of that component, while @rendermode ServerPrerendered will apply ServerPrerendered render mode to all instances of that component.
+
+For more information about render modes and how to use them in Blazor Web Apps, you can refer to these resources:
+
+1)ASP.NET Core Blazor render modes
+https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0
+2).NET 8 and Blazor United / Server-side rendering
+https://steven-giesel.com/blogPost/3c71e553-490f-4d52-8104-eb8338c0207f
+3)Blazor .NET 8 preview 7 rendering modes
+https://stackoverflow.com/questions/77040382/blazor-net-8-preview-7-rendering-modes
+4)ASP.NET Core Blazor SignalR guidance
+https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/signalr?view=aspnetcore-7.0
+5)Blazor in .NET 8: Server-side and Streaming Rendering
+https://chrissainty.com/blazor-in-dotnet-8-server-side-and-streaming-rendering/
+---------------------------------------------------------------------------------------------------------------------------------
