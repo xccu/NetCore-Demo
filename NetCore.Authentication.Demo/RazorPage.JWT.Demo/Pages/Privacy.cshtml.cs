@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Security;
 
-namespace RazorPage.Demo.Pages
+namespace RazorPage.JWT.Demo.Pages
 {
-    //[Permission("AtLeast18")]
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
@@ -18,4 +16,5 @@ namespace RazorPage.Demo.Pages
         {
         }
     }
+
 }

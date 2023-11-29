@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPage.Demo", "RazorPage
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Server.Demo", "Blazor.Server.Demo\Blazor.Server.Demo.csproj", "{397FDDF4-7A7E-4744-A638-B3406C7BC3FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{622E217E-FE31-44AF-ABDE-37D41BF153E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{622E217E-FE31-44AF-ABDE-37D41BF153E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security", "Security\Security.csproj", "{D335F65C-0C47-4E29-92CD-022EF6C7A53A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI.JWT.Demo", "WebApi.JWT.Demo\WebAPI.JWT.Demo.csproj", "{84B13ECE-E1B2-4391-AE6B-981052F960B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D335F65C-0C47-4E29-92CD-022EF6C7A53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D335F65C-0C47-4E29-92CD-022EF6C7A53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D335F65C-0C47-4E29-92CD-022EF6C7A53A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84B13ECE-E1B2-4391-AE6B-981052F960B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84B13ECE-E1B2-4391-AE6B-981052F960B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84B13ECE-E1B2-4391-AE6B-981052F960B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84B13ECE-E1B2-4391-AE6B-981052F960B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

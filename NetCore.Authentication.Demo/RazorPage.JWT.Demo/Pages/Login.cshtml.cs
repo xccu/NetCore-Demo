@@ -15,12 +15,10 @@ public class LoginModel : PageModel
 
     private LoginService _loginService;
     private CacheService _cacheService;
-    private WeatherForecastService _weatherForecastService;
 
-    public LoginModel(LoginService loginService, CacheService cacheService,WeatherForecastService weatherForecastService)
+    public LoginModel(LoginService loginService, CacheService cacheService)
     {
         _loginService = loginService;
-        _weatherForecastService = weatherForecastService;
         _cacheService = cacheService;
     }
 
@@ -41,7 +39,6 @@ public class LoginModel : PageModel
 
     public async Task OnPostTestAsync()
     {
-        Text = await _weatherForecastService.GetWeatherAsync();
-        //Text = await _loginService.JWTGet();
+        Text = await _loginService.JWTGet();
     }
 }

@@ -1,10 +1,14 @@
 ﻿@page
 @model LoginModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Home page";
 }
 
-<h3>JWT Login</h3>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-page-handler="Login" method="post">
@@ -22,15 +26,13 @@
         </form>        
     </div>
 </div>
-<p></p>
+
 <form asp-page-handler="Logout" method="post">
-    <button class="btn btn-primary">Logout</button>
+   <button>Logout</button>
 </form>
 
-<p></p>
 <form asp-page-handler="Test" method="post">
-    <label>Get Weather forecast</label>
-    <button class="btn btn-primary">Click</button>
+    <button>Test</button>
 </form>
 
 <textarea class="form-control" rows="5">@Model.Text</textarea>

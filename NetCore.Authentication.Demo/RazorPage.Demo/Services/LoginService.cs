@@ -22,17 +22,10 @@ public class LoginService
             Encoding.UTF8,
             Application.Json); // using static System.Net.Mime.MediaTypeNames;
 
-        using var httpResponseMessage = await _httpClient.PostAsync("JWT/Login", todoItemJson);
+        using var httpResponseMessage = await _httpClient.PostAsync("login", todoItemJson);
         var result = await httpResponseMessage.Content.ReadAsStringAsync();
 
         return result;
     }
 
-    public async Task<string> JWTGet()
-    {
-        using var httpResponseMessage = await _httpClient.GetAsync("JWT/Get");
-        var result = await httpResponseMessage.Content.ReadAsStringAsync();
-
-        return result;
-    }
 }
