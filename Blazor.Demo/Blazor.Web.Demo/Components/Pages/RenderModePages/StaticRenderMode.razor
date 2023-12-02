@@ -1,4 +1,4 @@
-﻿@page "/render-mode-1"
+﻿@page "/render-mode-static"
 @using Services;
 @inject FooService FooService
 <h3>Static Render Mode</h3>
@@ -13,12 +13,12 @@
 
         protected override void OnInitialized()
     {
-        Console.WriteLine($"StaticRender OnInitialized: {FooService.GetInfo()}");
+        Console.WriteLine($"[{DateTime.Now}] StaticRender OnInitialized: {FooService.GetInfo()}");
     }
 
     private void UpdateMessage()
     {
-        Console.WriteLine("StaticRender UpdateMessage clicked");
+        Console.WriteLine($"[{DateTime.Now}] StaticRender UpdateMessage clicked");
         message = "Somebody clicked me!";
     }
 }

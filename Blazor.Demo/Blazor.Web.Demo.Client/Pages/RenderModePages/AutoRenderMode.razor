@@ -1,4 +1,4 @@
-﻿@page "/render-mode-4"
+﻿@page "/render-mode-auto"
 @using Services;
 
 @rendermode RenderMode.InteractiveAuto
@@ -16,12 +16,12 @@
 
     protected override void OnInitialized()
     {
-        Console.WriteLine($"AutoRender OnInitialized: {FooService.GetInfo()}");
+        Console.WriteLine($"[{DateTime.Now}] AutoRender OnInitialized: {FooService.GetInfo()}");
     }
 
     private void UpdateMessage()
     {
-        Console.WriteLine("AutoRender UpdateMessage clicked");
+        Console.WriteLine($"[{DateTime.Now}] AutoRender UpdateMessage clicked");
         message = "Somebody clicked me!";
     }
 }

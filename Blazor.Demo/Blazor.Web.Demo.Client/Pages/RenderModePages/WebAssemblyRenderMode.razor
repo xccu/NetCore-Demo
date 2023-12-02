@@ -1,4 +1,4 @@
-﻿@page "/render-mode-3"
+﻿@page "/render-mode-webassembly"
 @rendermode RenderMode.InteractiveWebAssembly
 @using Services;
 @inject FooService FooService
@@ -15,12 +15,12 @@
 
     protected override void OnInitialized()
     {
-        Console.WriteLine($"WebAssemblyRender OnInitialized: {FooService.GetInfo()}");
+        Console.WriteLine($"[{DateTime.Now}] WebAssemblyRender OnInitialized: {FooService.GetInfo()}");
     }
 
     private void UpdateMessage()
     {
-        Console.WriteLine("WebAssemblyRender UpdateMessage clicked");
+        Console.WriteLine($"[{DateTime.Now}] WebAssemblyRender UpdateMessage clicked");
         message = "Somebody clicked me!";
     }
 }

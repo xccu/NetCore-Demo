@@ -1,4 +1,4 @@
-﻿@page "/prerendered-counter-auto"
+﻿@page "/prerendered-auto"
 @using Services;
 
 @rendermode RenderMode.InteractiveAuto
@@ -29,14 +29,14 @@
         if (!ApplicationState.TryTakeFromJson<int>("count", out var restoredCount))
         {
             currentCount = r.Next(100);
-            Logger.LogInformation("currentCount set to {Count}", currentCount);
+            Console.WriteLine($"[{DateTime.Now}] currentCount restored to {currentCount}");
         }
         else
         {
             currentCount = restoredCount!;
-            Logger.LogInformation("currentCount restored to {Count}", currentCount);
+            Console.WriteLine($"[{DateTime.Now}] currentCount restored to {currentCount}");
         }
-        Logger.LogInformation("Foo is {0}", FooService.GetInfo());
+        Console.WriteLine($"[{DateTime.Now}] Foo is {FooService.GetInfo()}");
     }
 
     private Task PersistCount()
@@ -54,6 +54,6 @@
     private void IncrementCount()
     {
         currentCount = FooService.AddOne(currentCount);
-        Logger.LogInformation("IncrementCount Clicked:{0}", currentCount);
+        Console.WriteLine($"[{DateTime.Now}] IncrementCount Clicked:{currentCount}");
     }
 }

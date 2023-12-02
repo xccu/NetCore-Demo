@@ -1,4 +1,4 @@
-﻿@page "/render-mode-2"
+﻿@page "/render-mode-server"
 @rendermode RenderMode.InteractiveServer
 @using Services;
 @inject FooService FooService
@@ -15,12 +15,12 @@
 
     protected override void OnInitialized()
     {
-        Console.WriteLine($"ServerRender OnInitialized: {FooService.GetInfo()}");
+        Console.WriteLine($"[{DateTime.Now}] ServerRender OnInitialized: {FooService.GetInfo()}");
     }
 
     private void UpdateMessage()
     {
-        Console.WriteLine("ServerRender UpdateMessage clicked");
+        Console.WriteLine($"[{DateTime.Now}] ServerRender UpdateMessage clicked");
         message = "Somebody clicked me!";
     }
 }

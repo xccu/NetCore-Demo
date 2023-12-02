@@ -79,6 +79,7 @@ app.Use(async (context, next) =>
 
         }        
         var routeEndpoint = (RouteEndpoint)endpoint;
+        Console.WriteLine($"[{DateTime.Now}] RoutePattern:{routeEndpoint.RoutePattern.RawText}");
         //Console.WriteLine($"DisplayName:{routeEndpoint.DisplayName}\t RoutePattern:{routeEndpoint.RoutePattern.RawText}");
     }
     
