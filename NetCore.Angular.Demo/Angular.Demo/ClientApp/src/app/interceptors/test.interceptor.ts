@@ -10,8 +10,8 @@ import { filter, map, mergeMap } from "rxjs/operators";
 export class TestInterceptor implements HttpInterceptor {
   constructor() { }
 
-  //private header: string;
-
+  private header!: string | null;
+  private keys!: string[] | null;
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = this.handleRequest(req);
     return next.handle(req).pipe(
@@ -19,12 +19,11 @@ export class TestInterceptor implements HttpInterceptor {
     );
   }
 
-
   /**
    * 请求参数拦截处理
    */
   handleRequest(req: any) {
-    console.log("[Test Request] " + req);
+    console.log(`[Test Request] [${req.method}]${req.url}`);
     return req;
   }
 
@@ -34,11 +33,16 @@ export class TestInterceptor implements HttpInterceptor {
   handle(evt: any) {
     return new Observable<HttpEvent<any>>(observer => {
       if (evt instanceof HttpResponse) {
-        console.log("[Test Response] " + evt);
+        console.log(`[Test Response] [${evt.status}]${evt.url}`);
+        this.keys = evt.headers.keys();
+        this.header = evt.headers.get('Date'); //Content-Type
+        if (this.header != null) {
+          console.log(`[Content-Type] ${this.header}`);
+        }
       }
-      else
-      {
-        //console.log("[Test Request After] " + JSON.stringify(evt));
+      else {
+        //console.log("[Test Request] " + JSON.stringify(evt));
+        //console.log(`拦截器A接收到请求发出状态：${JSON.stringify(evt)}`);
       }
       observer.next(evt);
     });

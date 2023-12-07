@@ -10,8 +10,6 @@ import { filter, map, mergeMap } from "rxjs/operators";
 export class LogInterceptor implements HttpInterceptor {
   constructor() { }
 
-  //private header: string;
-
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = this.handleRequest(req);    
     return next.handle(req).pipe(
@@ -19,12 +17,11 @@ export class LogInterceptor implements HttpInterceptor {
     );
   }
 
-
   /**
    * 请求参数拦截处理
    */
   handleRequest(req: any) {
-    console.log("[Log Request] " + req.url);
+    console.log(`[Log Request] [${req.method}]${req.url}`);
     return req;
   }
 
@@ -33,8 +30,9 @@ export class LogInterceptor implements HttpInterceptor {
    */
   handle(evt: any) {
     return new Observable<HttpEvent<any>>(observer => {
-      if (evt instanceof HttpResponse) {
-        console.log("[Log Response] " + evt.url);
+      if (evt instanceof HttpResponse) {            
+        console.log(`[Log Response] [${evt.status}]${evt.url}`);
+        console.log(`${JSON.stringify(evt.body)}`);
       }
       else
       {

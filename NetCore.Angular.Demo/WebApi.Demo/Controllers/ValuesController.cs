@@ -10,6 +10,7 @@ public class ValuesController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<ValueDto>> Get()
     {
+        this.HttpContext.Response.Headers.Append("API-VALUE-TEST", "Get Value");
         var values = new List<ValueDto>()
         {
             new (){ Id = 1, Name = "Name1", Value="Value1" },
