@@ -3,9 +3,9 @@
 <p>This is a simple example of an Angular component.</p>
 
 <button class="btn btn-primary" (click)="getValues()">Get</button>
-<button class="btn btn-primary" >Post</button>
-<button class="btn btn-primary" >Put</button>
-<button class="btn btn-primary" >Delete</button>
-<button class="btn btn-primary" >Error</button>
+<button class="btn btn-primary" (click)="postValues()">Post</button>
+<button class="btn btn-primary" (click)="putValues()">Put</button>
+<button class="btn btn-primary" (click)="deleteValues()">Delete</button>
+<button class="btn btn-primary" (click)="getError()">Error</button>
 <div>Output:</div>
 <textarea rows="10" cols="100">{{ values }}</textarea>

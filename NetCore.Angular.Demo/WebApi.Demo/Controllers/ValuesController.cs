@@ -12,8 +12,8 @@ public class ValuesController : ControllerBase
     {
         var values = new List<ValueDto>()
         {
-            new (){ Name = "Name1", Value="Value1" },
-            new (){ Name = "Name2", Value="Value2" }
+            new (){ Id = 1, Name = "Name1", Value="Value1" },
+            new (){ Id = 2, Name = "Name2", Value="Value2" }
         };
         return values;
     }
@@ -32,19 +32,22 @@ public class ValuesController : ControllerBase
             ValueDto dto)
     {
 
+        Console.WriteLine($"{dto.Name}-{dto.Value}");
         return Ok(dto);
     }
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    public IActionResult Put(int id, [FromBody] string value)
     {
+        return Ok();
     }
 
     // DELETE api/values/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public IActionResult Delete(int id)
     {
+        return Ok();
     }
 
     // GET api/values/error

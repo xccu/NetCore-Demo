@@ -24,7 +24,7 @@ export class TestInterceptor implements HttpInterceptor {
    * 请求参数拦截处理
    */
   handleRequest(req: any) {
-    console.log("[Request Brfore-Test] " + req);
+    console.log("[Test Request] " + req);
     return req;
   }
 
@@ -34,11 +34,11 @@ export class TestInterceptor implements HttpInterceptor {
   handle(evt: any) {
     return new Observable<HttpEvent<any>>(observer => {
       if (evt instanceof HttpResponse) {
-        console.log("[Response-Test] " + evt);
+        console.log("[Test Response] " + evt);
       }
       else
       {
-        //console.log("[Request After-Test] " + JSON.stringify(evt));
+        //console.log("[Test Request After] " + JSON.stringify(evt));
       }
       observer.next(evt);
     });

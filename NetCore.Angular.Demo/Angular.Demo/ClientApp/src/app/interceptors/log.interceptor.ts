@@ -13,7 +13,7 @@ export class LogInterceptor implements HttpInterceptor {
   //private header: string;
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req = this.handleRequest(req);
+    req = this.handleRequest(req);    
     return next.handle(req).pipe(
       mergeMap(evt => this.handle(evt))
     );
@@ -24,7 +24,7 @@ export class LogInterceptor implements HttpInterceptor {
    * 请求参数拦截处理
    */
   handleRequest(req: any) {
-    console.log("[Request Brfore-Log] " + req);
+    console.log("[Log Request] " + req.url);
     return req;
   }
 
@@ -34,11 +34,11 @@ export class LogInterceptor implements HttpInterceptor {
   handle(evt: any) {
     return new Observable<HttpEvent<any>>(observer => {
       if (evt instanceof HttpResponse) {
-        console.log("[Response-Log] " + evt);
+        console.log("[Log Response] " + evt.url);
       }
       else
       {
-        //console.log("[Request After-Log] " + JSON.stringify(evt));
+        //console.log("[Log Request] " + JSON.stringify(evt));
         //console.log(`拦截器A接收到请求发出状态：${JSON.stringify(evt)}`);
       }
       observer.next(evt);
