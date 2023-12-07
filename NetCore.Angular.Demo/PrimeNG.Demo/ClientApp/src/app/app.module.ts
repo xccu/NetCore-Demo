@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { PanelModule } from 'primeng/panel';
@@ -21,6 +21,8 @@ import { InputTextComponent } from './samples/input-text/input-text.component';
 import { PanelComponent } from './samples/panel/panel.component';
 import { MenuBarComponent } from './samples/menu-bar/menu-bar.component';
 import { ButtonComponent } from './samples/button/button.component';
+import { LogInterceptor } from './helpers/log.interceptor';
+
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import { ButtonComponent } from './samples/button/button.component';
       { path: 'button', component: ButtonComponent }
     ])
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LogInterceptor, multi: true } // LogInterceptor 注册语句
+  ],   
   bootstrap: [AppComponent]
 })
 export class AppModule { }
