@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# MakeConst: Variable can be made constant
+dotnet_diagnostic.MakeConst.severity = error

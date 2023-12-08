@@ -1,7 +1,10 @@
 ﻿namespace ConsoleApp1;
 
-class Program 
+class Program
 {
+    public int Id { get; set; } 
+
+
     static void Main(string[] args)
     {
         int x = 0;

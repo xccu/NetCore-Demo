@@ -13,6 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeConst.Test", "MakeConst
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeConst.Vsix", "MakeConst\MakeConst.Vsix\MakeConst.Vsix.csproj", "{F268A426-9CB7-4B7E-AF9E-C3FE5C86AB7C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "..\ConsoleApp1\ConsoleApp1\ConsoleApp1.csproj", "{3FCA5BE3-D9FF-4FD5-9C9A-B41DFE81DF2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0970276E-CB59-4C76-B1E0-A897E783847F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +46,10 @@ Global
 		{F268A426-9CB7-4B7E-AF9E-C3FE5C86AB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F268A426-9CB7-4B7E-AF9E-C3FE5C86AB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F268A426-9CB7-4B7E-AF9E-C3FE5C86AB7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FCA5BE3-D9FF-4FD5-9C9A-B41DFE81DF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FCA5BE3-D9FF-4FD5-9C9A-B41DFE81DF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FCA5BE3-D9FF-4FD5-9C9A-B41DFE81DF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FCA5BE3-D9FF-4FD5-9C9A-B41DFE81DF2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!--<ItemGroup>
+    <PackageReference Include="MakeConst" Version="1.0.0" />	  
+  </ItemGroup>-->
+
 </Project>
