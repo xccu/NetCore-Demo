@@ -7,12 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Reference Include="MakeConst">
-      <HintPath>..\..\NetCore.Roslyn.Demo\MakeConst\MakeConst\bin\Debug\netstandard2.0\MakeConst.dll</HintPath>
-		<PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </Reference>
-  </ItemGroup>
-
 </Project>
