@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ValuesComponent } from './samples/values/values.component';
+import { MapComponent } from './samples/map/map.component';
+
 import { LogInterceptor } from './interceptors/log.interceptor';
 import { TestInterceptor } from './interceptors/test.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
@@ -21,7 +23,8 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    ValuesComponent
+    ValuesComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,6 +35,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'values', component: ValuesComponent },
+      { path: 'map', component: MapComponent },
     ])
   ],
   providers: [
