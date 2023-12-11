@@ -1,13 +1,13 @@
 import { Component, Inject } from '@angular/core';
-import { Observable, delay, map, mergeMap, of } from 'rxjs';
+import { Observable, delay, filter, map, mergeMap, of } from 'rxjs';
 
 @Component({
-  selector: 'app-map-component',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  selector: 'app-rxjs-demo-component',
+  templateUrl: './rxjs-demo.component.html',
+  styleUrls: ['./rxjs-demo.component.css']
 })
 
-export class MapComponent {
+export class RxjsDemoComponent {
 
   constructor() {
   }
@@ -39,4 +39,14 @@ export class MapComponent {
     );
   }
 
+  public onFilter() {
+    var squareOdd = of(1, 2, 3, 4, 5);
+    squareOdd.pipe(
+        filter(n => n % 2 === 1),
+        map(n => n * n)
+    );
+
+    // Subscribe to get values
+    squareOdd.subscribe(x => console.log(x));
+  }
 }

@@ -3,11 +3,11 @@ import { Component, Inject } from '@angular/core';
 import { Value } from '../../models/value.model';
 
 @Component({
-  selector: 'app-values-component',
-  templateUrl: './values.component.html',
-  styleUrls: ['./values.component.css']
+  selector: 'app-api-demo-component',
+  templateUrl: './api-demo.component.html',
+  styleUrls: ['./api-demo.component.css']
 })
-export class ValuesComponent {
+export class ApiDemoComponent {
 
   public values: string | undefined;
   private baseUrl: string;

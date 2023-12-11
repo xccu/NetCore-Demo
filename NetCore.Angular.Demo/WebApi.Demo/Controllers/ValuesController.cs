@@ -6,24 +6,40 @@ namespace WebApi.Demo.Controllers;
 [ApiController]
 public class ValuesController : ControllerBase
 {
-    // GET api/values
-    [HttpGet]
-    public ActionResult<IEnumerable<ValueDto>> Get()
+    private List<ValueDto> _values = default;
+
+    public ValuesController()
     {
-        this.HttpContext.Response.Headers.Append("API-VALUE-TEST", "Get Value");
-        var values = new List<ValueDto>()
+        _values = new()
         {
             new (){ Id = 1, Name = "Name1", Value="Value1" },
             new (){ Id = 2, Name = "Name2", Value="Value2" }
         };
-        return values;
+    }
+
+    // GET api/values
+    [HttpGet]
+    public ActionResult<IEnumerable<ValueDto>> Get()
+    {
+        this.HttpContext.Request.Headers.TryGetValue("Cache-Control", out var v);
+        Console.WriteLine(v);
+        this.HttpContext.Response.Headers.Append("API-VALUE-TEST", "Get Value");
+        
+        return _values;
     }
 
     // GET api/values/5
     [HttpGet("{id}")]
     public ActionResult<string> Get(int id)
     {
-        return "value";
+
+        return _values.FirstOrDefault(t=>t.Id==id)?.Value ?? "value";
+    }
+
+    [HttpGet("name/{name}")]
+    public ActionResult<string> GetByName(string name)
+    {
+        return _values.FirstOrDefault(t => t.Name == name)?.Value ?? "value";
     }
 
     // POST api/values
@@ -40,8 +56,8 @@ public class ValuesController : ControllerBase
     // PUT api/values/5
     [HttpPut("{id}")]
     public IActionResult Put(int id, [FromBody] string value)
-    {
-        return Ok();
+    {       
+        return Ok(new ValueDto() { Id = id, Name = value, Value = value });
     }
 
     // DELETE api/values/5

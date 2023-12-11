@@ -1,0 +1,7 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@hostname=localhost
+@port=42899
+@host={{hostname}}:{{port}}
+@id=3
+DELETE http://{{host}}/api/values/{{id}}
