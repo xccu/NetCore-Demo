@@ -2,15 +2,17 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Demo.Algorithms\Demo.Algorithms.csproj" />
+    <ProjectReference Include="..\Demo.AutoMapper\Demo.AutoMapper.csproj" />
     <ProjectReference Include="..\Demo.Decorator\Demo.Decorator.csproj" />
     <ProjectReference Include="..\Demo.Delegates\Demo.Delegates.csproj" />
+    <ProjectReference Include="..\Demo.Exception\Demo.Exception.csproj" />
     <ProjectReference Include="..\Demo.ExpressionTree\Demo.ExpressionTree.csproj" />
   </ItemGroup>
 

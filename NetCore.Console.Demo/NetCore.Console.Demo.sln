@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console.App", "Console.App\Console.App.csproj", "{AB1F8C76-4ABB-4915-A6A4-6146301C8813}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApplication", "Console.App\ConsoleApplication.csproj", "{AB1F8C76-4ABB-4915-A6A4-6146301C8813}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Delegates", "Demo.Delegates\Demo.Delegates.csproj", "{B31F52C7-10B8-468C-A451-FD3925C542BD}"
 EndProject
@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Algorithms", "Demo.Alg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.ExpressionTree", "Demo.ExpressionTree\Demo.ExpressionTree.csproj", "{312A0F01-6B5B-47A2-9C5B-0727E3C51810}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Decorator", "Demo.Decorator\Demo.Decorator.csproj", "{FE1D1B1E-CD14-49E5-8E22-ED8A608D2B8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Decorator", "Demo.Decorator\Demo.Decorator.csproj", "{FE1D1B1E-CD14-49E5-8E22-ED8A608D2B8C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.HttpFiles", "Demo.HttpFiles\Demo.HttpFiles.csproj", "{0F30F9A6-074E-4916-A844-993CE6C70D1C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Exception", "Demo.Exception\Demo.Exception.csproj", "{3D945F01-F8BC-469F-AD7E-2D022D590E08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.AutoMapper", "Demo.AutoMapper\Demo.AutoMapper.csproj", "{42215843-A5C8-4CED-957D-BC06AE076943}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{FE1D1B1E-CD14-49E5-8E22-ED8A608D2B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE1D1B1E-CD14-49E5-8E22-ED8A608D2B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE1D1B1E-CD14-49E5-8E22-ED8A608D2B8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F30F9A6-074E-4916-A844-993CE6C70D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F30F9A6-074E-4916-A844-993CE6C70D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F30F9A6-074E-4916-A844-993CE6C70D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F30F9A6-074E-4916-A844-993CE6C70D1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D945F01-F8BC-469F-AD7E-2D022D590E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D945F01-F8BC-469F-AD7E-2D022D590E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D945F01-F8BC-469F-AD7E-2D022D590E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D945F01-F8BC-469F-AD7E-2D022D590E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42215843-A5C8-4CED-957D-BC06AE076943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42215843-A5C8-4CED-957D-BC06AE076943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42215843-A5C8-4CED-957D-BC06AE076943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42215843-A5C8-4CED-957D-BC06AE076943}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
