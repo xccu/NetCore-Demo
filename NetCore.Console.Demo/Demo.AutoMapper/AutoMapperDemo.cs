@@ -3,13 +3,14 @@
 namespace Demo.AutoMapper;
 
 //https://docs.automapper.org/en/latest/
+//https://docs.automapper.org/en/latest/Getting-started.html
 public class AutoMapperDemo
 {
 
 
     public static void Run()
     {
-        var dto = new UserDto()
+        var userDto = new UserDto()
         {
             Id = "1",
             PassWord = "123",
@@ -22,10 +23,6 @@ public class AutoMapperDemo
             }
         };
 
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<UserDto, UserModel>());
-        var mapper = config.CreateMapper();
-        var model =  mapper.Map<UserModel>(dto);
-
         var nodeDto = new NodeDto()
         {
             Id = 1,
@@ -34,17 +31,23 @@ public class AutoMapperDemo
             {
                 new NodeDto() {Id = 2,Name="subNode1-2"},
                 new NodeDto() {Id = 3,Name="subNode1-3"},
-                new NodeDto() 
+                new NodeDto()
                 {
-                    Id = 4,Name="subNode1-4",SubNodes = new(){ new NodeDto() { Id = 2, Name = "subNode1-4-5" } } 
-                } 
+                    Id = 4,Name="subNode1-4",SubNodes = new(){ new NodeDto() { Id = 2, Name = "subNode1-4-5" } }
+                }
             }
         };
 
-        var config2 = new MapperConfiguration(cfg => cfg.CreateMap<NodeDto, NodeModel>());
-        var mapper2 = config.CreateMapper();
-        var model2 = mapper.Map<NodeModel>(nodeDto);
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<UserDto, UserModel>();
+            cfg.CreateMap<NodeDto, NodeModel>();
+        });
+        var mapper = config.CreateMapper();
 
+        var userModel = mapper.Map<UserModel>(userDto);
+        var nodeModel = mapper.Map<NodeModel>(nodeDto);
 
     }
+
 }
