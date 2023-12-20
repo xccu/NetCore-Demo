@@ -10,5 +10,5 @@ public class NodeModel
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public NodeModel Child { get; set; } = new();
+    public List<NodeModel> SubNodes { get; set; } = new();
 }

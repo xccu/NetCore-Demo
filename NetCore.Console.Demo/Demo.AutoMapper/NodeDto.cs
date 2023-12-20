@@ -10,5 +10,5 @@ public class NodeDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public NodeDto Child { get; set; } = new();
+    public List<NodeDto> SubNodes { get; set; } = new();
 }
