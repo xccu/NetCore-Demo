@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo.AutoMapper;
+namespace Demo.AutoMapper.Dtos;
 
 public class UserDto
 {
-    public string Id { set; get; }
+    public int Id { set; get; }
 
-    public string UserName { set; get; }
+    public string Name { set; get; }
 
     public string PassWord { set; get; }
 
-    public List<string> AssignRoles { set; get; } = new List<string>();
+    public List<string> Roles { set; get; } = new List<string>();
 }
