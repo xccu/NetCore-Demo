@@ -22,6 +22,8 @@ public class User : IVersion
     public String gender { get; set; }
     [Column("RACE")]
     public String race { get; set; }
+
+    [ConcurrencyCheck]
     [Column("VERSION_NO")]
     public int VersionNo { get; set; }
 }

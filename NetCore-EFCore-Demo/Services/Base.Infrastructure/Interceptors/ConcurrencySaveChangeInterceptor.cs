@@ -24,6 +24,13 @@ public class ConcurrencySaveChangeInterceptor : SaveChangesInterceptor
         return base.ThrowingConcurrencyException(eventData, result);
     }
 
+    public override async ValueTask<InterceptionResult> ThrowingConcurrencyExceptionAsync(ConcurrencyExceptionEventData eventData,
+                                                                                      InterceptionResult result,
+                                                                                      CancellationToken cancellationToken = default)
+    {
+        return await base.ThrowingConcurrencyExceptionAsync(eventData, result, cancellationToken);
+    }
+
     private void HandleChanges(DbContext dbContext)
     {
         var entries = dbContext.ChangeTracker.Entries().ToArray();

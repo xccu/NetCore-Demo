@@ -28,10 +28,6 @@ public class LoggerSaveChangesInterceptor : SaveChangesInterceptor
         return await base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 
-    public override InterceptionResult ThrowingConcurrencyException(ConcurrencyExceptionEventData eventData,InterceptionResult result)
-    {
-        return base.ThrowingConcurrencyException(eventData, result);
-    }
 
     private void HandleChanges(DbContext dbContext)
     {

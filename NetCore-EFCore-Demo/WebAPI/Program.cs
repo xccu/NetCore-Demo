@@ -28,7 +28,7 @@ builder.Services.AddUser(
     builder => builder.UseDataBase(options =>
     {
         options.UseSqlServer(connectionString);
-        options.AddInterceptors(new LoggerSaveChangesInterceptor(),new ConcurrencySaveChangeInterceptor());
+        options.AddInterceptors(new ConcurrencySaveChangeInterceptor());
         options.ReplaceService<IModelCustomizer, UserModelCustomizer>();
     }),
     option =>
