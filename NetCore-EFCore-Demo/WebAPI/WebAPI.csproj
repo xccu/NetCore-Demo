@@ -20,10 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ExcelData\" />
-  </ItemGroup>
-
-  <ItemGroup>   
+    <ProjectReference Include="..\Common\DataSeed\Common.DataSeed.csproj" />
     <ProjectReference Include="..\Services\Device.Infrastructure\Device.Infrastructure.csproj" />    
     <ProjectReference Include="..\Services\User.Infrastructure\User.Infrastructure.csproj" />
   </ItemGroup>

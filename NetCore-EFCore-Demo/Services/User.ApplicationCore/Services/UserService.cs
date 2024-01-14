@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Caching.Memory;
 using Base.Infrastructure;
 using System.Collections.Generic;
+using Base.ApplicationCore;
 
 namespace User.ApplicationCore.Service;
 

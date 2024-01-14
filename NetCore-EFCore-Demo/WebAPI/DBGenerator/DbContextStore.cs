@@ -9,7 +9,7 @@ public static class DbContextStore
 {
     public static IEnumerable<Func<Type>> Contexts = new Func<Type>[]
     {
-        [Description("User Database")]()=> typeof(UserContext),
-        [Description("Device Database")]()=> typeof(DeviceContext)
+        [Description("User Database")]()=> typeof(UserDbContext),
+        [Description("Device Database")]()=> typeof(DeviceDbContext)
     };
 }

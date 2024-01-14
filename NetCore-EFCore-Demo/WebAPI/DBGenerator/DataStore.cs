@@ -18,23 +18,23 @@ public static class DataStore
 
     private static void WriteUser(IServiceProvider provider)
     {
-        var context = provider.GetRequiredService<UserContext>();
-        context.Add(new Users.User() { name = "Weslie", password= "Psd%123", age= 12, gender= "Male", race= "Caprinae" });
-        context.Add(new Users.User() { name = "Wolffy", password = "Psd%123", age = 34, gender = "Male", race = "Lupo" });
-        context.Add(new Users.User() { name = "Paddi", password = "Psd%123", age = 10, gender = "Male", race = "Caprinae" });
-        context.Add(new Users.User() { name = "Tibby", password = "Psd%123", age = 11, gender = "Female", race = "Caprinae" });
-        context.Add(new Users.User() { name = "Sparky", password = "Psd%123", age = 13, gender = "Male", race = "Caprinae" });
-        context.Add(new Users.User() { name = "Jonie", password = "Psd%123", age = 13, gender = "Female", race = "Caprinae" });
-        context.Add(new Users.User() { name = "Slowy", password = "Psd%123", age = 80, gender = "Male", race = "Caprinae" });
-        context.Add(new Users.User() { name = "Wolnie", password = "Psd%123", age = 33, gender = "Female", race = "Lupo" });
-        context.Add(new Users.User() { name = "Wilie", password = "Psd%123", age = 3, gender = "Male", race = "Lupo" });
+        var context = provider.GetRequiredService<UserDbContext>();
+        context.Add(new Users.User() { Name = "Weslie", Password= "Psd%123", Age= 12, Gender= "Male", Race= "Caprinae" });
+        context.Add(new Users.User() { Name = "Wolffy", Password = "Psd%123", Age = 34, Gender = "Male", Race = "Lupo" });
+        context.Add(new Users.User() { Name = "Paddi", Password = "Psd%123", Age = 10, Gender = "Male", Race = "Caprinae" });
+        context.Add(new Users.User() { Name = "Tibby", Password = "Psd%123", Age = 11, Gender = "Female", Race = "Caprinae" });
+        context.Add(new Users.User() { Name = "Sparky", Password = "Psd%123", Age = 13, Gender = "Male", Race = "Caprinae" });
+        context.Add(new Users.User() { Name = "Jonie", Password = "Psd%123", Age = 13, Gender = "Female", Race = "Caprinae" });
+        context.Add(new Users.User() { Name = "Slowy", Password = "Psd%123", Age = 80, Gender = "Male", Race = "Caprinae" });
+        context.Add(new Users.User() { Name = "Wolnie", Password = "Psd%123", Age = 33, Gender = "Female", Race = "Lupo" });
+        context.Add(new Users.User() { Name = "Wilie", Password = "Psd%123", Age = 3, Gender = "Male", Race = "Lupo" });
 
         context.SaveChanges();
     }
 
     private static void WriteDevice(IServiceProvider provider)
     {
-        var context = provider.GetRequiredService<DeviceContext>();
+        var context = provider.GetRequiredService<DeviceDbContext>();
         context.Add(new Devices.Device() { name = "DELL-Laptop", description = "Laptop", deviceNumber = "H000001", registedDate = Convert.ToDateTime("2023-1-1") });
         context.Add(new Devices.Device() { name = "HP-Screen", description = "Screen", deviceNumber = "H000002", registedDate = Convert.ToDateTime("2023-1-1") });
         context.Add(new Devices.Device() { name = "Desk", description = "Desk", deviceNumber = "H000003", registedDate = Convert.ToDateTime("2023-1-1") });

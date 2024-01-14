@@ -1,4 +1,5 @@
 using Base.Infrastructure.Interceptors;
+using Common.DataSeed;
 using Device.ApplicationCore.Interfaces.Repositories;
 using Device.ApplicationCore.Interfaces.Services;
 using Device.ApplicationCore.Services;
@@ -7,7 +8,7 @@ using Device.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using User.Infrastructure;
-using WebAPI.DBGenerator;
+using WebAPI.DataSeedProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +53,7 @@ builder.Services.AddUser(
 #endregion
 
 //"MysqlConnection": "Data Source=127.0.0.1;port=3306;Initial Catalog=DemoEfCore;user id=root;password=123456;"
-builder.Services.AddDbContext<DeviceContext>(options => 
+builder.Services.AddDbContext<DeviceDbContext>(options => 
 {
     options.UseSqlServer(connectionString);
     options.AddInterceptors( new LoggerSaveChangesInterceptor());
@@ -60,9 +61,15 @@ builder.Services.AddDbContext<DeviceContext>(options =>
 builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 builder.Services.AddScoped<IDeviceService, DeviceService>();
 
+builder.Services.AddDataSeed(builder => 
+{
+    builder.Services.AddScoped<IDataSeedProvider, UserDataSeedProvider>();
+    builder.Services.AddScoped<IDataSeedProvider, DeviceDataSeedProvider>();
+});
+
 var app = builder.Build();
 
-app.SeedData("SqlServer");
+await seedAsync();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -77,3 +84,18 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+async Task seedAsync()
+{
+    //old
+    //app.SeedData("SqlServer");
+
+    //new
+    var scope = app.Services.CreateScope();
+    using (scope)
+    {
+        var dataSeed = scope.ServiceProvider.GetRequiredService<IDataSeed>();
+        dataSeed.ExecuteAsync().Wait();
+    }
+}

@@ -31,10 +31,11 @@ namespace WebAPI.Controllers
         //https://localhost:5001/course/user/1
         [HttpGet]
         [Route("user/{userId}")]
-        public GetCourseByUserDTO GetCourseByUser(int userId)
+        public GetCourseByUserDTO GetCourseByUser(string userId)
         {
             var courseDto = _service.GetByUser(userId);
             return courseDto;
         }
     }
 }
+    

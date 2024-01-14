@@ -67,6 +67,7 @@ public class DeviceController : ControllerBase
     }
 
     [HttpPost]
+    [MyActionFilter]
     [Route("InsertAsync")]
     public async Task<bool> InsertDevicesAsync()
     {

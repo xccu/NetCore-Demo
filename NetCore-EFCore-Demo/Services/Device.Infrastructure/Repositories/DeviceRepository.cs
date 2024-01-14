@@ -6,7 +6,7 @@ namespace Device.Infrastructure.Repositories;
 
 public class DeviceRepository : BaseRepository<ApplicationCore.Entities.Device>, IDeviceRepository
 {
-    public DeviceRepository(DeviceContext dbContext) : base(dbContext)
+    public DeviceRepository(DeviceDbContext dbContext) : base(dbContext)
     {
 
     }

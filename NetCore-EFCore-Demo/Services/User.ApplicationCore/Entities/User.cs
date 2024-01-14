@@ -8,20 +8,25 @@ namespace User.ApplicationCore.Entities;
 [Table("T_USER")]
 public class User : IVersion
 {
+    public User() 
+    {
+        this.Id = System.Guid.NewGuid().ToString();
+    }
+
     [Key]
     [Required]
     [Column("USER_ID")]
-    public int id { get; set; }
+    public String Id { get; set; }
     [Column("USER_NAME")]
-    public String name { get; set; }
+    public String Name { get; set; }
     [Column("PASSWORD")]
-    public String password { get; set; }
+    public String Password { get; set; }
     [Column("AGE")]
-    public int age { get; set; }
+    public int Age { get; set; }
     [Column("GENDER")]
-    public String gender { get; set; }
+    public String Gender { get; set; }
     [Column("RACE")]
-    public String race { get; set; }
+    public String Race { get; set; }
 
     [ConcurrencyCheck]
     [Column("VERSION_NO")]

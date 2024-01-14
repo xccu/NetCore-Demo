@@ -6,7 +6,7 @@ namespace User.Infrastructure.Repositories;
 
 public class UserRepository : BaseRepository<ApplicationCore.Entities.User>, IUserRepository
 {
-    public UserRepository(UserContext dbContext) : base(dbContext)
+    public UserRepository(UserDbContext dbContext) : base(dbContext)
     {
 
     }

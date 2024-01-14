@@ -36,9 +36,11 @@ namespace Base.Infrastructure.Repositories
             {
                 return false;
             }
-
+           
             dbContext.Set<T>().Add(entity);
-            return await dbContext.SaveChangesAsync() > 0;
+
+            await dbContext.SaveChangesAsync();
+            return true;
         }
 
         public bool Update(T entity)

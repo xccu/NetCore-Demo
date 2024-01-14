@@ -27,25 +27,25 @@ public class CourseService: ICourseService
         return _courseRepository.GetAll();
     }
 
-    public GetCourseByUserDTO GetByUser(int userId) 
+    public GetCourseByUserDTO GetByUser(string userId) 
     {
         var dto = new GetCourseByUserDTO();
 
         var course = _courseRepository.GetAll()
-           .Join(_userCourseRepository.GetAll(), c => c.id, uc => uc.courseId, (c, uc) => new { c, uc })
-           .Join(_userRepository.GetAll(), c => c.uc.userId, u => u.id, (uc, u) => new { uc, u })
-           .Where(t => t.u.id == userId).Select(t => new { t.uc.uc, t.uc.c,t.u.name });
+           .Join(_userCourseRepository.GetAll(), c => c.Id, uc => uc.CourseId, (c, uc) => new { c, uc })
+           .Join(_userRepository.GetAll(), c => c.uc.UserId, u => u.Id, (uc, u) => new { uc, u })
+           .Where(t => t.u.Id == userId).Select(t => new { t.uc.uc, t.uc.c,t.u.Name });
 
         var courseDtos = new List<CourseDTO>();
         foreach (var item in course)
         {
             CourseDTO courseDto = new CourseDTO();
-            courseDto.score = item.uc.score;
-            courseDto.courseName = item.c.courseName;
-            courseDto.credit = item.c.credit;
+            courseDto.score = item.uc.Score;
+            courseDto.courseName = item.c.CourseName;
+            courseDto.credit = item.c.Credit;
             courseDtos.Add(courseDto);
         }
-        dto.userName = course.FirstOrDefault().name;
+        dto.userName = course.FirstOrDefault().Name;
         dto.courses = courseDtos;
 
         return dto;

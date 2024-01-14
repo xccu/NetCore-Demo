@@ -12,7 +12,7 @@ namespace User.Infrastructure.Data;
 
 public class UserCourseRepository : BaseRepository<UserCourse>, IUserCourseRepository
 {
-    public UserCourseRepository(UserContext dbContext) : base(dbContext)
+    public UserCourseRepository(UserDbContext dbContext) : base(dbContext)
     {
 
     }

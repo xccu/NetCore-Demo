@@ -1,7 +1,7 @@
 ﻿using Base.ApplicationCore.Entities;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Base.Infrastructure;
+namespace Base.ApplicationCore;
 
 public static class CacheExtensions
 {

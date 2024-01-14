@@ -1,0 +1,46 @@
+Check if Table exists:
+https://github.com/dotnet/efcore/issues/13703
+https://github.com/dotnet/efcore/issues/32071
+
+'There is already an object named 'xxx' in the database.'
+
+	#region check table exist	
+            var entities = _dbcontext.Model.GetEntityTypes();
+            var tableName = entities.FirstOrDefault().GetTableName();
+            var dbConn = _dbcontext.Database.GetDbConnection();
+            dbConn.Open();
+            string[] restrictions = new string[4];
+            //restrictions[0] = "DbName";
+            //restrictions[1] = "dbo";
+            restrictions[2] = tableName;
+            //restrictions[3] = "BASE TABLE";
+            var dt = dbConn.GetSchema("Tables", restrictions);
+            int exist = dt.Rows.Count;
+            dbConn.Close();
+	#endregion
+
+
+	#region ado.net
+            var dbConn = _dbcontext.Database.GetDbConnection();
+            dbConn.Open();
+            string[] restrictions = new string[4];
+            restrictions[2] = "T_IC_PERMISSIONS";
+            var dt = dbConn.GetSchema("Tables", restrictions);
+            int exist = dt.Rows.Count;
+            var createTableQuery = @"CREATE TABLE [dbo].[T_IC_PERMISSIONS] (
+    		[NORMALIZED_NAME]   NVARCHAR (256) NOT NULL,
+    		[NAME]              NVARCHAR (256) NOT NULL,
+    		[DESCRIPTION]       NVARCHAR (256) NULL,
+    		[VERSION_NO]        INT            NOT NULL,
+    		[EXTENDED_PROPERTY] NVARCHAR (MAX) NULL);";
+
+            var dbCmd = dbConn.CreateCommand();
+            dbCmd.CommandText = createTableQuery;
+            dbCmd.ExecuteNonQuery();
+
+            dbConn.Close();
+	#endregion
+
+	#region EFCore
+            //_databaseCreator.CreateTables();
+	@endregion

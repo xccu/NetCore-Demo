@@ -10,13 +10,18 @@ namespace User.ApplicationCore.Entities;
 [Table("T_COURSE")]
 public class Course
 {
+    public Course()
+    {
+        this.Id = System.Guid.NewGuid().ToString();
+    }
+
     [Key]
     [Required]
     [Column("COURSE_ID")]
-    public int id { get; set; }
+    public String Id { get; set; }
     [Column("COURSE_NAME")]
-    public String courseName { get; set; }
+    public String CourseName { get; set; }
     [Column("credit")]
-    public float credit { get; set; }
+    public float Credit { get; set; }
 
 }

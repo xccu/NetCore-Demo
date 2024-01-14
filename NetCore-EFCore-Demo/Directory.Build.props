@@ -3,7 +3,7 @@
 		<SignAssembly>false</SignAssembly>
 	</PropertyGroup>
 	<PropertyGroup>
-		<MsExtensionsPackageVersion>7.0.0</MsExtensionsPackageVersion>
+		<MsExtensionsPackageVersion>8.0.0</MsExtensionsPackageVersion>
 		<EfCorePackageVersion>7.0.0</EfCorePackageVersion>
 	</PropertyGroup>
 </Project>

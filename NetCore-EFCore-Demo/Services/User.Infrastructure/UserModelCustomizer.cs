@@ -12,6 +12,6 @@ public class UserModelCustomizer : IModelCustomizer
     {
         modelBuilder.Entity<ApplicationCore.Entities.User>();
         modelBuilder.Entity<Course>();
-        modelBuilder.Entity<UserCourse>().HasKey(t => new { t.userId, t.courseId });
+        modelBuilder.Entity<UserCourse>().HasKey(t => new { t.UserId, t.CourseId });
     }
 }

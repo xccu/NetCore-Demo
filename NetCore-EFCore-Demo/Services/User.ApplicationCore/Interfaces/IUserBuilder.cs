@@ -1,4 +1,4 @@
-﻿using Base.Infrastructure.Enum;
+﻿using Base.ApplicationCore.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

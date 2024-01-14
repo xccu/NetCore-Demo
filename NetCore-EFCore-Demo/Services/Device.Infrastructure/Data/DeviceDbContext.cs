@@ -2,9 +2,9 @@
 
 namespace Device.Infrastructure.Data;
 
-public class DeviceContext : DbContext
+public class DeviceDbContext : DbContext
 {
-    public DeviceContext(DbContextOptions<DeviceContext> options) : base(options)
+    public DeviceDbContext(DbContextOptions<DeviceDbContext> options) : base(options)
     {
 
     }
