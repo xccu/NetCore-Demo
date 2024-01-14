@@ -6,9 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="MySql.EntityFrameworkCore" Version="$(EfCorePackageVersion)" />
 		<PackageReference Include="Oracle.EntityFrameworkCore" Version="6.21.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EfCorePackageVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(EfCorePackageVersion)" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Base.ApplicationCore\Base.ApplicationCore.csproj" />

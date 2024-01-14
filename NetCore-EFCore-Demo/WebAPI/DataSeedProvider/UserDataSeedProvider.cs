@@ -41,6 +41,10 @@ public class UserDataSeedProvider : IDataSeedProvider
             if (ex.Number == 2714) return true;
             else throw;
         }
+        catch (Exception ex)
+        {
+            return false;
+        }
         return true;
     }
 

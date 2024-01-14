@@ -1,9 +1,12 @@
 ﻿using Common.DataSeed;
 using Device.Infrastructure.Data;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Reflection;
 using Entities = Device.ApplicationCore.Entities;
 
 namespace WebAPI.DataSeedProvider;
@@ -43,9 +46,17 @@ public class DeviceDataSeedProvider : IDataSeedProvider
     {
         try
         {
+            //RelationalDatabaseCreator c = new();
+            //c.
+            BindingFlags eFlags = BindingFlags.Instance | BindingFlags.NonPublic;
+            var t = _databaseCreator.GetType().BaseType;
+            MethodInfo method = t.GetMethod("GetCreateTablesCommands", eFlags);
             //MigrationCommand
             var entities = _context.Model.GetEntityTypes();
             var tableName = entities.FirstOrDefault().GetTableName();
+            object[] obj = { MigrationsSqlGenerationOptions.Default };
+            var result = method.Invoke(_databaseCreator, obj);
+
             var dbConn = _context.Database.GetDbConnection();
             dbConn.Open();
             string[] restrictions = new string[4];

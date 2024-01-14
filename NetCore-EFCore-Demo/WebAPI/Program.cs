@@ -13,7 +13,7 @@ using WebAPI.DataSeedProvider;
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
-var connectionString = configuration.GetConnectionString("SqlServer");
+var connectionString = configuration.GetConnectionString("MySql");
 
 // Add services to the container.
 
@@ -28,7 +28,7 @@ builder.Services.AddCacheFactory();
 builder.Services.AddUser(
     builder => builder.UseDataBase(options =>
     {
-        options.UseSqlServer(connectionString);
+        options.UseMySQL(connectionString);
         options.AddInterceptors(new ConcurrencySaveChangeInterceptor());
         options.ReplaceService<IModelCustomizer, UserModelCustomizer>();
     }),
@@ -55,7 +55,7 @@ builder.Services.AddUser(
 //"MysqlConnection": "Data Source=127.0.0.1;port=3306;Initial Catalog=DemoEfCore;user id=root;password=123456;"
 builder.Services.AddDbContext<DeviceDbContext>(options => 
 {
-    options.UseSqlServer(connectionString);
+    options.UseMySQL(connectionString);
     options.AddInterceptors( new LoggerSaveChangesInterceptor());
 });
 builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
