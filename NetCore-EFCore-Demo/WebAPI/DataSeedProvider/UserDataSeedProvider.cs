@@ -59,7 +59,7 @@ public class UserDataSeedProvider : IDataSeedProvider
         Add( "Slowy", "Psd%123", 80, "Male", "Caprinae" );
         Add( "Wolnie", "Psd%123", 33, "Female", "Lupo" );
         Add( "Wilie", "Psd%123", 3, "Male", "Lupo" );
-
+        
         foreach (var item in _list)
         {
             if (!_context.User.Any(t => t.Name == item.Name && t.Password == item.Password))

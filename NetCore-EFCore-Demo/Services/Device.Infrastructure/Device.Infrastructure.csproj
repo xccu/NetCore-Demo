@@ -6,19 +6,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Extensions\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <None Remove="Extensions\**" />
+  </ItemGroup>
+
 	<ItemGroup>
-		<PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.0" />
-		<PackageReference Include="Oracle.EntityFrameworkCore" Version="6.21.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.0" />
+		<PackageReference Include="MySql.EntityFrameworkCore" Version="$(EfCorePackageVersion)" />
+		<PackageReference Include="Oracle.EntityFrameworkCore" Version="7.2.18" />
+	    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Base.Infrastructure\Base.Infrastructure.csproj" />
 	  <ProjectReference Include="..\Device.ApplicationCore\Device.ApplicationCore.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Extensions\" />
 	</ItemGroup>
 
 </Project>

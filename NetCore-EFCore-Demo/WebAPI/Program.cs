@@ -7,13 +7,15 @@ using Device.Infrastructure.Data;
 using Device.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using User.Infrastructure;
+using WebAPI;
 using WebAPI.DataSeedProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
-var connectionString = configuration.GetConnectionString("MySql");
+var connectionString = configuration.GetConnectionString("SqlServer");
 
 // Add services to the container.
 
@@ -28,7 +30,7 @@ builder.Services.AddCacheFactory();
 builder.Services.AddUser(
     builder => builder.UseDataBase(options =>
     {
-        options.UseMySQL(connectionString);
+        options.UseSqlServer(connectionString);
         options.AddInterceptors(new ConcurrencySaveChangeInterceptor());
         options.ReplaceService<IModelCustomizer, UserModelCustomizer>();
     }),
@@ -55,16 +57,22 @@ builder.Services.AddUser(
 //"MysqlConnection": "Data Source=127.0.0.1;port=3306;Initial Catalog=DemoEfCore;user id=root;password=123456;"
 builder.Services.AddDbContext<DeviceDbContext>(options => 
 {
-    options.UseMySQL(connectionString);
+    options.UseSqlServer(connectionString, x => x.MigrationsAssembly("Device.Infrastructure"));
     options.AddInterceptors( new LoggerSaveChangesInterceptor());
 });
 builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 builder.Services.AddScoped<IDeviceService, DeviceService>();
 
+builder.Services.AddDbContext<FooDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
+
 builder.Services.AddDataSeed(builder => 
 {
-    builder.Services.AddScoped<IDataSeedProvider, UserDataSeedProvider>();
-    builder.Services.AddScoped<IDataSeedProvider, DeviceDataSeedProvider>();
+    //builder.Services.AddScoped<IDataSeedProvider, UserDataSeedProvider>();
+    //builder.Services.AddScoped<IDataSeedProvider, DeviceDataSeedProvider>();
+    builder.Services.AddScoped<IDataSeedProvider, FooDataSeedProvider>();
 });
 
 var app = builder.Build();

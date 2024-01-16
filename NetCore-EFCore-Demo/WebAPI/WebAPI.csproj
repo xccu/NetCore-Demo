@@ -10,13 +10,16 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.1" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="$(EfCorePackageVersion)" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
-    <PackageReference Include="Oracle.EntityFrameworkCore" Version="6.21.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(EfCorePackageVersion)" />
+    <PackageReference Include="Oracle.EntityFrameworkCore" Version="7.2.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EfCorePackageVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(EfCorePackageVersion)" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
 
-
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

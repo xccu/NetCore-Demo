@@ -55,7 +55,7 @@ public class DeviceDataSeedProvider : IDataSeedProvider
             var entities = _context.Model.GetEntityTypes();
             var tableName = entities.FirstOrDefault().GetTableName();
             object[] obj = { MigrationsSqlGenerationOptions.Default };
-            var result = method.Invoke(_databaseCreator, obj);
+            var result = method.Invoke(_databaseCreator, obj) as IReadOnlyList<MigrationCommand>;
 
             var dbConn = _context.Database.GetDbConnection();
             dbConn.Open();
