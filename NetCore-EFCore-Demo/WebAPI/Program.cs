@@ -68,6 +68,11 @@ builder.Services.AddDbContext<FooDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 
+builder.Services.AddDbContext<BarDbContext>(options =>
+{
+    options.UseSqlServer(connectionString, x => x.MigrationsHistoryTable("__BarMigrationsHistory", "BarSchema"));
+});
+
 builder.Services.AddDataSeed(builder => 
 {
     //builder.Services.AddScoped<IDataSeedProvider, UserDataSeedProvider>();
