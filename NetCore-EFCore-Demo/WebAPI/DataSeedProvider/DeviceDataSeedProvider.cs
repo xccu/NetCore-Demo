@@ -46,11 +46,8 @@ public class DeviceDataSeedProvider : IDataSeedProvider
     {
         try
         {
-            //RelationalDatabaseCreator c = new();
-            //c.
-            BindingFlags eFlags = BindingFlags.Instance | BindingFlags.NonPublic;
             var t = _databaseCreator.GetType().BaseType;
-            MethodInfo method = t.GetMethod("GetCreateTablesCommands", eFlags);
+            MethodInfo method = t.GetMethod("GetCreateTablesCommands", BindingFlags.Instance | BindingFlags.NonPublic);
             //MigrationCommand
             var entities = _context.Model.GetEntityTypes();
             var tableName = entities.FirstOrDefault().GetTableName();
