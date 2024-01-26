@@ -12,9 +12,9 @@ public class UserCourse
     [Key]
     [Required]
     [Column("COURSE_ID")]
-    public int courseId { get; set; }
+    public string courseId { get; set; }
     [Column("USER_ID")]
-    public int userId { get; set; }
+    public string userId { get; set; }
     [Column("SCORE")]
     public float score { get; set; }
 }

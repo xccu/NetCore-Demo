@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using User.Infrastructure;
 using System.Configuration;
+using User.ApplicationCore.Interfaces.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,18 @@ builder.Services.AddUser(
     //    option.CacheOptions.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1);
     //}
 );
+
+//todo :cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder.AllowAnyOrigin()
+          .AllowAnyMethod()
+          .AllowAnyHeader()
+    .Build());
+});
+
+builder.Services.AddAutoMapper(typeof(IUserService).Assembly);
 
 var app = builder.Build();
 

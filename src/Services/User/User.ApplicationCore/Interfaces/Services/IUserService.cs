@@ -11,12 +11,12 @@ namespace User.ApplicationCore.Interfaces.Services
     public interface IUserService
     {
         public IEnumerable<Entities.User> GetUsers();
-        public Entities.User GetUser(int id);
+        public Entities.User GetUser(string id);
         public IEnumerable<Entities.User> SearchCondition(Expression<Func<Entities.User, bool>> expression);
         public bool Update(Entities.User user);
         public bool Insert(Entities.User user);
         public bool Delete(Entities.User user);
-        public bool Delete(int id);
+        public bool Delete(string id);
 
         public Task<bool> InsertAsync(Entities.User user);
     }

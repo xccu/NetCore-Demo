@@ -6,5 +6,5 @@ namespace User.ApplicationCore.Interfaces.Repositories;
 
 public interface ICourseRepository : IRepository<Course>
 {
-    IQueryable<Course> getByUser(int userId);
+    IQueryable<Course> getByUser(string userId);
 }

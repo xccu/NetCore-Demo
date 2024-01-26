@@ -1,0 +1,6 @@
+@RazorPage.Web.HttpAggregator_HostAddress = http://localhost:5108
+
+GET {{RazorPage.Web.HttpAggregator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -11,6 +11,6 @@ namespace User.ApplicationCore.Interfaces.Services
     public interface ICourseService
     {
         public IEnumerable<Entities.Course> GetCourses();
-        public GetCourseByUserDTO GetByUser(int userId);
+        public GetCourseByUserDTO GetByUser(string userId);
     }
 }

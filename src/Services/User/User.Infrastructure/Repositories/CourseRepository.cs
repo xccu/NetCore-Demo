@@ -20,7 +20,7 @@ public class CourseRepository : BaseRepository<Course>, ICourseRepository
         _context = dbContext;
     }
 
-    public IQueryable<Course> getByUser(int userId)
+    public IQueryable<Course> getByUser(string userId)
     {
         var course = _context.Course
             .Join(_context.UserCourse, c => c.id, uc => uc.courseId, (c, uc) => new { c, uc })

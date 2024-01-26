@@ -11,7 +11,7 @@ public class User : IVersion
     [Key]
     [Required]
     [Column("USER_ID")]
-    public int id { get; set; }
+    public string id { get; set; }
     [Column("USER_NAME")]
     public String name { get; set; }
     [Column("PASSWORD")]

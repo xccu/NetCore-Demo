@@ -45,7 +45,7 @@ public class UserService : IUserService
         return (IEnumerable<Entities.User>)data;
     }
 
-    public Entities.User GetUser(int id)
+    public Entities.User GetUser(string id)
     {
         if (!_options.EnableCache)
             return _userRepository.GetById(id);
@@ -88,7 +88,7 @@ public class UserService : IUserService
         return _userRepository.Delete(user);
     }
 
-    public bool Delete(int id)
+    public bool Delete(string id)
     {
         RefreshCache();
         return _userRepository.Delete(id);       

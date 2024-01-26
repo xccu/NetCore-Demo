@@ -13,7 +13,7 @@ public class Course
     [Key]
     [Required]
     [Column("COURSE_ID")]
-    public int id { get; set; }
+    public string id { get; set; }
     [Column("COURSE_NAME")]
     public String courseName { get; set; }
     [Column("credit")]

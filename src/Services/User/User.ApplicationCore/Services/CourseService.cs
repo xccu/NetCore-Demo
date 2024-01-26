@@ -27,7 +27,7 @@ public class CourseService: ICourseService
         return _courseRepository.GetAll();
     }
 
-    public GetCourseByUserDTO GetByUser(int userId) 
+    public GetCourseByUserDTO GetByUser(string userId) 
     {
         var dto = new GetCourseByUserDTO();
 

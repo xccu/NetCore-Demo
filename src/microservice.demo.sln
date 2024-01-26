@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "microservice.demo", "microservice.demo\microservice.demo.csproj", "{90169729-8EC8-4E2D-A79F-CD8EE48BC6F6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{BB34F700-D01E-40C1-B18D-6251D1A71ECF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{46A069D2-4CB1-4BEC-BB4A-D399EBCB72C4}"
@@ -35,16 +33,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device.ApplicationCore", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device.Infrastructure", "Services\Device\Device.Infrastructure\Device.Infrastructure.csproj", "{6E416978-293A-4163-B1EC-20D5BD1EA912}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPage.Web.HttpAggregator", "RazorPage.Web.HttpAggregator\RazorPage.Web.HttpAggregator.csproj", "{966C9EC2-9A4B-49B4-8FD5-15DD393CD74E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{90169729-8EC8-4E2D-A79F-CD8EE48BC6F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90169729-8EC8-4E2D-A79F-CD8EE48BC6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90169729-8EC8-4E2D-A79F-CD8EE48BC6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90169729-8EC8-4E2D-A79F-CD8EE48BC6F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55E6C95F-EC8C-48FF-8DB6-C715580BEC83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55E6C95F-EC8C-48FF-8DB6-C715580BEC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55E6C95F-EC8C-48FF-8DB6-C715580BEC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,6 +73,10 @@ Global
 		{6E416978-293A-4163-B1EC-20D5BD1EA912}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E416978-293A-4163-B1EC-20D5BD1EA912}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E416978-293A-4163-B1EC-20D5BD1EA912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{966C9EC2-9A4B-49B4-8FD5-15DD393CD74E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{966C9EC2-9A4B-49B4-8FD5-15DD393CD74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{966C9EC2-9A4B-49B4-8FD5-15DD393CD74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{966C9EC2-9A4B-49B4-8FD5-15DD393CD74E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +93,7 @@ Global
 		{0C179CAD-7F5A-47CF-8EF0-728E5832A614} = {0FAA3E4B-246F-4977-94B6-407F72765EC4}
 		{686E554A-102E-42F1-BF49-8F2D7A422145} = {065B46CA-80EC-4FD6-91B0-D6F6C3EF424F}
 		{6E416978-293A-4163-B1EC-20D5BD1EA912} = {065B46CA-80EC-4FD6-91B0-D6F6C3EF424F}
+		{966C9EC2-9A4B-49B4-8FD5-15DD393CD74E} = {46A069D2-4CB1-4BEC-BB4A-D399EBCB72C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {591C85CE-9699-4DB6-9F9F-B010BAE7B552}
