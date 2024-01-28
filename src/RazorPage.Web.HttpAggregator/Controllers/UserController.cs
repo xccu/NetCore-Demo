@@ -29,8 +29,16 @@ public class UserController : ControllerBase
     [Route("{id}")]
     public async Task<UserDto> GetUser(string id)
     {
-        var result = await _service.GetAsync(id);
-        return result;
+        try 
+        {
+            var result = await _service.GetAsync(id);
+            return result;
+        }
+        catch (Exception ex) 
+        {
+            return null;
+        }
+
     }
 
 
