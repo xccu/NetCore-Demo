@@ -25,6 +25,6 @@ public class UserBuilder : IUserBuilder
 
     public void UseDataBase(Action<DbContextOptionsBuilder> buildAction = null)
     {
-        this.Services.AddDbContext<UserContext>(buildAction);
+        this.Services.AddDbContext<UserDbContext>(buildAction);
     }
 }

@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 var configuration = builder.Configuration;
-var connectionString = configuration.GetConnectionString("SqlServer");
+var connectionString = configuration.GetConnectionString("MySql");
 
 // Add services to the container.
 
@@ -23,7 +23,7 @@ builder.Services.AddCacheFactory();
 builder.Services.AddUser(
     builder => builder.UseDataBase(options =>
     {
-        options.UseSqlServer(connectionString);
+        options.UseMySQL(connectionString);
         options.AddInterceptors(new ConcurrencySaveChangeInterceptor());
         options.ReplaceService<IModelCustomizer, UserModelCustomizer>();
     })

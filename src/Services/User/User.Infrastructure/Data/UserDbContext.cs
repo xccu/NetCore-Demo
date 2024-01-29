@@ -4,9 +4,9 @@ using User.ApplicationCore.Entities;
 
 namespace User.Infrastructure.Data;
 
-public partial class UserContext : DbContext
+public partial class UserDbContext : DbContext
 {
-    public UserContext(DbContextOptions<UserContext> options): base(options)
+    public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
     {
 
     }

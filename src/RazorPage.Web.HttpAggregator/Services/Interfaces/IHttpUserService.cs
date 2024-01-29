@@ -15,4 +15,6 @@ public interface IHttpUserService
     Task<bool> UpdateAsync(UserDto dto);
     [Delete("/api/user/{id}")]
     Task<bool> DeleteAsync(string id);
+
+   
 }

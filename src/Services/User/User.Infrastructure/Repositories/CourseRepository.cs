@@ -13,9 +13,9 @@ namespace User.Infrastructure.Repositories;
 
 public class CourseRepository : BaseRepository<Course>, ICourseRepository
 {
-    private readonly UserContext _context;
+    private readonly UserDbContext _context;
 
-    public CourseRepository(UserContext dbContext) : base(dbContext)
+    public CourseRepository(UserDbContext dbContext) : base(dbContext)
     {
         _context = dbContext;
     }

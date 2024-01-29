@@ -8,6 +8,11 @@ namespace User.ApplicationCore.Entities;
 [Table("T_USER")]
 public class User : IVersion
 {
+    public User()
+    {
+        this.id = Guid.NewGuid().ToString();
+    }
+
     [Key]
     [Required]
     [Column("USER_ID")]

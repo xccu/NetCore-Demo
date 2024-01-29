@@ -23,11 +23,11 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Entities.User> GetAll()
+    public IEnumerable<UserDto> GetAll()
     {
-        var user = _service.GetUsers().ToList();
-        //var dto = _mapper.Map<UserDto>(user);
-        return user;
+        var user = _service.GetUsers().ToArray();
+        var dto = _mapper.Map<Entities.User[],IEnumerable<UserDto>>(user);
+        return dto;
     }
 
     [HttpGet("{id}")]
@@ -82,7 +82,7 @@ public class UserController : ControllerBase
         return await _service.InsertAsync(user);
     }
 
-    [HttpDelete("id")]
+    [HttpDelete("{id}")]
     public bool DeleteUser(string id)
     {
         var user = _service.GetUser(id);

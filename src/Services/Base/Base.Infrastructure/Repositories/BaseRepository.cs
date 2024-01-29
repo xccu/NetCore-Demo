@@ -58,11 +58,11 @@ namespace Base.Infrastructure.Repositories
             //    return bRet;
             //}
 
-            bRet = IsEntityValid(entity);
-            if (!bRet)
-            {
-                return bRet;
-            }
+            //bRet = IsEntityValid(entity);
+            //if (!bRet)
+            //{
+            //    return bRet;
+            //}
 
             dbContext.Set<T>().Update(entity);
             return  dbContext.SaveChanges() > 0;
@@ -83,11 +83,11 @@ namespace Base.Infrastructure.Repositories
             //    return bRet;
             //}
 
-            bRet = IsEntityValid(entity);
-            if (!bRet)
-            {
-                return bRet;
-            }
+            //bRet = IsEntityValid(entity);
+            //if (!bRet)
+            //{
+            //    return bRet;
+            //}
 
             dbContext.Set<T>().Update(entity);
             return await dbContext.SaveChangesAsync() > 0;
@@ -108,11 +108,11 @@ namespace Base.Infrastructure.Repositories
             //    return bRet;
             //}
 
-            bRet = IsEntityValid(entity);
-            if (!bRet)
-            {
-                return bRet;
-            }
+            //bRet = IsEntityValid(entity);
+            //if (!bRet)
+            //{
+            //    return bRet;
+            //}
 
             dbContext.Set<T>().Remove(entity);
             return  dbContext.SaveChanges() > 0;
@@ -133,11 +133,11 @@ namespace Base.Infrastructure.Repositories
             //    return bRet;
             //}
 
-            bRet = IsEntityValid(entity);
-            if (!bRet)
-            {
-                return bRet;
-            }
+            //bRet = IsEntityValid(entity);
+            //if (!bRet)
+            //{
+            //    return bRet;
+            //}
 
             dbContext.Set<T>().Remove(entity);
             return await dbContext.SaveChangesAsync() > 0;
