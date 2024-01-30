@@ -8,15 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Refit" Version="7.0.0" />
-    <PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Services\User\User.ApplicationCore\User.ApplicationCore.csproj" />
-    <ProjectReference Include="..\Services\Device\Device.ApplicationCore\Device.ApplicationCore.csproj" />
+    <ProjectReference Include="..\Device.Infrastructure\Device.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

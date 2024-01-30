@@ -13,6 +13,6 @@ public class DeviceDto
     public int id { get; set; }
     public String name { get; set; }
     public String description { get; set; }
-    public String Number { get; set; }
-    public DateTime date { get; set; }
+    public String deviceNumber { get; set; }
+    public DateTime registedDate { get; set; }
 }

@@ -5,7 +5,8 @@ using User.ApplicationCore.Interfaces.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
-string securityWebApiServerUrl = configuration.GetSection("AppSettings").GetValue<string>("UserWebApiServer");
+string userWebApiServerUrl = configuration.GetSection("AppSettings").GetValue<string>("UserWebApiServer");
+string deviceWebApiServerUrl = configuration.GetSection("AppSettings").GetValue<string>("DeviceWebApiServer");
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -15,7 +16,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddRefitClient<IHttpUserService>()
     .ConfigureHttpClient(options =>
     {
-        options.BaseAddress = new Uri(securityWebApiServerUrl);
+        options.BaseAddress = new Uri(userWebApiServerUrl);
+    });
+builder.Services.AddRefitClient<IHttpDeviceService>()
+    .ConfigureHttpClient(options =>
+    {
+        options.BaseAddress = new Uri(deviceWebApiServerUrl);
     });
 
 builder.Services.AddAutoMapper(typeof(IUserService).Assembly);

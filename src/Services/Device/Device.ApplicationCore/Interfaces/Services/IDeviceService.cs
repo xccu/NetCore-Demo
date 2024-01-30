@@ -11,7 +11,7 @@ namespace Device.ApplicationCore.Interfaces.Services;
 public interface IDeviceService
 {
     public IEnumerable<Entities.Device> GetDevices();
-    public DeviceDto GetDevice(int id);
+    public Entities.Device GetDevice(int id);
     public IEnumerable<Entities.Device> SearchCondition(Expression<Func<Entities.Device, bool>> expression);
     public bool Update(Entities.Device device);
     public bool Insert(Entities.Device device);

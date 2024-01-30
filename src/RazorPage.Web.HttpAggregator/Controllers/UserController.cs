@@ -5,7 +5,7 @@ using User.ApplicationCore.Dtos;
 namespace RazorPage.Web.HttpAggregator.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/user")]
 public class UserController : ControllerBase
 {
     private readonly ILogger<UserController> _logger;

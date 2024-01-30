@@ -26,18 +26,9 @@ public class DeviceService : IDeviceService
         return _deviceRepository.GetAll();
     }
 
-    public DeviceDto GetDevice(int id)
+    public Entities.Device GetDevice(int id)
     {
-        var device =  _deviceRepository.GetById(id);
-        var dto = new DeviceDto()
-        {
-            id = device.id,
-            name = device.name,
-            description= device.description,
-            Number = device.deviceNumber,
-            date= device.registedDate
-        };
-        return dto;
+        return _deviceRepository.GetById(id);;
     }
 
     public IEnumerable<Entities.Device> SearchCondition(Expression<Func<Entities.Device, bool>> expression)
