@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.HttpFiles", "Demo.Http
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Exception", "Demo.Exception\Demo.Exception.csproj", "{3D945F01-F8BC-469F-AD7E-2D022D590E08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.AutoMapper", "Demo.AutoMapper\Demo.AutoMapper.csproj", "{42215843-A5C8-4CED-957D-BC06AE076943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.AutoMapper", "Demo.AutoMapper\Demo.AutoMapper.csproj", "{42215843-A5C8-4CED-957D-BC06AE076943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.HttpClient", "Demo.HttpClient\Demo.HttpClient.csproj", "{9F172A6A-261B-4A39-ACA3-65FD7233FF86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{42215843-A5C8-4CED-957D-BC06AE076943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42215843-A5C8-4CED-957D-BC06AE076943}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42215843-A5C8-4CED-957D-BC06AE076943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F172A6A-261B-4A39-ACA3-65FD7233FF86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F172A6A-261B-4A39-ACA3-65FD7233FF86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F172A6A-261B-4A39-ACA3-65FD7233FF86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F172A6A-261B-4A39-ACA3-65FD7233FF86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

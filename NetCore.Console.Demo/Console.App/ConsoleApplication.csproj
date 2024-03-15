@@ -14,6 +14,7 @@
     <ProjectReference Include="..\Demo.Delegates\Demo.Delegates.csproj" />
     <ProjectReference Include="..\Demo.Exception\Demo.Exception.csproj" />
     <ProjectReference Include="..\Demo.ExpressionTree\Demo.ExpressionTree.csproj" />
+    <ProjectReference Include="..\Demo.HttpClient\Demo.HttpClient.csproj" />
   </ItemGroup>
 
 </Project>

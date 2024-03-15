@@ -1,17 +1,11 @@
-﻿using Demo.AutoMapper;
-using Demo.Decorator;
-using Demo.Delegates;
-using Demo.Exception;
-using Demo.ExpressionTree;
-using System.Globalization;
-using System.Runtime.ExceptionServices;
-
-Console.WriteLine("Hello World");
-//ChainDelegateDemo.Run();
-//ExpressionTreeDemo.Run();
-//DecoratorDemo.Run();
-//ExceptionDemo.Run();
-AutoMapperDemo.Run();
+﻿
+//Console.WriteLine("Hello World");
+//Demo.Delegates.ChainDelegateDemo.Run();
+//Demo.ExpressionTree.ExpressionTreeDemo.Run();
+//Demo.Decorator.DecoratorDemo.Run();
+//Demo.Exception.ExceptionDemo.Run();
+//Demo.AutoMapper.AutoMapperDemo.Run();
+await Demo.HttpClient.HttpClientDemo.RunAsync();
 
 //DateTime dt = DateTime.Now;
 //CultureInfo culture = CultureInfo.GetCultureInfo("en-US");
@@ -23,3 +17,4 @@ AutoMapperDemo.Run();
 //Console.WriteLine(dt.ToString(format, culture));
 
 
+Console.ReadLine();
