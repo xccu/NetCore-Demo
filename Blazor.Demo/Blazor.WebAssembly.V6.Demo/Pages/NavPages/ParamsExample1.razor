@@ -1,0 +1,36 @@
+﻿@page "/params-example-1"
+
+@inject NavigationManager NavigationManager
+
+<h3>Params Example1</h3>
+<p role="status">id: @_id</p>
+<li><a href="/params-example-2">link</a></li>
+<li><a href="/params-example-2?id=0001">link with params</a></li>
+<button class="btn btn-primary" @onclick="OnSkip">Skip</button>
+<button class="btn btn-primary" @onclick="OnSkipWithParams">Skip With Params</button>
+
+@code {
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? Id { get; set; } = default!;
+
+    private string _id;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _id = Id;
+        await base.OnInitializedAsync();
+    }
+
+    public void OnSkip()
+    {
+        NavigationManager.NavigateTo("/params-example-2");
+    }
+
+    public void OnSkipWithParams()
+    {
+
+        NavigationManager.NavigateTo("/params-example-2?id=0001");
+    }
+}
