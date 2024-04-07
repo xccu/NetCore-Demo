@@ -34,8 +34,6 @@ namespace IdentityServer
             #endregion
 
             //var builder = services.AddIdentityServer()
-            //    //.AddDeveloperSigningCredential()            //This is for dev only scenarios when you don’t have a certificate to use.
-            //    .AddInMemoryIdentityResources(Config.IdentityResources)
             //    .AddInMemoryApiScopes(Config.ApiScopes)
             //    .AddInMemoryClients(Config.Clients)
             //    .AddTestUsers(TestUsers.Users);

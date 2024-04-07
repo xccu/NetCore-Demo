@@ -29,13 +29,12 @@ builder.Services.AddAuthentication(options =>
     //Getting claims from the UserInfo endpoint
     options.Scope.Add("profile");
     options.GetClaimsFromUserInfoEndpoint = true;
+    
     //add more claims to the test users - and also more identity resources.
     options.ClaimActions.MapUniqueJsonKey("myclaim1", "myclaim1");
 
-
     options.SaveTokens = true;
 });
-
 
 var app = builder.Build();
 
@@ -55,9 +54,5 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseAuthorization();
 app.MapDefaultControllerRoute().RequireAuthorization();
-
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
