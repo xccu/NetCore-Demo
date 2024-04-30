@@ -1,47 +1,39 @@
 using Security.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPage.Demo.Services;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RazorPage.Demo.Pages;
 
 public class LoginModel : PageModel
 {
     [BindProperty]
-    public User User { get; set; }
+    public User User { get; set; } = new();
 
-    public string Text { get; set; } = "";
+    public LoginModel(){}
 
-    private LoginService _loginService;
-    private CacheService _cacheService;
-    private WeatherForecastService _weatherForecastService;
-
-    public LoginModel(LoginService loginService, CacheService cacheService,WeatherForecastService weatherForecastService)
-    {
-        _loginService = loginService;
-        _weatherForecastService = weatherForecastService;
-        _cacheService = cacheService;
-    }
 
     public void OnGet() { }
 
     public async Task OnPostLoginAsync()
     {
-        var traceid = Activity.Current?.TraceId.ToString();
-        Text = await _loginService.LoginAsync(User);
-        _cacheService.SetCache("jwt.token", Text);
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, User.Name),
+            new Claim(ClaimTypes.DateOfBirth, User.BirthDate.ToString()),
+        };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
     }
 
-    public void OnPostLogoutAsync()
+    public async Task OnPostLogoutAsync()
     {
-       
-        _cacheService.SetCache("jwt.token", null);
-    }
-
-    public async Task OnPostTestAsync()
-    {
-        Text = await _weatherForecastService.GetWeatherAsync();
-        //Text = await _loginService.JWTGet();
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
 }

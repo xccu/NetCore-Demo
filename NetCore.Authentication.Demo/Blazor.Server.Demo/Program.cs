@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Components.Web;
 //see:
 //https://learn.microsoft.com/en-us/aspnet/core/blazor/security/server/?view=aspnetcore-6.0&tabs=visual-studio
 
+//实现通过本地授权
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,7 +20,18 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.AddScoped<AuthenticationStateProvider,CustomAuthenticationStateProvider>();
 
-#region
+#region Cookie认证方案
+//https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-7.0
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.SlidingExpiration = true;
+    options.AccessDeniedPath = "/Failed"; //授权失败则跳转
+});
+#endregion
+
+#region 授权
 var permissionRequirement = new MinimumAgeRequirement(18);
 
 //授权
@@ -28,17 +41,6 @@ builder.Services.AddAuthorization(options =>
 });
 // 注入权限处理器
 builder.Services.AddTransient<IAuthorizationHandler, MinimumAgeHandler>();
-
-//Cookie认证方案
-//https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-7.0
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-.AddCookie(options =>
-{
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-    options.SlidingExpiration = true;
-    options.AccessDeniedPath = "/error"; //授权失败则跳转
-});
-
 #endregion
 
 var app = builder.Build();

@@ -1,7 +1,6 @@
 ﻿using Security.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPage.Demo.Services;
 
 namespace RazorPage.Demo.Pages
 {

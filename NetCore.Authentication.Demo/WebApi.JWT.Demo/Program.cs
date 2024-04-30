@@ -1,14 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Security.Authorization;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder.AllowAnyOrigin()
+          .AllowAnyMethod()
+          .AllowAnyHeader()
+    .Build());
+});
 
 // Add services to the container.
 var permissionRequirement = new MinimumAgeRequirement(18);
@@ -54,7 +59,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 
 //UseAuthentication must before UseAuthorization

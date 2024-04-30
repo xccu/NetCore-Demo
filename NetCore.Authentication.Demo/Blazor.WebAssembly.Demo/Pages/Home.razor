@@ -1,0 +1,61 @@
+﻿@page "/"
+
+@using Security;
+@using System.Security.Claims;
+@using Blazor.WebAssembly.Demo.Services
+@using Security.Model
+@inject LoginService LoginService
+
+
+
+
+<PageTitle>Home</PageTitle>
+
+<div>Name:</div>
+<div>
+    <input @bind="_userName" />
+</div>
+<div>Birth Date:</div>
+<div>
+    <input @bind="_birthDate" />
+</div>
+<div>
+    <button @onclick="SignInAsync">Sign in</button>
+    <button @onclick="SignOutAsync">Sign Out</button>
+</div>
+
+<div>
+    @message
+</div>
+
+
+@code {
+    string message = "";
+    public string _userName = "user1";
+    public DateTime _birthDate = DateTime.Now.AddYears(-20);
+    public User user;
+    private async Task SignInAsync()
+    {
+        try
+        {
+            User user = new()
+            {
+                Name = _userName,
+                BirthDate = _birthDate
+            };
+            string token = await LoginService.LoginAsync(user);
+            message = $"Token = {token}";
+        }
+        catch (Exception ex)
+        {
+            message = $"Error: {ex.Message}";
+            
+        }
+    }
+
+    private async Task SignOutAsync()
+    {
+        await LoginService.LogoutAsync();
+        message = $"Logout";
+    }
+}

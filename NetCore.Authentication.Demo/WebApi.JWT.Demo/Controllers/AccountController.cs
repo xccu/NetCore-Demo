@@ -18,11 +18,11 @@ public class AccountController : ControllerBase
         {
             //生成JWT token
             string token = GenerateJwtToken(user.Name, user.BirthDate);
-            return Ok(token);
+            return await Task.FromResult(Ok(token));
         }
         catch(Exception ex) 
         {
-            return BadRequest(ex.Message);
+            return await Task.FromResult(BadRequest(ex.Message));
         }     
     }
 
