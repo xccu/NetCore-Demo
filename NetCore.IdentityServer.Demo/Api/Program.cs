@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 //adds the authentication services to DI and configures Bearer as the default scheme.
 builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
 {
-    options.Authority = "https://localhost:5001";
+    options.Authority = "http://localhost:5001";
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateAudience = false

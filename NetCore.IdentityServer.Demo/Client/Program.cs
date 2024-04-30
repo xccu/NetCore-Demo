@@ -3,7 +3,7 @@ using IdentityModel.Client;
 using Newtonsoft.Json.Linq;
 
 var client = new HttpClient();
-var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
+var disco = await client.GetDiscoveryDocumentAsync("http://localhost:5001");
 if (disco.IsError)
 {
     Console.WriteLine(disco.Error);

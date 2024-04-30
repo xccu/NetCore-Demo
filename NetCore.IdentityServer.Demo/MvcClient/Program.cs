@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using MvcClient.Extensions;
 using System.IdentityModel.Tokens.Jwt;
 
 
@@ -17,10 +18,11 @@ builder.Services.AddAuthentication(options =>
     // we will be using the OpenID Connect protocol.
     options.DefaultChallengeScheme = "oidc";
 })
+//.AddIdentityServerAuthentication(x => x.RequireHttpsMetadata = false)
 .AddCookie("Cookies")
 .AddOpenIdConnect("oidc", options =>
 {
-    options.Authority = "https://localhost:5001";
+    options.Authority = "http://localhost:5001";
 
     options.ClientId = "mvc";
     options.ClientSecret = "secret";
@@ -29,13 +31,13 @@ builder.Services.AddAuthentication(options =>
     //Getting claims from the UserInfo endpoint
     options.Scope.Add("profile");
     options.GetClaimsFromUserInfoEndpoint = true;
-    
+    options.RequireHttpsMetadata = false;
     //add more claims to the test users - and also more identity resources.
     options.ClaimActions.MapUniqueJsonKey("myclaim1", "myclaim1");
 
     options.SaveTokens = true;
 });
-
+builder.Services.AddScoped<IClaimsTransformation, AdditionalClaimsTransformation>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
