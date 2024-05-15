@@ -14,12 +14,12 @@ builder.Services.AddAuthentication(options =>
 .AddCookie("Cookies")
 .AddOpenIdConnect("oidc", options =>
 {
-    options.Authority = "https://localhost:5001";
+    options.Authority = "http://localhost:5001";
 
     options.ClientId = "web";
     options.ClientSecret = "secret";
     options.ResponseType = "code";
-
+    
     options.Scope.Clear();
     options.Scope.Add("openid");
     options.Scope.Add("profile");    
@@ -27,6 +27,7 @@ builder.Services.AddAuthentication(options =>
     options.MapInboundClaims = false; // Don't rename claim types
 
     options.SaveTokens = true;
+    options.RequireHttpsMetadata = false; //config for http  
 });
 #endregion
 

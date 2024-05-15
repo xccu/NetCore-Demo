@@ -3,7 +3,7 @@ using System.Text.Json;
 
 #region Retrieve the discovery document
 var client = new HttpClient();
-var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
+var disco = await client.GetDiscoveryDocumentAsync("http://localhost:5001");
 if (disco.IsError)
 {
     Console.WriteLine(disco.Error);
@@ -34,7 +34,7 @@ Console.WriteLine(tokenResponse.AccessToken);
 var apiClient = new HttpClient();
 apiClient.SetBearerToken(tokenResponse.AccessToken!); // AccessToken is always non-null when IsError is false
 
-var response = await apiClient.GetAsync("https://localhost:6001/identity");
+var response = await apiClient.GetAsync("http://localhost:6001/identity");
 if (!response.IsSuccessStatusCode)
 {
     Console.WriteLine(response.StatusCode);

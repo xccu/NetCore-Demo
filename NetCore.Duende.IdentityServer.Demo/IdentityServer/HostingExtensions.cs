@@ -13,29 +13,33 @@ internal static class HostingExtensions
         builder.Services.AddRazorPages();
 
         #region uncomment if you want to store config in memory
-        builder.Services.AddIdentityServer()
-            .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients)
-            .AddTestUsers(TestUsers.Users);
+        builder.Services.AddIdentityServer(options => 
+        {
+            options.Authentication.CookieSameSiteMode = SameSiteMode.Lax;
+        }).AddInMemoryIdentityResources(Config.IdentityResources)
+          .AddInMemoryApiScopes(Config.ApiScopes)
+          .AddInMemoryClients(Config.Clients)
+          .AddTestUsers(TestUsers.Users);
         #endregion
 
         #region uncomment if you want to store config in SqlServer db
         //var migrationsAssembly = typeof(Program).Assembly.GetName().Name;
         //const string connectionString = @"Data Source=.;Database=IdentityServerDb;Integrated Security=True;trustServerCertificate=true;";
 
-        //builder.Services.AddIdentityServer()
-        //    .AddConfigurationStore(options =>
-        //    {
-        //        options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
-        //            sql => sql.MigrationsAssembly(migrationsAssembly));
-        //    })
-        //    .AddOperationalStore(options =>
-        //    {
-        //        options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
-        //            sql => sql.MigrationsAssembly(migrationsAssembly));
-        //    })
-        //    .AddTestUsers(TestUsers.Users);
+        //builder.Services.AddIdentityServer(options => 
+        //{
+        //    options.Authentication.CookieSameSiteMode = SameSiteMode.Lax;
+        //}).AddConfigurationStore(options =>
+        //  {
+        //      options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+        //          sql => sql.MigrationsAssembly(migrationsAssembly));
+        //  })
+        //  .AddOperationalStore(options =>
+        //  {
+        //      options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+        //          sql => sql.MigrationsAssembly(migrationsAssembly));
+        //  })
+        //  .AddTestUsers(TestUsers.Users);
         #endregion
 
         return builder.Build();

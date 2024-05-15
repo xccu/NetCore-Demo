@@ -10,13 +10,15 @@ builder.Services.AddControllers();
 builder.Services.AddAuthentication()
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:5001";
+        options.Authority = "http://localhost:5001";
         options.TokenValidationParameters.ValidateAudience = false;
+        options.RequireHttpsMetadata = false; //config for http 
     });
 
 //Add an Authorization Policy
 builder.Services.AddAuthorization(options =>
 {
+    
     options.AddPolicy("ApiScope", policy =>
     {
         policy.RequireAuthenticatedUser();
