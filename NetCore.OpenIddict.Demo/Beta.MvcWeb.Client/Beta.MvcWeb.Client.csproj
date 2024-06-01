@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0"/>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" PrivateAssets="All" Version="8.0.0"/>
+		<PackageReference Include="OpenIddict.AspNetCore" Version="5.6.0"/>
+		<PackageReference Include="OpenIddict.EntityFrameworkCore" Version="5.6.0" />
+		<PackageReference Include="OpenIddict.Quartz" Version="5.6.0"/>
+		<PackageReference Include="OpenIddict.Core" Version="5.6.0"/>
+		<PackageReference Include="Quartz.Extensions.Hosting" Version="3.9.0"/>
+	</ItemGroup>
+
+</Project>
