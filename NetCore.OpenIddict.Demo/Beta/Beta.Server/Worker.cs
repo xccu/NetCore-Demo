@@ -55,7 +55,7 @@ public class Worker : IHostedService
                     Permissions.Scopes.Profile,
                     Permissions.Scopes.Roles,
                     Permissions.Prefixes.Scope + "console",
-                    Permissions.Prefixes.Scope + "api1",
+                    Permissions.Prefixes.Scope + "api1"
                 },
                 Requirements =
                 {
@@ -88,7 +88,7 @@ public class Worker : IHostedService
                 Permissions =
                 {
                     Permissions.Endpoints.Token,
-                    Permissions.GrantTypes.ClientCredentials,
+                    Permissions.GrantTypes.ClientCredentials
                 }
             });
         }
@@ -113,7 +113,7 @@ public class Worker : IHostedService
             await manager.CreateAsync(new OpenIddictScopeDescriptor
             {
                 DisplayName = "Api client application",
-                Name = "api1",
+                Name = "api1"
             });
         }
     }

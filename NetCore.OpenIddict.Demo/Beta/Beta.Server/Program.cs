@@ -56,6 +56,17 @@ builder.Services.AddOpenIddict()
         options.AddDevelopmentEncryptionCertificate()
                .AddDevelopmentSigningCertificate();
 
+        
+        //see: https://documentation.openiddict.com/configuration/token-formats.html
+        options.DisableAccessTokenEncryption();
+
+        //options.UseDataProtection()
+        //      .PreferDefaultAccessTokenFormat()
+        //      .PreferDefaultAuthorizationCodeFormat()
+        //      .PreferDefaultDeviceCodeFormat()
+        //      .PreferDefaultRefreshTokenFormat()
+        //      .PreferDefaultUserCodeFormat();
+
         // Register the ASP.NET Core host and configure the ASP.NET Core-specific options.
         options.UseAspNetCore()
                .EnableAuthorizationEndpointPassthrough()

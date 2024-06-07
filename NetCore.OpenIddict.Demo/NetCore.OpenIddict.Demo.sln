@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beta.Server", "Beta\Beta.Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beta.MvcWeb.Client", "Beta.MvcWeb.Client\Beta.MvcWeb.Client.csproj", "{9169A22D-0D86-479C-B801-7F395D612505}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beta.WebApi", "Beta.WebApi\Beta.WebApi.csproj", "{02D6C903-0E0F-4F13-9C04-D547D229ABC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beta.WebApi", "Beta.WebApi\Beta.WebApi.csproj", "{02D6C903-0E0F-4F13-9C04-D547D229ABC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
