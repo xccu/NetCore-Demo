@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Demo.Algorithms\Demo.Algorithms.csproj" />
     <ProjectReference Include="..\Demo.AutoMapper\Demo.AutoMapper.csproj" />
     <ProjectReference Include="..\Demo.Decorator\Demo.Decorator.csproj" />

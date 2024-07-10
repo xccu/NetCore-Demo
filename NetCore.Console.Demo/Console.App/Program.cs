@@ -1,11 +1,11 @@
-﻿
+﻿using ConsoleApplication.FireAndForget;
 //Console.WriteLine("Hello World");
 //Demo.Delegates.ChainDelegateDemo.Run();
 //Demo.ExpressionTree.ExpressionTreeDemo.Run();
 //Demo.Decorator.DecoratorDemo.Run();
 //Demo.Exception.ExceptionDemo.Run();
 //Demo.AutoMapper.AutoMapperDemo.Run();
-await Demo.HttpClient.HttpClientDemo.RunAsync();
+//await Demo.HttpClient.HttpClientDemo.RunAsync();
 
 //DateTime dt = DateTime.Now;
 //CultureInfo culture = CultureInfo.GetCultureInfo("en-US");
@@ -17,4 +17,6 @@ await Demo.HttpClient.HttpClientDemo.RunAsync();
 //Console.WriteLine(dt.ToString(format, culture));
 
 
+//FireAndForgetExceptionExample.Run();
+FireAndForgetExceptionExample.RunAsync().Wait();
 Console.ReadLine();
