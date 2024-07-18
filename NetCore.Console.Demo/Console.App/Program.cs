@@ -1,4 +1,4 @@
-﻿using ConsoleApplication.FireAndForget;
+﻿
 //Console.WriteLine("Hello World");
 //Demo.Delegates.ChainDelegateDemo.Run();
 //Demo.ExpressionTree.ExpressionTreeDemo.Run();
@@ -18,5 +18,22 @@
 
 
 //FireAndForgetExceptionExample.Run();
-FireAndForgetExceptionExample.RunAsync().Wait();
-Console.ReadLine();
+//FireAndForgetExceptionExample.RunAsync().Wait();
+
+
+#region Cannel Example
+var example1 = new ConsoleApplication.ChannelExample.Example1(50);
+example1.Run();
+
+//ConsoleApplication.ChannelExample.Example.Run();
+#endregion
+
+#region Timer
+//ConsoleApplication.TimerExample.Example.Run();
+
+//var example1 = new ConsoleApplication.TimerExample.Example1(10);
+//example1.Run();
+#endregion
+
+Console.WriteLine("Press any key to continue...");
+Console.ReadKey();

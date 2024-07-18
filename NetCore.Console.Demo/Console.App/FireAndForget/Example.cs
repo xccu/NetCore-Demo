@@ -1,6 +1,6 @@
-﻿namespace ConsoleApplication.FireAndForget;
+﻿namespace ConsoleApplication.FireAndForgetExample;
 
-public class FireAndForgetExceptionExample
+public class Example
 {
     public static void Run()
     {

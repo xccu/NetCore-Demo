@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.ValueGeneration;
 
-namespace ConsoleApplication.GuidGenerator;
+namespace ConsoleApplication.GuidGeneratorExample;
 
-public class GuidGenerator
+public class Example
 {
     public void Run()
     {
