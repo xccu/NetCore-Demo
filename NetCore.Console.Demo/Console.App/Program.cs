@@ -22,8 +22,8 @@
 
 
 #region Cannel Example
-var example1 = new ConsoleApplication.ChannelExample.Example1(50);
-example1.Run();
+//var example1 = new ConsoleApplication.ChannelExample.Example1(50);
+//example1.Run();
 
 //ConsoleApplication.ChannelExample.Example.Run();
 #endregion
@@ -33,6 +33,14 @@ example1.Run();
 
 //var example1 = new ConsoleApplication.TimerExample.Example1(10);
 //example1.Run();
+#endregion
+
+
+#region GenericArray
+ConsoleApplication.GenericArray.Example<string>.Run(["value1","value2"]);
+#endregion
+#region AsyncLocal
+//await ConsoleApplication.AsyncLocal.Example.RunAsync();
 #endregion
 
 Console.WriteLine("Press any key to continue...");

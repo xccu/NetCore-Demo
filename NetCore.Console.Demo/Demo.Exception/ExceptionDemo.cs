@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.ExceptionServices;
 
 namespace Demo.Exception;
 
@@ -17,6 +12,7 @@ public class ExceptionDemo
         }
         catch (System.Exception ex)
         {
+
             var context = new ExceptionContext();
             context.exception = ex;
             try
@@ -26,8 +22,12 @@ public class ExceptionDemo
             }
             catch (System.Exception e)
             {
-
+                Console.WriteLine(e.ToString());
             }
+        }
+        finally
+        {
+            Console.WriteLine("Finally");
         }
     }
 }
