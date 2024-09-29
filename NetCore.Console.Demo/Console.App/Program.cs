@@ -20,28 +20,37 @@
 //FireAndForgetExceptionExample.Run();
 //FireAndForgetExceptionExample.RunAsync().Wait();
 
+# region Fire and forget
+var example = new ConsoleApplication.FireAndForgetExample.Example();
+example.Run();
+#endregion
 
-#region Cannel Example
+//# region Sequential Guid ValueGenerator
+//var example = new ConsoleApplication.GuidGeneratorExample.Example();
+//example.Run();
+//#endregion
+
+//#region Cannel Example
 //var example1 = new ConsoleApplication.ChannelExample.Example1(50);
 //example1.Run();
 
 //ConsoleApplication.ChannelExample.Example.Run();
-#endregion
+//#endregion
 
-#region Timer
+//#region Timer
 //ConsoleApplication.TimerExample.Example.Run();
 
 //var example1 = new ConsoleApplication.TimerExample.Example1(10);
 //example1.Run();
-#endregion
+//#endregion
 
+//#region GenericArray
+//ConsoleApplication.GenericArray.Example<string>.Run(["value1","value2"]);
+//#endregion
 
-#region GenericArray
-ConsoleApplication.GenericArray.Example<string>.Run(["value1","value2"]);
-#endregion
-#region AsyncLocal
+//#region AsyncLocal
 //await ConsoleApplication.AsyncLocal.Example.RunAsync();
-#endregion
+//#endregion
 
 Console.WriteLine("Press any key to continue...");
 Console.ReadKey();

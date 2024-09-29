@@ -8,7 +8,7 @@ public class Example
     {
         SequentialGuidValueGenerator generator = new SequentialGuidValueGenerator();
 
-        for (int i = 0; i < 23; i++)
+        for (int i = 0; i < 50; i++)
         {
             Console.WriteLine($"CodeId =\"{generator.Next(null)}\", ");
         }
