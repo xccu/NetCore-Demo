@@ -1,0 +1,36 @@
+﻿<CascadingValue Value="this">
+    @foreach (var node in Nodes)
+    {
+        if (node.ChildNodes?.Any() == true)
+        {
+            <SubMenu>
+                <TitleTemplate>
+                    <span>
+                        @if (!string.IsNullOrEmpty(node.Image))
+                        {
+                            <Icon Type="@node.Image" Theme="@IconThemeType.Outline" />
+                        }
+                        <span>@node.Title</span>
+                    </span>
+                </TitleTemplate>
+                <ChildContent>
+                    <DynamicMenu Nodes="node.ChildNodes" />
+                </ChildContent>
+            </SubMenu>
+        }
+        else
+        {
+            <MenuItem Icon="@node.Image">
+                <span>@node.Title</span>
+            </MenuItem>
+        }
+    }
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public ICollection<Node> Nodes { get; set; }
+
+    [CascadingParameter]
+    private DynamicMenu Parent { get; set; }
+}

@@ -3,13 +3,13 @@
 <h3>Top Navigation</h3>
 <li>Horizontal top navigation menu.</li>
 
-<Menu Mode=MenuMode.Horizontal>
+<Menu Mode="MenuMode.Inline">
     <MenuItem Key="mail">
-        <Icon Type="mail" Theme="outline"></Icon>
+        <Icon Type="mail" Theme="@IconThemeType.Outline"></Icon>
         Navigation One
     </MenuItem>
     <MenuItem Key="app" Disabled>
-        <Icon Type="appstore" Theme="outline"></Icon>
+        <Icon Type="appstore" Theme="@IconThemeType.Outline"></Icon>
         Navigation Two
     </MenuItem>
     <SubMenu TitleTemplate=@sub1Title>
@@ -27,7 +27,7 @@
         </MenuItemGroup>
     </SubMenu>
     <MenuItem Key="alipay">
-        <MenuLink Href="https://ant.design" target="_blank" rel="noopener noreferrer">
+        <MenuLink Href="https://ant.design"  rel="noopener noreferrer">
             Navigation Four - Link
         </MenuLink>
     </MenuItem>
@@ -37,7 +37,7 @@
 {
     RenderFragment sub1Title =
     @<Template>
-        <Icon Type="setting" Theme="outline"></Icon>
+        <Icon Type="setting" Theme="@IconThemeType.Outline"></Icon>
         Navigation Three - Submenu
     </Template>;
 }

@@ -1,0 +1,31 @@
+﻿@page "/example3"
+
+<h3>Router</h3>
+<li>Automatically activate menu items based on routing, use MenuLink property.</li>
+
+<Menu Mode="MenuMode.Horizontal">
+    <MenuItem RouterLink="/en-US/components/menu" RouterMatch="NavLinkMatch.All">English Menu Document</MenuItem>
+    <MenuItem RouterLink="/zh-CN/components/menu" RouterMatch="NavLinkMatch.All">Chinese Menu Document</MenuItem>
+</Menu>
+
+<br />
+<br />
+
+<div style="width: 256px;">
+    <Menu Mode="MenuMode.Inline">
+        <SubMenu Title="Sub Menu1">
+            <MenuItem RouterLink="/en-US/components/menu" RouterMatch="NavLinkMatch.All">English Menu Document</MenuItem>
+        </SubMenu>
+        <SubMenu Title="Sub Menu2">
+            <MenuItem RouterLink="/zh-CN/components/menu" RouterMatch="NavLinkMatch.All">Chinese Menu Document</MenuItem>
+        </SubMenu>
+        <SubMenu Title="Sub Menu3">
+            <MenuItem RouterLink="Counter" RouterMatch="NavLinkMatch.All">Counter</MenuItem>
+            <MenuItem RouterLink="FetchData" RouterMatch="NavLinkMatch.All">FetchData</MenuItem>
+        </SubMenu>
+    </Menu>
+</div>
+
+@code
+{
+}

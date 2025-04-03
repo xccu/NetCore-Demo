@@ -7,12 +7,15 @@
     <RootNamespace>Ant_Layout_Demo</RootNamespace>
   </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="AntDesign" Version="0.13.1" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Data\**" />
+    <Content Remove="Data\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <None Remove="Data\**" />
+  </ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Data\" />
+		<PackageReference Include="AntDesign" Version="0.13.1" />
 	</ItemGroup>
 	
 </Project>
