@@ -9,4 +9,6 @@
 <p>
   Only one single root menuitem can be active by default, enable multiple property to be able to open more than one items.
 </p>
+
+<p aria-live="polite">Selected: <strong>{{ message }}</strong></p>
 <p-panelMenu [model]="items" [style]="{'width':'300px'}" [multiple]="true"/>
