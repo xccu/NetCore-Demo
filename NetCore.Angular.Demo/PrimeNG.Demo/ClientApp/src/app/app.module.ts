@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { PanelModule } from 'primeng/panel';
 import { MenuModule } from 'primeng/menu';
+import { PanelMenuModule } from 'primeng/panelmenu';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { StyleClassModule } from 'primeng/styleclass';
@@ -19,9 +20,11 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { InputSwitchComponent } from './samples/input-switch/input-switch.component';
 import { InputTextComponent } from './samples/input-text/input-text.component';
 import { PanelComponent } from './samples/panel/panel.component';
+import { MenuComponent } from './samples/menu/menu.component';
 import { MenuBarComponent } from './samples/menu-bar/menu-bar.component';
 import { ButtonComponent } from './samples/button/button.component';
 import { LogInterceptor } from './helpers/log.interceptor';
+import { PanelMenuComponent } from './samples/panel-menu/panel-menu.component';
 
 
 
@@ -35,6 +38,8 @@ import { LogInterceptor } from './helpers/log.interceptor';
     InputSwitchComponent,
     InputTextComponent,
     PanelComponent,
+    MenuComponent,
+    PanelMenuComponent,
     MenuBarComponent,
     ButtonComponent,
   ],
@@ -46,6 +51,7 @@ import { LogInterceptor } from './helpers/log.interceptor';
     PanelModule,
     BrowserAnimationsModule,
     MenuModule,
+    PanelMenuModule,
     MenubarModule,
     ButtonModule,
     StyleClassModule,
@@ -56,6 +62,8 @@ import { LogInterceptor } from './helpers/log.interceptor';
       { path: 'input-switch', component: InputSwitchComponent },
       { path: 'input-text', component: InputTextComponent },
       { path: 'panel', component: PanelComponent },
+      { path: 'menu', component: MenuComponent },
+      { path: 'panel-menu', component: PanelMenuComponent },
       { path: 'menu-bar', component: MenuBarComponent },
       { path: 'button', component: ButtonComponent }
     ])
