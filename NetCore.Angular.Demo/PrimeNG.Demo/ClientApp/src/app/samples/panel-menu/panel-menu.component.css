@@ -1,9 +1,9 @@
-
-::ng-deep .my-menubar {
-  width: 800px;
-  color: white;
+/*::ng-deep 穿透 Angular 的样式封装修改样式*/
+::ng-deep .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-action {
+  color: #334155;
+  text-decoration: none;
 }
 
-::ng-deep .p-ripple {
+::ng-deep .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content .p-menuitem-link {
   text-decoration: none;
 }
