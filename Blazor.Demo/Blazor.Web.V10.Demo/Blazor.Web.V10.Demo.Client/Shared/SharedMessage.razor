@@ -1,0 +1,22 @@
+﻿<p>@Text</p>
+<p>RendererInfo: @RendererInfo.Name</p>
+<p>IsInteractive:@RendererInfo.IsInteractive</p>
+<button @onclick="UpdateMessage">Click me</button> @message
+
+<p>@ChildContent</p>
+
+@code {
+    private string message = "Not clicked yet.";
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Text { get; set; } = "Hello!";
+
+    private void UpdateMessage()
+    {
+        Console.WriteLine("SharedMessage UpdateMessage");
+        message = "Somebody clicked me!";
+    }
+}

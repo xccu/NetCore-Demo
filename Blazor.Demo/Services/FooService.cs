@@ -1,4 +1,5 @@
 ﻿using Models;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Services;
@@ -13,8 +14,6 @@ public class FooService
     }
 
     public Foo GetFoo() => _foo;
-
-
 
     public string GetInfo()
     {

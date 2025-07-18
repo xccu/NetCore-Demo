@@ -1,0 +1,28 @@
+﻿@page "/provider-render-mode-webassembly"
+@rendermode RenderMode.InteractiveWebAssembly
+@using Provider;
+@inject MyProvider MyProvider
+
+<h3>WebAssembly Provider Render Mode</h3>
+<p>RendererInfo: @RendererInfo.Name</p>
+<p>IsInteractive:@RendererInfo.IsInteractive</p>
+<p>
+    <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#webassembly-render-mode">MS Document</a>
+</p>
+<p>@MyProvider.Name</p>
+<button class="btn btn-primary" @onclick="UpdateMessage">Click me</button> @message
+
+@code {
+    private string message = "Not clicked yet.";
+
+    protected override void OnInitialized()
+    {
+
+    }
+
+    private void UpdateMessage()
+    {
+        Console.WriteLine($"[{DateTime.Now}] WebAssemblyRender UpdateMessage clicked");
+        message = "Somebody clicked me!";
+    }
+}

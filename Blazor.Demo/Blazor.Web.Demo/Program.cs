@@ -63,28 +63,28 @@ app.MapRazorComponents<App>()
 
 app.ViewEndpoints();
 
-app.Use(async (context, next) =>
-{
-    var endpoint = context.GetEndpoint();
-    if (endpoint is not null)
-    {
-        //__PrivateComponentRenderModeAttribute
-        var metadata = endpoint.Metadata.GetOrderedMetadata<ComponentTypeMetadata>();
+//app.Use(async (context, next) =>
+//{
+//    var endpoint = context.GetEndpoint();
+//    if (endpoint is not null)
+//    {
+//        //__PrivateComponentRenderModeAttribute
+//        var metadata = endpoint.Metadata.GetOrderedMetadata<ComponentTypeMetadata>();
         
-        if (metadata?.Count > 0)
-        {
-            var typ = metadata[0].Type;
-            Type[] types = typ.GetNestedTypes(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var attr = types.FirstOrDefault(t => t.Name == "__PrivateComponentRenderModeAttribute") ;
+//        if (metadata?.Count > 0)
+//        {
+//            var typ = metadata[0].Type;
+//            Type[] types = typ.GetNestedTypes(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+//            var attr = types.FirstOrDefault(t => t.Name == "__PrivateComponentRenderModeAttribute") ;
 
-        }        
-        var routeEndpoint = (RouteEndpoint)endpoint;
-        Console.WriteLine($"[{DateTime.Now}] RoutePattern:{routeEndpoint.RoutePattern.RawText}");
-        //Console.WriteLine($"DisplayName:{routeEndpoint.DisplayName}\t RoutePattern:{routeEndpoint.RoutePattern.RawText}");
-    }
+//        }        
+//        var routeEndpoint = (RouteEndpoint)endpoint;
+//        Console.WriteLine($"[{DateTime.Now}] RoutePattern:{routeEndpoint.RoutePattern.RawText}");
+//        //Console.WriteLine($"DisplayName:{routeEndpoint.DisplayName}\t RoutePattern:{routeEndpoint.RoutePattern.RawText}");
+//    }
     
-    await next();
-});
+//    await next();
+//});
 
 
 app.Run();
