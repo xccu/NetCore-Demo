@@ -1,6 +1,6 @@
 ﻿@page "/wrapper-render-mode"
 @using Blazor.Web.V10.Demo.Client.Shared
-@rendermode RenderMode.InteractiveWebAssembly
+@rendermode RenderMode.InteractiveServer
 <h3>Child components with different render modes</h3>
 
 <p>RendererInfo: @RendererInfo.Name</p>
@@ -9,10 +9,10 @@
 <p><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#child-components-with-different-render-modes">MS Document</a></p>
 
 
-@* <Child @rendermode="RenderMode.InteractiveServer" Text="Server"/>  *@
+<Child  Text="Test"/> 
 <p></p> 
 
-<Child @rendermode="RenderMode.InteractiveWebAssembly" Text="WebAssembly" />
+@* <Child @rendermode="RenderMode.InteractiveWebAssembly" Text="WebAssembly" /> *@
 
 <p></p>
 @*<Child @rendermode="RenderMode.InteractiveAuto" Text="Auto" /> *@
