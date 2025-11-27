@@ -1,0 +1,32 @@
+﻿@page "/render-mode-auto-no-prerender"
+@rendermode InteractiveRenderSettings.InteractiveAutoWithoutPrerender
+@using global::Services
+
+@inject FooService FooService
+
+<h3>Auto Render Mode Without Prerender</h3>
+<p>RendererInfo: @RendererInfo.Name</p>
+<p>IsInteractive:@RendererInfo.IsInteractive</p>
+<p>@AssignedRenderMode</p>
+<p>
+    <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#auto-render-mode">MS Document</a>
+</p>
+<p>@FooService.GetInfo()</p>
+<button class="btn btn-primary" @onclick="UpdateMessage">Click me</button>
+@message
+
+@code {
+    private string message = "Not clicked yet.";
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"[{DateTime.Now}] AutoNoPrerender OnInitialized: {FooService.GetInfo()}");
+    }
+
+    private void UpdateMessage()
+    {
+        Console.WriteLine($"{FooService.GetInfo()} clicked me!");
+        message = $"{FooService.GetInfo()} clicked me!";
+    }
+
+}

@@ -1,0 +1,232 @@
+﻿@* Pages/ValidationTest.razor *@
+@page "/validation-test"
+@using System.ComponentModel.DataAnnotations
+
+<PageTitle>验证类型测试</PageTitle>
+
+<h3>🧪 Blazor WebAssembly 验证测试</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>1. 标准数据注解验证</h5>
+            </div>
+            <div class="card-body">
+                <EditForm Model="@standardModel" OnValidSubmit="@HandleStandardValidSubmit" OnInvalidSubmit="@HandleStandardInvalidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="mb-3">
+                        <label for="standard-name" class="form-label">姓名</label>
+                        <InputText id="standard-name" @bind-Value="standardModel.Name" class="form-control" />
+                        <ValidationMessage For="@(() => standardModel.Name)" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="standard-email" class="form-label">邮箱</label>
+                        <InputText id="standard-email" @bind-Value="standardModel.Email" class="form-control" />
+                        <ValidationMessage For="@(() => standardModel.Email)" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="standard-age" class="form-label">年龄</label>
+                        <InputNumber id="standard-age" @bind-Value="standardModel.Age" class="form-control" />
+                        <ValidationMessage For="@(() => standardModel.Age)" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">提交标准验证</button>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>2. 自定义验证类型测试</h5>
+            </div>
+            <div class="card-body">
+                <EditForm Model="@customModel" OnValidSubmit="@HandleCustomValidSubmit" OnInvalidSubmit="@HandleCustomInvalidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="mb-3">
+                        <label for="custom-username" class="form-label">用户名</label>
+                        <InputText id="custom-username" @bind-Value="customModel.Username" class="form-control" />
+                        <ValidationMessage For="@(() => customModel.Username)" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="custom-password" class="form-label">密码</label>
+                        <InputText id="custom-password" type="password" @bind-Value="customModel.Password" class="form-control" />
+                        <ValidationMessage For="@(() => customModel.Password)" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="custom-confirmpassword" class="form-label">确认密码</label>
+                        <InputText id="custom-confirmpassword" type="password" @bind-Value="customModel.ConfirmPassword" class="form-control" />
+                        <ValidationMessage For="@(() => customModel.ConfirmPassword)" />
+                    </div>
+
+                    <button type="submit" class="btn btn-success">提交自定义验证</button>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>📊 验证结果</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert @resultAlertClass">
+                    <h6>@resultTitle</h6>
+                    <p class="mb-0">@resultMessage</p>
+                    @if (!string.IsNullOrEmpty(validationDetails))
+                    {
+                        <pre class="mt-2"><code>@validationDetails</code></pre>
+                    }
+                </div>
+
+                <h6>测试说明：</h6>
+                <ul>
+                    <li><strong>标准验证</strong>：使用内置的 <code>[Required]</code>, <code>[EmailAddress]</code>, <code>[Range]</code> 等特性</li>
+                    <li><strong>自定义验证</strong>：测试自定义验证类型和复杂验证逻辑</li>
+                    <li><strong>WASM兼容性</strong>：验证所有逻辑在浏览器中正常运行</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    // 标准数据注解模型
+    private StandardValidationModel standardModel = new();
+
+    // 自定义验证模型
+    private CustomValidationModel customModel = new();
+
+    // 结果显示
+    private string resultTitle = "等待验证测试...";
+    private string resultMessage = "请使用上面的表单进行验证测试";
+    private string resultAlertClass = "alert-info";
+    private string validationDetails = "";
+
+    // 标准模型类
+    public class StandardValidationModel
+    {
+        [Required(ErrorMessage = "姓名是必填项")]
+        [StringLength(50, ErrorMessage = "姓名不能超过50个字符")]
+        public string Name { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "邮箱是必填项")]
+        [EmailAddress(ErrorMessage = "请输入有效的邮箱地址")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "年龄是必填项")]
+        [Range(18, 100, ErrorMessage = "年龄必须在18到100之间")]
+        public int Age { get; set; }
+    }
+
+    // 自定义验证模型
+    public class CustomValidationModel
+    {
+        [Required(ErrorMessage = "用户名是必填项")]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "用户名长度必须在3-20个字符之间")]
+        [RegularExpression(@"^[a-zA-Z0-9_]+$", ErrorMessage = "用户名只能包含字母、数字和下划线")]
+        public string Username { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "密码是必填项")]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "密码长度至少6个字符")]
+        public string Password { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "请确认密码")]
+        [Compare("Password", ErrorMessage = "密码和确认密码不匹配")]
+        public string ConfirmPassword { get; set; } = string.Empty;
+    }
+
+    // 标准验证提交处理
+    private void HandleStandardValidSubmit()
+    {
+        ShowSuccessResult("标准验证通过",
+            $"✅ 所有标准验证规则都通过了！\n" +
+            $"姓名: {standardModel.Name}\n" +
+            $"邮箱: {standardModel.Email}\n" +
+            $"年龄: {standardModel.Age}");
+    }
+
+    private void HandleStandardInvalidSubmit()
+    {
+        ShowErrorResult("标准验证失败",
+            "❌ 请检查标准表单中的错误并修正");
+    }
+
+    // 自定义验证提交处理
+    private void HandleCustomValidSubmit()
+    {
+        ShowSuccessResult("自定义验证通过",
+            $"✅ 所有自定义验证规则都通过了！\n" +
+            $"用户名: {customModel.Username}\n" +
+            $"密码长度: {customModel.Password?.Length ?? 0} 字符");
+    }
+
+    private void HandleCustomInvalidSubmit()
+    {
+        ShowErrorResult("自定义验证失败",
+            "❌ 请检查自定义表单中的错误并修正");
+    }
+
+    // 结果显示方法
+    private void ShowSuccessResult(string title, string message)
+    {
+        resultTitle = title;
+        resultMessage = message;
+        resultAlertClass = "alert-success";
+        validationDetails = GenerateValidationDetails();
+    }
+
+    private void ShowErrorResult(string title, string message)
+    {
+        resultTitle = title;
+        resultMessage = message;
+        resultAlertClass = "alert-danger";
+        validationDetails = GenerateValidationDetails();
+    }
+
+    // 生成验证详情
+    private string GenerateValidationDetails()
+    {
+        return $"验证测试时间: {DateTime.Now:yyyy-MM-dd HH:mm:ss}\n" +
+               $"用户代理: {GetUserAgent()}\n" +
+               $"运行环境: Blazor WebAssembly\n" +
+               $"验证状态: {(resultAlertClass == "alert-success" ? "成功" : "失败")}";
+    }
+
+    // 获取用户代理信息（WASM兼容）
+    private string GetUserAgent()
+    {
+        // 在Blazor WebAssembly中，我们通过JS互操作获取用户代理
+        return "通过JS互操作获取";
+    }
+}
+
+<style>
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    .alert pre {
+        background: rgba(0,0,0,0.1);
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+</style>

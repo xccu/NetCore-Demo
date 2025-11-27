@@ -1,0 +1,63 @@
+﻿
+@page "/without-persistent"
+@rendermode InteractiveServer
+
+<h3>No Persistent ComponentState</h3>
+
+@* 每次预渲染都会重新获取数据 *@
+<div class="alert alert-warning">
+    <strong>Note：</strong> Will get data per Prerender 
+</div>
+
+@if (weatherData == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="weather-card">
+        <h4>@weatherData.City</h4>
+        <p>Temperature: @weatherData.Temperature°C</p>
+        <p>Condition: @weatherData.Condition</p>
+        <p>LastUpdated: @weatherData.LastUpdated.ToString("HH:mm:ss")</p>
+    </div>
+}
+
+<button @onclick="RefreshData" class="btn btn-primary mt-3">
+    Refresh Data
+</button>
+
+@code {
+    private WeatherData? weatherData;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("OnInitializedAsync invoked - get new data");
+
+        // 模拟 API 调用 - 每次都会执行
+        await Task.Delay(1000);
+
+        weatherData = new WeatherData
+        {
+            City = "Chengdu",
+            Temperature = new Random().Next(15, 30),
+            Condition = "Sunny",
+            LastUpdated = DateTime.Now
+        };
+    }
+
+    private async Task RefreshData()
+    {
+        weatherData = null;
+        await OnInitializedAsync();
+        StateHasChanged();
+    }
+
+    public class WeatherData
+    {
+        public string City { get; set; } = string.Empty;
+        public int Temperature { get; set; }
+        public string Condition { get; set; } = string.Empty;
+        public DateTime LastUpdated { get; set; }
+    }
+}

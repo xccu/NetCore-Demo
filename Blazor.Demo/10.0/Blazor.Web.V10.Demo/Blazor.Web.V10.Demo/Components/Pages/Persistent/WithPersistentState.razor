@@ -1,0 +1,110 @@
+﻿@* Pages/WithPersistentState.razor *@
+@page "/with-persistent"
+@rendermode InteractiveServer
+@implements IDisposable
+
+<h3>Use PersistentComponentState</h3>
+
+@* 避免预渲染后重复获取数据 *@
+<div class="alert alert-success">
+    <strong>Advantage:</strong> avoid get data again after prerender 
+</div>
+
+@if (weatherData == null)
+{
+    <p>loading...</p>
+}
+else
+{
+    <div class="weather-card">
+        <h4>@weatherData.City</h4>
+        <p>Temperature: @weatherData.Temperature°C</p>
+        <p>Condition: @weatherData.Condition</p>
+        <p>LastUpdated: @weatherData.LastUpdated.ToString("HH:mm:ss")</p>
+        <small class="text-muted">
+            @(isFromPersistedState ? "Recover from PersistentComponentState" : "New data")
+        </small>
+    </div>
+}
+
+<button @onclick="RefreshData" class="btn btn-primary mt-3">
+    Refresh Data
+</button>
+
+@code {
+
+    private WeatherData? weatherData;
+    private bool isFromPersistedState = false;
+
+    [Inject]
+    private PersistentComponentState ApplicationState { get; set; } = default!;
+
+    private PersistingComponentStateSubscription _subscription;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("OnInitializedAsync invoked");
+
+        // 注册持久化回调
+        _subscription = ApplicationState.RegisterOnPersisting(PersistData);
+
+        
+        // 首先尝试从持久化状态恢复数据
+        if (ApplicationState.TryTakeFromJson<WeatherData>("weather_data", out var persistedData))
+        {
+            Console.WriteLine("Restore from PersistentComponentState");
+            weatherData = persistedData;
+            isFromPersistedState = true;
+        }
+        else
+        {
+            Console.WriteLine("PersistentComponentState not exist，get new data");
+            await LoadFreshData();
+        }
+    }
+
+    private async Task LoadFreshData()
+    {
+        // 模拟 API 调用
+        await Task.Delay(1000);
+
+        weatherData = new WeatherData
+        {
+            City = "Chengdu",
+            Temperature = new Random().Next(15, 30),
+            Condition = "Sunny",
+            LastUpdated = DateTime.Now
+        };
+        isFromPersistedState = false;
+    }
+
+    private Task PersistData()
+    {
+        Console.WriteLine("Persist Data");
+        if (weatherData != null)
+        {
+            ApplicationState.PersistAsJson("weather_data", weatherData);
+        }
+        return Task.CompletedTask;
+    }
+
+    private async Task RefreshData()
+    {
+        Console.WriteLine("refresh manual");
+        await LoadFreshData();
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        _subscription.Dispose();
+    }
+
+    public class WeatherData
+    {
+        public string City { get; set; } = string.Empty;
+        public int Temperature { get; set; }
+        public string Condition { get; set; } = string.Empty;
+        public DateTime LastUpdated { get; set; }
+    }
+}
