@@ -6,6 +6,8 @@ namespace Blazor.Maui.V10.Demo;
 
 public static class MauiProgram
 {
+    
+
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
@@ -22,8 +24,11 @@ public static class MauiProgram
 		builder.Services.AddBlazorWebViewDeveloperTools();
 		builder.Logging.AddDebug();
 #endif
-		builder.Services.AddSingleton(sp => { return new Foo() { Name = "Server Foo" }; });
+		builder.Services.AddSingleton(sp => { 
+            return new Foo() { Name = "Server Foo" }; 
+        });
 		builder.Services.AddSingleton<FooService>();
-		return builder.Build();
+
+        return builder.Build();
     }
 }

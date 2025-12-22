@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Blazor.Maui.Web.V10.Demo.Shared;
 
+//https://learn.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/maui-blazor-web-app?view=aspnetcore-10.0#per-pagecomponent-server-interactivity
 public static class InteractiveRenderSettings
 {
 	public static IComponentRenderMode? InteractiveServer { get; set; } =RenderMode.InteractiveServer;
