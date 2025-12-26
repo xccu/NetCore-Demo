@@ -1,0 +1,20 @@
+﻿@using Models
+@inject Foo Foo;
+<div>@Foo.Name</div>
+<div>RendererInfo: @RendererInfo.Name</div>
+<div>IsInteractive:@RendererInfo.IsInteractive</div>
+<button @onclick="UpdateMessage">Click me</button> @message 
+
+
+@code {
+    private string message = "Not clicked yet.";
+
+    [Parameter]
+    public string Text { get; set; } = "Hello!";
+
+    private void UpdateMessage()
+    {
+        Console.WriteLine("SharedMessage UpdateMessage");
+        message = "Somebody clicked me!";
+    }
+}

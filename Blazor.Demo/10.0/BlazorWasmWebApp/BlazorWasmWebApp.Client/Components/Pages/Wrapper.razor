@@ -1,0 +1,15 @@
+﻿@page "/wrapper"
+<h3>Wrapper</h3>
+
+@if (RendererInfo.IsInteractive)
+{
+    <BlazorWasmWebApp.Client.Components.Shared.Child />
+}
+else
+{
+    <div>loading...</div>
+}
+
+@code {
+
+}

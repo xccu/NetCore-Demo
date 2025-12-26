@@ -1,12 +1,15 @@
 using BlazorWasmWebApp.Client.Components.Pages;
 using BlazorWasmWebApp.Components;
+using Models;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
-
+//builder.Services.AddSingleton(sp => { return new Foo() { Name = "Server Foo" }; });
+//builder.Services.AddSingleton<FooService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
