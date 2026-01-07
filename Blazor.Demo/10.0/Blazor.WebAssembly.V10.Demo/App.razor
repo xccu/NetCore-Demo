@@ -1,4 +1,4 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@* <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -9,4 +9,53 @@
             <p role="alert">Sorry, there's nothing at this address.</p>
         </LayoutView>
     </NotFound>
+</Router> *@
+
+
+@using System.Reflection
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.WebAssembly.Services
+@using Microsoft.Extensions.Logging
+@inject ILogger<App> Logger
+@inject LazyAssemblyLoader AssemblyLoader
+
+<Router AppAssembly="typeof(App).Assembly"
+        AdditionalAssemblies="lazyLoadedAssemblies"
+        OnNavigateAsync="OnNavigateAsync">
+    <Navigating>
+        <div style="padding:20px;background-color:blue;color:white">
+            <p>Loading the requested page&hellip;</p>
+        </div>
+    </Navigating>
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="typeof(MainLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
 </Router>
+
+@code {
+    private List<Assembly> lazyLoadedAssemblies = [];
+    private bool grantImaharaRobotControlsAssemblyLoaded;
+
+    private async Task OnNavigateAsync(NavigationContext args)
+    {
+        try
+        {
+            if ((args.Path == "robot") && !grantImaharaRobotControlsAssemblyLoaded)
+            {
+                var assemblies = await AssemblyLoader.LoadAssembliesAsync(
+                    ["GrantImaharaRobotControls.dll"]);
+                lazyLoadedAssemblies.AddRange(assemblies);
+                grantImaharaRobotControlsAssemblyLoaded = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError("Error: {Message}", ex.Message);
+        }
+    }
+}

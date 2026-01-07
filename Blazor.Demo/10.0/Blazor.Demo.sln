@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157 d18.0
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{B0F90054-13AF-451C-AE6A-C6D263F4E102}"
 EndProject
@@ -38,6 +38,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWasmWebApp", "BlazorWasmWebApp\BlazorWasmWebApp\BlazorWasmWebApp.csproj", "{94EA8037-8761-274D-7968-2D8EA10739BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWasmWebApp.Client", "BlazorWasmWebApp\BlazorWasmWebApp.Client\BlazorWasmWebApp.Client.csproj", "{902F3121-E164-B4B8-3213-52BD4FD704BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrantImaharaRobotControls", "GrantImaharaRobotControls\GrantImaharaRobotControls.csproj", "{061BC768-8352-4B74-B63D-38CF7BC4CD61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.WebAssembly.LazyLoadTest", "Blazor.WebAssembly.LazyLoadTest\Blazor.WebAssembly.LazyLoadTest.csproj", "{45C93D94-0DAC-466D-A6B2-80FEA77D7507}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,6 +124,14 @@ Global
 		{902F3121-E164-B4B8-3213-52BD4FD704BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{902F3121-E164-B4B8-3213-52BD4FD704BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{902F3121-E164-B4B8-3213-52BD4FD704BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{061BC768-8352-4B74-B63D-38CF7BC4CD61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{061BC768-8352-4B74-B63D-38CF7BC4CD61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{061BC768-8352-4B74-B63D-38CF7BC4CD61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{061BC768-8352-4B74-B63D-38CF7BC4CD61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45C93D94-0DAC-466D-A6B2-80FEA77D7507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45C93D94-0DAC-466D-A6B2-80FEA77D7507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45C93D94-0DAC-466D-A6B2-80FEA77D7507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45C93D94-0DAC-466D-A6B2-80FEA77D7507}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
